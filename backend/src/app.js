@@ -1,5 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
+import cors from "cors";
+import healthcheckRouter from "./routes/healthCheck.route.js";
 
 const app = express();
 
@@ -11,9 +13,22 @@ app.use(express.static("public"));
 // cookie configuration --------------------------------------------------------------------------------------
 app.use(cookieParser());
 
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
+
 //routes-----------------------------------------------------------------------------------------------------
-app.get("/", (req, res) => {
-  res.send({ message: "wellcome to my new eshop" });
+
+app.use("/api/v1/health-check", healthcheckRouter);
+
+app.get("/api", (req, res) => {
+  console.log("this is backend");
+  res.status(200).json({ message: "wellcome to my new eshop" });
 });
 
 // app export ---------------------------------------------------------------------------------------------------
