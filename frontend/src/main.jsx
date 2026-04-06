@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import Healthcheck from "./pages/healthcheck/Healthcheck.jsx";
+
+import { Profile, SignUp, AuthOutlet } from "./pages/authentication/index.js";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -12,6 +14,20 @@ const router = createBrowserRouter([
   {
     path: "/health-check",
     element: <Healthcheck />,
+  },
+  {
+    path: "/user",
+    element: <AuthOutlet />,
+    children: [
+      {
+        path: "",
+        element: <Profile />,
+      },
+      {
+        path: "signup",
+        element: <SignUp />,
+      },
+    ],
   },
 ]);
 

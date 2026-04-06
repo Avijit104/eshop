@@ -17,8 +17,9 @@ function Healthcheck() {
   }, [healthcheck]);
   return (
     <div className="min-w-screen min-h-screen flex justify-center items-center">
-      <div className="w-[50%] h-[50%] py-20 rounded-2xl border border-white flex justify-center items-center">
-        <p>{healthcheck}</p>
+      <div className="w-[50%] h-[50%] py-20 rounded-2xl border border-white flex-col justify-center items-center">
+        <h1 className="text-white text-2xl text-center">Health check</h1>
+        <p className="text-center">{healthcheck}</p>
       </div>
     </div>
   );

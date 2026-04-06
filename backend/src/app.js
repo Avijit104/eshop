@@ -2,6 +2,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import healthcheckRouter from "./routes/healthCheck.route.js";
+import authRouter from "./routes/user.route.js";
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(
 //routes-----------------------------------------------------------------------------------------------------
 
 app.use("/api/v1/health-check", healthcheckRouter);
+app.use("/api/v1/user", authRouter);
 
 app.get("/api", (req, res) => {
   console.log("this is backend");
