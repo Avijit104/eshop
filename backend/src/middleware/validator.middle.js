@@ -7,8 +7,12 @@ const validator = (req, res, next) => {
     return next();
   }
   const extractErrors = [];
-  errors.array().map((err) => extractErrors.push({ [err.path]: err.msg }));
-  throw new ApiError(422, "invalid data", extractErrors);
+  errors.array().map((err) => extractErrors.push(err));
+  throw new ApiError(
+    422,
+    `validation error :: ${extractErrors[0].msg}`,
+    extractErrors,
+  );
 };
 
 export { validator };

@@ -1,20 +1,23 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 function SignUp() {
   const [user, setUser] = useState({ email: "", username: "", password: "" });
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const onSignUp = async () => {
     try {
       const res = await axios.post("/api/v1/user/signup", user);
+      console.log("response", res.data);
       console.log(res.data.message);
-      if (res.status === 500) {
-        setError(res.message);
-      }
+      navigate("/user/login");
     } catch (error) {
       setError(true);
-      console.log(error.status);
+      if (error.status === 422) {
+        setError("signup failed: invalid data");
+      }
     }
     console.log(user);
   };
@@ -60,7 +63,7 @@ function SignUp() {
       </div>
       {error ? (
         <div className="p-1 text-center text-red-700 bg-(--innerBox) w-[40%] m-4 rounded-xl">
-          <p>Signup failed</p>
+          <p>{error}</p>
         </div>
       ) : (
         <></>
