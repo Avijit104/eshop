@@ -1,20 +1,38 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.jsx";
-import { createBrowserRouter, RouterProvider } from "react-router";
-import Healthcheck from "./pages/healthcheck/Healthcheck.jsx";
 
+//react router
+import { createBrowserRouter, RouterProvider } from "react-router";
+
+// store redux
+import { Provider } from "react-redux";
+import store from "./store/store.js";
+
+// css
+import "./index.css";
+
+// pages
+import App from "./App.jsx";
+import Healthcheck from "./pages/healthcheck/Healthcheck.jsx";
 import {
   Profile,
   SignUp,
   AuthOutlet,
   Login,
+  ChangePassword,
 } from "./pages/authentication/index.js";
+import Home from "./pages/HomePage/Home.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    children: [
+      {
+        path: "",
+        element: <Home />,
+      },
+    ],
   },
   {
     path: "/health-check",
@@ -36,12 +54,18 @@ const router = createBrowserRouter([
         path: "login",
         element: <Login />,
       },
+      {
+        path: "changepassword",
+        element: <ChangePassword />,
+      },
     ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>,
 );

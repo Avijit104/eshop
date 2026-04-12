@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { Link } from "react-router";
 
 function SignUp() {
   const [user, setUser] = useState({ email: "", username: "", password: "" });
@@ -22,13 +23,14 @@ function SignUp() {
     console.log(user);
   };
   return (
-    <div className="main flex-center flex-col">
-      <div className="flex-center flex-col w-[40%] text-2xl gap-10 p-5 bg-(--innerBox) rounded-2xl">
-        <h1>Signup</h1>
-        <div className="w-[60%]">
+    <div className="main flex-center flex-col ">
+      <div className="flex-center flex-col w-[40%] text-2xl gap-10  bg-black rounded-2xl p-10">
+        <h1 className="font-bold">Signup</h1>
+        <div className="w-[75%]">
           <input
             type="email"
             placeholder="Email"
+            autoComplete="off"
             name="email"
             id="email"
             className="input"
@@ -38,6 +40,7 @@ function SignUp() {
           <input
             type="text"
             placeholder="Username"
+            autoComplete="off"
             name="username"
             id="username"
             className="input"
@@ -47,6 +50,7 @@ function SignUp() {
           <input
             type="password"
             placeholder="Password"
+            autoComplete="off"
             name="pass"
             id="pass"
             className="input"
@@ -54,12 +58,18 @@ function SignUp() {
             onChange={(e) => setUser({ ...user, password: e.target.value })}
           />
 
-          <div className="w-full flex-center p-4">
+          <div className="w-full flex-center ">
             <button className="button" onClick={onSignUp}>
               Signup
             </button>
           </div>
         </div>
+        <p className="text-sm text-gray-600">
+          Already have an account &nbsp;
+          <Link className="text-blue-700" to="/user/login">
+            login here
+          </Link>
+        </p>
       </div>
       {error ? (
         <div className="p-1 text-center text-red-700 bg-(--innerBox) w-[40%] m-4 rounded-xl">

@@ -2,56 +2,40 @@
 
 :root {
   --text: #ffffff;
-  --text-h: #08060d;
-  --bg: #fff;
-  --innerBox: #1f1f1f;
-  --code-bg: #f4f3ec;
-  --accent: #9a9a9a;
-  --accent-bg: rgb(255, 0, 0);
+  --text-h: #303030;
+  --bg: #0f0f0f;
+  --border: #2e303a;
+  --code-bg: #1f2028;
+  --accent: #1d1d1d;
+  --accent-bg: rgba(40, 40, 40, 0.15);
   --accent-border: #9a9a9a;
-  --social-bg: rgba(244, 243, 236, 0.5);
+  --noti-bg: rgba(91, 98, 179, 0.192);
   --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+    rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
 
   --sans: system-ui, "Segoe UI", Roboto, sans-serif;
   --heading: system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
   letter-spacing: 0.18px;
-  color-scheme: light dark;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
 
   @media (max-width: 1024px) {
+    box-sizing: border-box;
     font-size: 16px;
   }
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #ffffff;
-    --text-h: #303030;
-    --bg: #181818;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #0d0d0d;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: #9a9a9a;
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+:root ::-webkit-scrollbar {
+  display: none;
 }
 @utility main {
-  @apply min-h-screen min-w-screen;
+  @apply min-h-screen w-full box-border;
 }
 @utility flex-center {
   @apply flex justify-center items-center;
@@ -62,10 +46,12 @@
 @utility w-h-half {
   @apply w-[50%] h-[50%];
 }
-
+@utility notification-bg {
+  @apply bg-(--noti-bg);
+}
 @utility input {
-  @apply block w-full mb-3 p-2 px-3 rounded-xl text-base bg-(--accent);
+  @apply block w-full mb-5 p-4 px-3 rounded-xl text-[1.05rem] bg-(--accent);
 }
 @utility button {
-  @apply px-7 py-2 bg-blue-700 text-white text-base text-center border-0 outline-0 rounded-lg hover:bg-blue-800;
+  @apply px-7 py-2 bg-blue-700 text-white text-base text-center border-0 outline-0 rounded-lg hover:bg-blue-800 font-bold;
 }

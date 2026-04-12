@@ -1,16 +1,86 @@
-import React from "react";
-import { Link } from "react-router";
+import axios from "axios";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router";
+import { login } from "../store/AtuhSlice";
 
 function Navbar() {
+  const isLogin = useSelector((state) => state.auth.isLogin);
+  const dispatcher = useDispatch();
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        if (!isLogin) {
+          const res = await axios("/api/v1/user");
+          dispatcher(login(res.data.data._id));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchUser();
+  }, [isLogin]);
+  const navigate = useNavigate();
   return (
-    <div>
+    <div className="w-full box-border flex justify-between items-center px-15 bg-black py-3">
       <div>
-        <h1>Ethenicity</h1>
+        <h1 className="text-2xl font-bold text-blue-600">Ethenicity</h1>
       </div>
-      <div>
-        <Link>Home</Link>
-        <div></div>
-      </div>
+      {isLogin ? (
+        <div className="flex gap-10">
+          <button
+            className="button font-bold rounded-3xl  "
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Home
+          </button>
+          <button
+            className="button font-bold rounded-3xl "
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Cart
+          </button>
+          <button
+            className="button font-bold rounded-3xl "
+            onClick={() => {
+              navigate("/user");
+            }}
+          >
+            Profile
+          </button>
+        </div>
+      ) : (
+        <div className="flex gap-10">
+          <button
+            className="button font-bold rounded-3xl  "
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Home
+          </button>
+          <button
+            className="button font-bold rounded-3xl "
+            onClick={() => {
+              navigate("/user/signup");
+            }}
+          >
+            Signup
+          </button>
+          <button
+            className="button font-bold rounded-3xl "
+            onClick={() => {
+              navigate("/user/login");
+            }}
+          >
+            Login
+          </button>
+        </div>
+      )}
     </div>
   );
 }

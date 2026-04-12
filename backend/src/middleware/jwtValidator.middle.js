@@ -16,7 +16,6 @@ export const jwtValidator = asyncHandler(async (req, res, next) => {
     if (!user) {
       throw new ApiError(404, "user not found");
     }
-    console.log(user);
     req.user = user;
     next();
   } catch (error) {
