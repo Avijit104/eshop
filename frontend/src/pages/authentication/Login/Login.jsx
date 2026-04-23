@@ -11,19 +11,15 @@ function Login() {
   const isLogin = useSelector((state) => state.auth.isLogin);
   const onLogin = async () => {
     try {
-      const res = await axios.post("/api/v1/user/login", user);
+      const res = await axios.post("/api/v1/auth/login", user);
       console.log(res.data.data._id);
       dispatcher(login(res.data.data._id));
-      navigate("/user");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
   };
-  useEffect(() => {
-    if (isLogin) {
-      navigate("/user");
-    }
-  }, [isLogin]);
+
   return (
     <div className="main flex-center">
       <div className="flex-center flex-col w-[40%] text-2xl gap-10 p-10 bg-black rounded-2xl">
@@ -58,7 +54,7 @@ function Login() {
         </div>
         <p className="text-sm text-gray-600">
           Don't have any account &nbsp;
-          <Link className="text-blue-700" to="/user/signup">
+          <Link className="text-blue-700" to="/signup">
             register here
           </Link>
         </p>

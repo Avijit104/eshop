@@ -14,7 +14,8 @@ import {
   verifyEmail,
   sendVerifyEmail,
   changePassword,
-} from "../controllers/user.controllers.js";
+  logout,
+} from "../controllers/auth.controllers.js";
 
 // validators
 import {
@@ -22,19 +23,23 @@ import {
   loginValidator,
   editUsernameValidator,
   changePasswordValidator,
-} from "../validators/user.validator.js";
+} from "../validators/auth.validator.js";
 
 // router initialization
 const router = Router();
 
 // unsecured routes
 router.route("/signup").post(signupValidator(), validator, signup);
+
 router.route("/login").post(loginValidator(), validator, login);
 
 // secure routes
 router.route("/email-verify/:unHashedToken").get(jwtValidator, verifyEmail);
+
 router.route("/verification-mail").get(jwtValidator, sendVerifyEmail);
+
 router.route("/").get(jwtValidator, getUser);
+
 router
   .route("/")
   .put(jwtValidator, editUsernameValidator(), validator, editUsername);
@@ -42,6 +47,8 @@ router
 router
   .route("/change-password")
   .post(jwtValidator, changePasswordValidator(), validator, changePassword);
+
+router.route("/logout").get(jwtValidator, logout);
 
 // export
 export default router;

@@ -14,13 +14,7 @@ import "./index.css";
 // pages
 import App from "./App.jsx";
 import Healthcheck from "./pages/healthcheck/Healthcheck.jsx";
-import {
-  Profile,
-  SignUp,
-  AuthOutlet,
-  Login,
-  ChangePassword,
-} from "./pages/authentication/index.js";
+import { SignUp, Login, ChangePassword } from "./pages/authentication/index.js";
 import Home from "./pages/HomePage/Home.jsx";
 
 const router = createBrowserRouter([
@@ -32,31 +26,17 @@ const router = createBrowserRouter([
         path: "",
         element: <Home />,
       },
-    ],
-  },
-  {
-    path: "/health-check",
-    element: <Healthcheck />,
-  },
-  {
-    path: "/user",
-    element: <AuthOutlet />,
-    children: [
       {
-        path: "",
-        element: <Profile />,
+        path: "/health-check",
+        element: <Healthcheck />,
       },
       {
-        path: "signup",
-        element: <SignUp />,
-      },
-      {
-        path: "login",
+        path: "/login",
         element: <Login />,
       },
       {
-        path: "changepassword",
-        element: <ChangePassword />,
+        path: "/signup",
+        element: <SignUp />,
       },
     ],
   },

@@ -19,7 +19,7 @@ function Navbar() {
       }
     };
     fetchUser();
-  }, [isLogin]);
+  }, []);
   const navigate = useNavigate();
   return (
     <div className="w-full box-border flex justify-between items-center px-15 bg-black py-3">
@@ -47,7 +47,7 @@ function Navbar() {
           <button
             className="button font-bold rounded-3xl "
             onClick={() => {
-              navigate("/user");
+              navigate("/");
             }}
           >
             Profile
@@ -66,7 +66,7 @@ function Navbar() {
           <button
             className="button font-bold rounded-3xl "
             onClick={() => {
-              navigate("/user/signup");
+              navigate("/signup");
             }}
           >
             Signup
@@ -74,7 +74,7 @@ function Navbar() {
           <button
             className="button font-bold rounded-3xl "
             onClick={() => {
-              navigate("/user/login");
+              navigate("/login");
             }}
           >
             Login

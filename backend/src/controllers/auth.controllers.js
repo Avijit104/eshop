@@ -193,6 +193,31 @@ const changePassword = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, "password changed successfully"));
 });
 
+// user logout
+const logout = asyncHandler(async (req, res) => {
+  const { _id } = req.user;
+  const user = await User.findByIdAndUpdate(
+    _id,
+    { $set: { refreshToken: "" } },
+    { new: true },
+  );
+
+  if (!user) {
+    throw new ApiError(404, "user not found");
+  }
+
+  const option = {
+    httpOnly: true,
+    secure: true,
+  };
+
+  return res
+    .status(200)
+    .clearCookie("accessToken", option)
+    .clearCookie("refreshToken", option)
+    .json(new ApiResponse(200, "user logged out successfully"));
+});
+
 export {
   signup,
   login,
@@ -201,4 +226,5 @@ export {
   verifyEmail,
   sendVerifyEmail,
   changePassword,
+  logout,
 };

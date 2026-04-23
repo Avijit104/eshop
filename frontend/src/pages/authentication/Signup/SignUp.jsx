@@ -10,10 +10,10 @@ function SignUp() {
 
   const onSignUp = async () => {
     try {
-      const res = await axios.post("/api/v1/user/signup", user);
+      const res = await axios.post("/api/v1/auth/signup", user);
       console.log("response", res.data);
       console.log(res.data.message);
-      navigate("/user/login");
+      navigate("/login");
     } catch (error) {
       setError(true);
       if (error.status === 422) {
@@ -66,7 +66,7 @@ function SignUp() {
         </div>
         <p className="text-sm text-gray-600">
           Already have an account &nbsp;
-          <Link className="text-blue-700" to="/user/login">
+          <Link className="text-blue-700" to="/login">
             login here
           </Link>
         </p>
