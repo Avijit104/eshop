@@ -3,13 +3,14 @@
 :root {
   --text: #ffffff;
   --text-h: #303030;
-  --bg: #0f0f0f;
+  --bg: #252525;
+  --bgSecond: #1b1b1b;
   --border: #2e303a;
   --code-bg: #1f2028;
   --accent: #1d1d1d;
   --accent-bg: rgba(40, 40, 40, 0.15);
   --accent-border: #9a9a9a;
-  --noti-bg: rgba(91, 98, 179, 0.192);
+  --notibg: rgba(91, 98, 179, 0.192);
   --shadow:
     rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
 
@@ -35,7 +36,7 @@
   display: none;
 }
 @utility main {
-  @apply min-h-screen w-full box-border;
+  @apply min-h-screen w-full box-border bg-(--bg);
 }
 @utility flex-center {
   @apply flex justify-center items-center;
@@ -46,12 +47,18 @@
 @utility w-h-half {
   @apply w-[50%] h-[50%];
 }
-@utility notification-bg {
-  @apply bg-(--noti-bg);
-}
+
 @utility input {
   @apply block w-full mb-5 p-4 px-3 rounded-xl text-[1.05rem] bg-(--accent);
 }
 @utility button {
   @apply px-7 py-2 bg-blue-700 text-white text-base text-center border-0 outline-0 rounded-lg hover:bg-blue-800 font-bold;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    "FILL" #1447e6,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
 }

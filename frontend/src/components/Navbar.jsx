@@ -7,22 +7,10 @@ import { login } from "../store/AtuhSlice";
 function Navbar() {
   const isLogin = useSelector((state) => state.auth.isLogin);
   const dispatcher = useDispatch();
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        if (!isLogin) {
-          const res = await axios("/api/v1/user");
-          dispatcher(login(res.data.data._id));
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchUser();
-  }, []);
+
   const navigate = useNavigate();
   return (
-    <div className="w-full box-border flex justify-between items-center px-15 bg-black py-3">
+    <div className="w-full box-border flex justify-between items-center px-15 bg-black   py-3 ">
       <div>
         <h1 className="text-2xl font-bold text-blue-600">Ethenicity</h1>
       </div>
@@ -47,7 +35,7 @@ function Navbar() {
           <button
             className="button font-bold rounded-3xl "
             onClick={() => {
-              navigate("/");
+              navigate("/user");
             }}
           >
             Profile

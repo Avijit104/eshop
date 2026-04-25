@@ -13,9 +13,16 @@ import "./index.css";
 
 // pages
 import App from "./App.jsx";
+import Home from "./pages/HomePage/Home.jsx";
 import Healthcheck from "./pages/healthcheck/Healthcheck.jsx";
 import { SignUp, Login, ChangePassword } from "./pages/authentication/index.js";
-import Home from "./pages/HomePage/Home.jsx";
+import {
+  ProfileOutlet,
+  PersonalDetails,
+  Address,
+} from "./pages/Profile/index.js";
+import AuthContainer from "./components/AuthContainer.jsx";
+import PageContainer from "./components/PageContainer.jsx";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +31,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Home />,
+        element: (
+          <PageContainer>
+            <Home />
+          </PageContainer>
+        ),
       },
       {
         path: "/health-check",
@@ -32,11 +43,47 @@ const router = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <Login />,
+        element: (
+          <AuthContainer authentication={false}>
+            <Login />
+          </AuthContainer>
+        ),
       },
       {
         path: "/signup",
-        element: <SignUp />,
+        element: (
+          <AuthContainer authentication={false}>
+            <SignUp />
+          </AuthContainer>
+        ),
+      },
+      {
+        path: "/user",
+        element: (
+          <PageContainer>
+            <AuthContainer authentication>
+              <ProfileOutlet />
+            </AuthContainer>
+          </PageContainer>
+        ),
+        children: [
+          {
+            path: "",
+            element: (
+              <AuthContainer authentication>
+                <PersonalDetails />
+              </AuthContainer>
+            ),
+          },
+          {
+            path: "address",
+            element: (
+              <AuthContainer authentication>
+                <Address />
+              </AuthContainer>
+            ),
+          },
+        ],
       },
     ],
   },
