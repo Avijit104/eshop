@@ -20,6 +20,7 @@ import {
   Login,
   ChangePassword,
   RegistrationForm,
+  Loginotp,
 } from "./pages/authentication/index.js";
 import {
   ProfileOutlet,
@@ -51,6 +52,14 @@ const router = createBrowserRouter([
         element: (
           <AuthContainer authentication={false}>
             <Login />
+          </AuthContainer>
+        ),
+      },
+      {
+        path: "/loginotp",
+        element: (
+          <AuthContainer authentication={false}>
+            <Loginotp />
           </AuthContainer>
         ),
       },

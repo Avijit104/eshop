@@ -22,9 +22,10 @@ function Login() {
 
   return (
     <div className="main flex-center">
-      <div className="flex-center flex-col w-[40%] text-2xl gap-10 p-10 bg-black rounded-2xl">
+      <div className="flex-center flex-col w-[40%] text-2xl gap-4 p-10 bg-black rounded-2xl">
         <h1 className="font-bold">Login</h1>
-        <div className="w-[75%]">
+        <div className="w-[75%] my-10">
+          <h2 className="text-base font-bold mb-1">Email :</h2>
           <input
             type="email"
             placeholder="Email"
@@ -35,6 +36,8 @@ function Login() {
             value={user.email}
             onChange={(e) => setUser({ ...user, email: e.target.value })}
           />
+          <h2 className="text-base font-bold mb-1">Password :</h2>
+
           <input
             type="password"
             placeholder="Password"
@@ -56,6 +59,12 @@ function Login() {
           Don't have any account &nbsp;
           <Link className="text-blue-700" to="/signup">
             register here
+          </Link>
+        </p>
+        <p className="text-sm text-gray-600">
+          Login with otp &nbsp;
+          <Link className="text-blue-700" to="/loginotp">
+            Click here
           </Link>
         </p>
       </div>

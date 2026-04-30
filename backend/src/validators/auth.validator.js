@@ -44,8 +44,24 @@ const loginValidator = () => {
       .withMessage("enter a valid email id")
       .notEmpty()
       .withMessage("email is required"),
-    body("password").trim().notEmpty().withMessage("password is required"),
+    body("password")
+      .trim()
+      .notEmpty()
+      .withMessage("password is required")
+      .isLength({ min: 8 })
+      .withMessage("password must be 8 characters long"),
   ];
 };
 
-export { signupValidator, loginValidator };
+const emailValidator = () => {
+  return [
+    body("email")
+      .trim()
+      .notEmpty()
+      .withMessage("email field is required")
+      .isEmail()
+      .withMessage("invalid email"),
+  ];
+};
+
+export { signupValidator, loginValidator, emailValidator };

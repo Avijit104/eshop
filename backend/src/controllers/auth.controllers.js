@@ -10,7 +10,7 @@ import { error } from "console";
 //email otp
 const emailOtp = asyncHandler(async (req, res) => {
   const { email } = req.body;
-  console.log(email);
+
   const existingUser = await User.findOne({ email });
   if (existingUser) {
     throw new ApiError(401, "user already exists please login");
@@ -60,6 +60,52 @@ const signup = asyncHandler(async (req, res) => {
     );
 });
 
+//user login otp send
+const loginOtpSend = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new ApiError(404, "user not fuound");
+  }
+  console.log(user);
+  const otp = crypto.randomInt(100000, 1000000).toString();
+  const option = {
+    email: email,
+    subject: "User Registration Otp",
+    mailGenContent: `${otp}`,
+  };
+  // const mail = await mailSender(option);
+  // if (!mail) {
+  //   throw new ApiError(401, "Otp mail sending error");
+  // }
+  res.status(200).json(new ApiResponse(200, "otp sent suuccessfully", otp));
+});
+
+//user login otp
+const loginOtp = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new ApiError(404, "user not found");
+  }
+  const refreshToken = user.generateDataToken();
+  const accessToken = user.generateDataToken();
+
+  user.refreshToken = refreshToken;
+  await user.save({ validateBeforeSave: false });
+
+  const options = {
+    httpOnly: true,
+    secure: true,
+  };
+
+  return res
+    .status(200)
+    .cookie("accessToken", accessToken, options)
+    .cookie("refreshToken", refreshToken, options)
+    .json(new ApiResponse(200, "user login successful", user));
+});
+
 //user login
 const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -91,7 +137,7 @@ const login = asyncHandler(async (req, res) => {
     .status(200)
     .cookie("accessToken", accessToken, options)
     .cookie("refreshToken", refreshToken, options)
-    .json(new ApiResponse(200, "http://localhost:5173/user", user));
+    .json(new ApiResponse(200, "user login successful", user));
 });
 
 // user logout
@@ -119,4 +165,4 @@ const logout = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, "user logged out successfully"));
 });
 
-export { signup, login, logout, emailOtp };
+export { signup, login, logout, emailOtp, loginOtp, loginOtpSend };
