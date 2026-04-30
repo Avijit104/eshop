@@ -6,7 +6,12 @@ import { validator } from "../middleware/validator.middle.js";
 import { jwtValidator } from "../middleware/jwtValidator.middle.js";
 
 // controllers
-import { signup, login, logout } from "../controllers/auth.controllers.js";
+import {
+  signup,
+  login,
+  logout,
+  emailOtp,
+} from "../controllers/auth.controllers.js";
 
 // validators
 import {
@@ -18,6 +23,8 @@ import {
 const router = Router();
 
 // unsecured routes
+
+router.route("/send-otp").post(emailOtp);
 router.route("/signup").post(signupValidator(), validator, signup);
 
 router.route("/login").post(loginValidator(), validator, login);

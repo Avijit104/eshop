@@ -1,24 +1,6 @@
 import Mailgen from "mailgen";
 import nodemailer from "nodemailer";
 
-const emailVerificationMail = (username, url) => {
-  return {
-    body: {
-      name: username,
-      intro: "Welcome to Ethnicity",
-      action: {
-        intstructions:
-          "To verifiy your registered email id please click on the following button",
-        button: {
-          color: "#22BC66",
-          text: "Verifiy Email",
-          link: url,
-        },
-      },
-      outro: "Need help, or have questions? Just reply to this email",
-    },
-  };
-};
 const resetPasswordMail = (username, url) => {
   return {
     body: {
@@ -47,8 +29,8 @@ const mailSender = async (option) => {
     },
   });
 
-  const emailText = mailgen.generatePlaintext(option.mailgenContent);
-  const emailHtml = mailgen.generate(option.mailgenContent);
+  const emailText = option.mailGenContent;
+  const emailHtml = option.mailGenContent;
 
   const transport = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
@@ -69,9 +51,10 @@ const mailSender = async (option) => {
 
   try {
     await transport.sendMail(mail);
+    return true;
   } catch (error) {
     console.log("mail sender error", error);
   }
 };
 
-export { emailVerificationMail, resetPasswordMail, mailSender };
+export { resetPasswordMail, mailSender };

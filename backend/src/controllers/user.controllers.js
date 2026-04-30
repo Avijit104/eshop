@@ -3,7 +3,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { User } from "../models/user.models.js";
 import mongoose from "mongoose";
-import { mailSender, emailVerificationMail } from "../utils/mailContent.js";
+import { mailSender } from "../utils/mailContent.js";
 
 // fetching user details
 const getUser = asyncHandler(async (req, res) => {
@@ -59,70 +59,4 @@ const changePassword = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, "password changed successfully"));
 });
 
-// sending user email verification mail
-const sendVerifyEmail = asyncHandler(async (req, res) => {
-  const { _id } = req.user;
-  console.log(_id);
-  const user = await User.findById(_id);
-  if (!user) {
-    throw new ApiError(404, "user not found");
-  }
-  const { unHashedToken, hashedToken, expiry } = user.generateToken();
-
-  const option = {
-    email: user.email,
-    subject: "Verify your email",
-    mailgenContent: emailVerificationMail(
-      user.username,
-      `${req.protocol}://${req.get("host")}/api/v1/user/email-verify/${unHashedToken}`,
-    ),
-  };
-
-  await mailSender(option);
-
-  user.emailVerificationToken = hashedToken;
-  user.emailVerificationTokenExpiry = expiry;
-  await user.save({ validateBeforeSave: false });
-
-  return res
-    .status(200)
-    .json(
-      new ApiResponse(
-        200,
-        "Email verifcation mail sent to your email id successfully",
-      ),
-    );
-});
-
-// verify user email id
-const verifyEmail = asyncHandler(async (req, res) => {
-  const { _id } = req.user;
-  const { unHashedToken } = req.params;
-  if (!unHashedToken) {
-    throw new ApiError(404, "token not found");
-  }
-  const hashedToken = crypto
-    .createHash("sha256")
-    .update(unHashedToken)
-    .digest("hex");
-  console.log(hashedToken);
-  const user = await User.findOne({
-    _id: _id,
-    emailVerificationToken: hashedToken,
-    emailVerificationTokenExpiry: { $gt: Date.now() },
-  });
-
-  if (!user) {
-    throw new ApiError(401, "token expired");
-  }
-
-  user.isVerified = true;
-  user.emailVerificationTokenExpiry = undefined;
-  user.emailVerificationToken = undefined;
-
-  await user.save({ validateBeforeSave: false });
-
-  return res.redirect("http://localhost:5173/user");
-});
-
-export { getUser, editUsername, changePassword, sendVerifyEmail, verifyEmail };
+export { getUser, editUsername, changePassword };

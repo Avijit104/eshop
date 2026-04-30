@@ -1,4 +1,5 @@
 import { body } from "express-validator";
+import { availableGender, gender } from "../utils/constants.js";
 
 const signupValidator = () => {
   return [
@@ -14,6 +15,18 @@ const signupValidator = () => {
       .withMessage("username is required")
       .isLength({ min: 3 })
       .withMessage("username must be longer than 3 characters"),
+    body("gender")
+      .trim()
+      .notEmpty()
+      .withMessage("gender field is required")
+      .isIn(availableGender)
+      .withMessage("invalid gender"),
+    body("phno")
+      .trim()
+      .notEmpty()
+      .withMessage("phone number field is required")
+      .isLength({ min: 10, max: 10 })
+      .withMessage("phone number must be equal to 10 characters long"),
     body("password")
       .trim()
       .notEmpty()

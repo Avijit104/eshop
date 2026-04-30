@@ -6,8 +6,6 @@ import {
   getUser,
   editUsername,
   changePassword,
-  verifyEmail,
-  sendVerifyEmail,
 } from "../controllers/user.controllers.js";
 
 import {
@@ -27,9 +25,6 @@ router
 router
   .route("/change-password")
   .put(jwtValidator, changePasswordValidator(), validator, changePassword);
-
-router.route("/email-mail").get(jwtValidator, sendVerifyEmail);
-router.route("/verify-email/:unHasedToken").get(jwtValidator, verifyEmail);
 
 // export router
 export default router;

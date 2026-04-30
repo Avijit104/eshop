@@ -4,14 +4,38 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
+import { mailSender } from "../utils/mailContent.js";
+import { error } from "console";
+
+//email otp
+const emailOtp = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  console.log(email);
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    throw new ApiError(401, "user already exists please login");
+  }
+  const otp = crypto.randomInt(100000, 1000000).toString();
+  console.log(otp);
+  const option = {
+    email: email,
+    subject: "User Registration Otp",
+    mailGenContent: `${otp}`,
+  };
+  // const mail = await mailSender(option);
+  // if (!mail) {
+  //   throw new ApiError(401, "Otp mail sending error");
+  // }
+  res.status(200).json(new ApiResponse(200, "otp sent suuccessfully", otp));
+});
 
 // user registration
 const signup = asyncHandler(async (req, res) => {
-  const { email, username, password } = req.body;
+  const { email, username, gender, phno, password } = req.body;
   const existingUser = await User.findOne({ email });
 
   if (existingUser) {
-    return res.status(500).json(new ApiResponse(500, "user already exists"));
+    return res.status(401).json(new ApiResponse(401, "user already exists"));
   }
 
   const salt = await bcrypt.genSalt(10);
@@ -20,6 +44,8 @@ const signup = asyncHandler(async (req, res) => {
   const newUser = await User.create({
     email,
     username,
+    gender,
+    phno,
     password: hasedPassword,
   });
 
@@ -93,4 +119,4 @@ const logout = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, "user logged out successfully"));
 });
 
-export { signup, login, logout };
+export { signup, login, logout, emailOtp };

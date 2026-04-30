@@ -15,7 +15,12 @@ import "./index.css";
 import App from "./App.jsx";
 import Home from "./pages/HomePage/Home.jsx";
 import Healthcheck from "./pages/healthcheck/Healthcheck.jsx";
-import { SignUp, Login, ChangePassword } from "./pages/authentication/index.js";
+import {
+  SignUp,
+  Login,
+  ChangePassword,
+  RegistrationForm,
+} from "./pages/authentication/index.js";
 import {
   ProfileOutlet,
   PersonalDetails,
@@ -57,6 +62,7 @@ const router = createBrowserRouter([
           </AuthContainer>
         ),
       },
+
       {
         path: "/user",
         element: (

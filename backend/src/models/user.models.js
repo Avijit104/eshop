@@ -31,10 +31,7 @@ const userSchema = new Schema(
       required: true,
       trim: true,
     },
-    isVerified: {
-      type: Boolean,
-      default: false,
-    },
+
     resetPasswordToken: String,
     resetPasswordTokenExpiry: Date,
     emailVerificationToken: String,

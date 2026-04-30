@@ -1,69 +1,152 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router";
+import RegistrationForm from "./RegistrationForm";
 
 function SignUp() {
-  const [user, setUser] = useState({ email: "", username: "", password: "" });
-  const [error, setError] = useState("");
+  const [email, setemail] = useState("");
+  const [otp, setOtp] = useState("");
+  const [isVerified, setVerified] = useState(false);
   const navigate = useNavigate();
+  const otpRef = useRef(null);
 
-  const onSignUp = async () => {
-    try {
-      const res = await axios.post("/api/v1/auth/signup", user);
-      console.log("response", res.data);
-      console.log(res.data.message);
-      navigate("/login");
-    } catch (error) {
-      setError(true);
-      if (error.status === 422) {
-        setError("signup failed: invalid data");
-      }
+  const onKeyPress = (e, index) => {
+    const input = Object.values(otpRef.current.children);
+    if (e.key === "Backspace" && e.target.value !== "" && index > 0) {
+      e.target.value = "";
+      input[index - 1].focus();
+      e.preventDefault();
+    } else if (!isNaN(e.key) && e.target.value !== "") {
+      input[index + 1].focus();
     }
-    console.log(user);
+  };
+
+  const otpValidate = async () => {
+    const input = Object.values(otpRef.current.children);
+    let userOtp = "";
+    await input.map((item) => {
+      userOtp = userOtp + item.value;
+    });
+    if (otp === userOtp) {
+      setVerified(true);
+    }
+  };
+
+  const sendOtp = async () => {
+    try {
+      const res = await axios.post("/api/v1/auth/send-otp", { email });
+      setOtp(res.data.data);
+      console.log(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="main flex-center flex-col ">
-      <div className="flex-center flex-col w-[40%] text-2xl gap-10  bg-black rounded-2xl p-10">
+      <div className="flex-center flex-col w-[40%] text-2xl gap-10  bg-black rounded-2xl p-5">
         <h1 className="font-bold">Signup</h1>
-        <div className="w-[75%]">
-          <input
-            type="email"
-            placeholder="Email"
-            autoComplete="off"
-            name="email"
-            id="email"
-            className="input"
-            value={user.email}
-            onChange={(e) => setUser({ ...user, email: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Username"
-            autoComplete="off"
-            name="username"
-            id="username"
-            className="input"
-            value={user.username}
-            onChange={(e) => setUser({ ...user, username: e.target.value })}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            autoComplete="off"
-            name="pass"
-            id="pass"
-            className="input"
-            value={user.password}
-            onChange={(e) => setUser({ ...user, password: e.target.value })}
-          />
-
-          <div className="w-full flex-center ">
-            <button className="button" onClick={onSignUp}>
-              Signup
-            </button>
+        {isVerified ? (
+          <div className="w-[75%]">
+            <RegistrationForm email={email} />
           </div>
-        </div>
+        ) : (
+          <div className="w-[75%]">
+            <div>
+              <h2 className="font-bold text-base mb-2">Email : </h2>
+              <input
+                type="email"
+                placeholder="Email"
+                autoComplete="off"
+                name="email"
+                id="email"
+                className="input"
+                value={email}
+                onChange={(e) => setemail(e.target.value)}
+              />
+            </div>
+            {otp && (
+              <div>
+                <h2 className="font-bold text-base mb-2">Otp : </h2>
+                <div className=" flex justify-around items-center" ref={otpRef}>
+                  <input
+                    type="text"
+                    className="w-[10%] input p-2 text-center aspect-square"
+                    autoComplete="off"
+                    name="otp"
+                    id="one"
+                    maxLength={1}
+                    key={1}
+                    onKeyDown={(e) => onKeyPress(e, 0)}
+                  />
+                  <input
+                    type="text"
+                    className="w-[10%] input p-2 text-center aspect-square"
+                    autoComplete="off"
+                    name="otp"
+                    maxLength={1}
+                    id="two"
+                    key={2}
+                    onKeyDown={(e) => onKeyPress(e, 1)}
+                  />
+                  <input
+                    type="text"
+                    className="w-[10%] input p-2 text-center aspect-square"
+                    autoComplete="off"
+                    name="otp"
+                    maxLength={1}
+                    id="three"
+                    key={3}
+                    onKeyDown={(e) => onKeyPress(e, 2)}
+                  />
+                  <input
+                    type="text"
+                    className="w-[10%] input p-2 text-center aspect-square"
+                    autoComplete="off"
+                    name="otp"
+                    maxLength={1}
+                    id="four"
+                    key={4}
+                    onKeyDown={(e) => onKeyPress(e, 3)}
+                  />
+                  <input
+                    type="text"
+                    className="w-[10%] input p-2 text-center aspect-square"
+                    autoComplete="off"
+                    name="otp"
+                    maxLength={1}
+                    id="five"
+                    key={5}
+                    onKeyDown={(e) => onKeyPress(e, 4)}
+                  />
+                  <input
+                    type="text"
+                    className="w-[10%] input p-2 text-center aspect-square"
+                    autoComplete="off"
+                    name="otp"
+                    maxLength={1}
+                    id="six"
+                    key={6}
+                    onKeyDown={(e) => onKeyPress(e, 5)}
+                  />
+                </div>
+              </div>
+            )}
+            {otp ? (
+              <div className="w-full flex-center ">
+                <button className="button" onClick={otpValidate}>
+                  Validate
+                </button>
+              </div>
+            ) : (
+              <div className="w-full flex-center">
+                <button className="button" onClick={sendOtp}>
+                  Send Otp
+                </button>
+              </div>
+            )}
+          </div>
+        )}
         <p className="text-sm text-gray-600">
           Already have an account &nbsp;
           <Link className="text-blue-700" to="/login">
@@ -71,13 +154,6 @@ function SignUp() {
           </Link>
         </p>
       </div>
-      {error ? (
-        <div className="p-1 text-center text-red-700 bg-(--innerBox) w-[40%] m-4 rounded-xl">
-          <p>{error}</p>
-        </div>
-      ) : (
-        <></>
-      )}
     </div>
   );
 }
