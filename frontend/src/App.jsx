@@ -8,15 +8,12 @@ import Footer from "./components/Footer";
 
 function App() {
   const [loading, setLoading] = useState(false);
-  console.log("this is outer ");
   const dispatcher = useDispatch();
   useEffect(() => {
-    console.log("this is inner");
     const fetchUser = async () => {
       try {
         const res = await axios.get("/api/v1/user");
         if (res) {
-          console.log("this is fetch user");
           dispatcher(login(res.data.data));
         }
       } catch (error) {

@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import { logout } from "../../../store/AtuhSlice";
 
 function ChangePassword() {
   const [password, setPassword] = useState({
@@ -8,14 +10,17 @@ function ChangePassword() {
     newPassword: "",
   });
   const navigate = useNavigate();
+  const dispatcher = useDispatch();
+
   const changePassword = async () => {
     try {
-      const res = await axios.post("/api/v1/user/change-password", password);
-      if (res) {
-        navigate("/user/login");
-      }
+      console.log("this is change password");
+      const res = await axios.put("/api/v1/user/change-password", password);
+      const logoutRes = await axios.get("/api/v1/auth/logout");
+      dispatcher(logout());
+      navigate("/login");
     } catch (error) {
-      console.log(error);
+      console.log({ ...error });
     }
   };
   return (

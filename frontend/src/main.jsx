@@ -71,6 +71,14 @@ const router = createBrowserRouter([
           </AuthContainer>
         ),
       },
+      {
+        path: "/change-password",
+        element: (
+          <AuthContainer authentication>
+            <ChangePassword />
+          </AuthContainer>
+        ),
+      },
 
       {
         path: "/user",

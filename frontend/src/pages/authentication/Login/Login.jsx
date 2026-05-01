@@ -12,7 +12,6 @@ function Login() {
   const onLogin = async () => {
     try {
       const res = await axios.post("/api/v1/auth/login", user);
-      console.log(res.data.data._id);
       dispatcher(login(res.data.data));
       navigate("/");
     } catch (error) {

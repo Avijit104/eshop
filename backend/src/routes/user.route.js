@@ -6,6 +6,7 @@ import {
   getUser,
   editUsername,
   changePassword,
+  updateUser,
 } from "../controllers/user.controllers.js";
 
 import {
@@ -25,6 +26,8 @@ router
 router
   .route("/change-password")
   .put(jwtValidator, changePasswordValidator(), validator, changePassword);
+
+router.route("/update").put(jwtValidator, updateUser);
 
 // export router
 export default router;

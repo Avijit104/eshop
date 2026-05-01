@@ -9,7 +9,7 @@ function AuthContainer({ children, authentication = true }) {
   useEffect(() => {
     if (authentication && isLogin !== authentication) {
       navigate("/login");
-    } else if (!authentication && isLogin !== authentication) {
+    } else if (isLogin !== authentication && !authentication) {
       navigate("/");
     }
   }, [authentication, isLogin, navigate]);
