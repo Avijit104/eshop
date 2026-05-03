@@ -1,7 +1,12 @@
 import React from "react";
+import MainContainer from "../../../components/MainContainer";
 
 function Address() {
-  return <div>Address</div>;
+  return (
+    <MainContainer>
+      <div>Address</div>
+    </MainContainer>
+  );
 }
 
 export default Address;

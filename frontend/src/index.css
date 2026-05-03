@@ -36,7 +36,7 @@
   display: none;
 }
 @utility main {
-  @apply min-h-screen w-full box-border bg-(--bg);
+  @apply min-h-screen h-screen w-full box-border bg-(--bg);
 }
 @utility flex-center {
   @apply flex justify-center items-center;

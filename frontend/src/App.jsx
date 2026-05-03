@@ -25,9 +25,9 @@ function App() {
     fetchUser();
   }, [setLoading, loading]);
   return loading ? (
-    <>
+    <div className="">
       <Outlet />
-    </>
+    </div>
   ) : (
     <></>
   );

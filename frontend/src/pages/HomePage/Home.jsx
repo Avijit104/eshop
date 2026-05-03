@@ -4,9 +4,11 @@ import PageContainer from "../../components/PageContainer";
 
 function Home() {
   return (
-    <div>
-      <p>this is home page</p>
-    </div>
+    <PageContainer>
+      <div>
+        <p>this is home page</p>
+      </div>
+    </PageContainer>
   );
 }
 

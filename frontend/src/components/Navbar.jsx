@@ -10,7 +10,7 @@ function Navbar() {
 
   const navigate = useNavigate();
   return (
-    <div className="w-full box-border flex justify-between items-center px-15 bg-black   py-3 ">
+    <div className="w-full h-full box-border flex justify-between items-center px-15 bg-black  ">
       <div>
         <h1 className="text-2xl font-bold text-blue-600">Ethenicity</h1>
       </div>

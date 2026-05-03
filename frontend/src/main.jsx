@@ -29,6 +29,7 @@ import {
 } from "./pages/Profile/index.js";
 import AuthContainer from "./components/AuthContainer.jsx";
 import PageContainer from "./components/PageContainer.jsx";
+import MainContainer from "./components/MainContainer.jsx";
 
 const router = createBrowserRouter([
   {
@@ -37,11 +38,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: (
-          <PageContainer>
-            <Home />
-          </PageContainer>
-        ),
+        element: <Home />,
       },
       {
         path: "/health-check",
@@ -83,11 +80,9 @@ const router = createBrowserRouter([
       {
         path: "/user",
         element: (
-          <PageContainer>
-            <AuthContainer authentication>
-              <ProfileOutlet />
-            </AuthContainer>
-          </PageContainer>
+          <AuthContainer authentication>
+            <ProfileOutlet />
+          </AuthContainer>
         ),
         children: [
           {
