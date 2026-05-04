@@ -34,7 +34,7 @@ function PersonalDetails() {
 
   return (
     <MainContainer>
-      <div className="flex-center bg-black flex-col">
+      <div className="flex-center  flex-col">
         <div className="flex border-b border-gray-900 w-[80%] items-center py-2 mb-10 justify-between">
           <h2 className="text-2xl font-bold ">Personal Details</h2>
           <button
@@ -44,7 +44,7 @@ function PersonalDetails() {
             Change Password
           </button>
         </div>
-        <div className=" w-[50%]">
+        <div className=" w-[50%] ">
           <h2 className="text-lg font-bold mb-1">Email :</h2>
           <div className="flex-center  mb-5 gap-5">
             <input
