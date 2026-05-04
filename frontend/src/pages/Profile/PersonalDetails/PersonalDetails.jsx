@@ -8,30 +8,42 @@ import MainContainer from "../../../components/MainContainer";
 function PersonalDetails() {
   const userData = useSelector((state) => state.auth.userData);
   const [user, setUser] = useState({
-    email: userData.email,
-    username: userData.username,
-    phno: userData.phno,
-    gender: userData.gender,
+    email: userData?.email,
+    username: userData?.username,
+    phno: userData?.phno,
+    gender: userData?.gender,
   });
   const [editUsername, setEditUsername] = useState(true);
   const [editEmail, setEditEmail] = useState(true);
   const [editPhno, setEditPhno] = useState(true);
   const navigate = useNavigate();
   const dispatcher = useDispatch();
-  console.log(user);
+
   const updateUser = async () => {
     try {
       const res = await axios.put("/api/v1/user/update", user);
       console.log(res.data.data);
       dispatcher(login(res.data.data));
+      setEditEmail(true);
+      setEditUsername(true);
+      setEditPhno(true);
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <MainContainer>
       <div className="flex-center bg-black flex-col">
-        <h2 className="text-2xl font-bold mb-5">Personal Details</h2>
+        <div className="flex border-b border-gray-900 w-[80%] items-center py-2 mb-10 justify-between">
+          <h2 className="text-2xl font-bold ">Personal Details</h2>
+          <button
+            className="button"
+            onClick={() => navigate("/change-password")}
+          >
+            Change Password
+          </button>
+        </div>
         <div className=" w-[50%]">
           <h2 className="text-lg font-bold mb-1">Email :</h2>
           <div className="flex-center  mb-5 gap-5">
@@ -155,14 +167,6 @@ function PersonalDetails() {
               <p>Other</p>
             </div>
           </div>
-        </div>
-        <div>
-          <button
-            className="button"
-            onClick={() => navigate("/change-password")}
-          >
-            Change Password
-          </button>
         </div>
       </div>
     </MainContainer>

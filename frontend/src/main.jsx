@@ -76,7 +76,6 @@ const router = createBrowserRouter([
           </AuthContainer>
         ),
       },
-
       {
         path: "/user",
         element: (

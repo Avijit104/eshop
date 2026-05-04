@@ -4,7 +4,6 @@ import Footer from "./Footer";
 import MainContainer from "./MainContainer.jsx";
 
 function PageContainer({ children }) {
-  console.log("this is page", children);
   return (
     <div className="main">
       <div className=" h-[9%] w-full sticky">
