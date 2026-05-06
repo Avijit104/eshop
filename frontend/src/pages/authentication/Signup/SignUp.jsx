@@ -44,16 +44,19 @@ function SignUp() {
   };
   return (
     <div className="main flex-center flex-col ">
-      <div className="flex-center flex-col w-[40%] text-2xl gap-10  bg-black rounded-2xl p-5">
-        <h1 className="font-bold">Signup</h1>
-        {isVerified ? (
-          <div className="w-[75%]">
+      {isVerified ? (
+        <div className="flex-center flex-col w-[60%] text-2xl gap-7  bg-black rounded-2xl p-5">
+          <h1 className="font-bold">Signup</h1>
+          <div className="w-[75%]  ">
             <RegistrationForm email={email} />
           </div>
-        ) : (
+        </div>
+      ) : (
+        <div className="flex-center flex-col w-[40%] text-2xl gap-10 border  bg-black rounded-2xl p-5">
+          <h1 className="font-bold">Signup</h1>
           <div className="w-[75%]">
-            <div>
-              <h2 className="font-bold text-base mb-2">Email : </h2>
+            <div className="mb-5">
+              <h2 className="font-bold text-base mb-1">Email : </h2>
               <input
                 type="email"
                 placeholder="Email"
@@ -66,8 +69,10 @@ function SignUp() {
               />
             </div>
             {otp && (
-              <div>
-                <h2 className="font-bold text-base mb-2">Otp : </h2>
+              <div className="my-10">
+                <h2 className="font-bold text-base mb-5 text-center">
+                  Enter your otp
+                </h2>
                 <div className=" flex justify-around items-center" ref={otpRef}>
                   <input
                     type="text"
@@ -135,7 +140,7 @@ function SignUp() {
             {otp ? (
               <div className="w-full flex-center ">
                 <button className="button" onClick={otpValidate}>
-                  Validate
+                  Verify otp
                 </button>
               </div>
             ) : (
@@ -146,14 +151,14 @@ function SignUp() {
               </div>
             )}
           </div>
-        )}
-        <p className="text-sm text-gray-600">
-          Already have an account &nbsp;
-          <Link className="text-blue-700" to="/login">
-            login here
-          </Link>
-        </p>
-      </div>
+          <p className="text-sm text-gray-600">
+            Already have an account &nbsp;
+            <Link className="text-blue-700" to="/login">
+              login here
+            </Link>
+          </p>
+        </div>
+      )}
     </div>
   );
 }

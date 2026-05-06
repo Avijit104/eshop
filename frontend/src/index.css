@@ -49,10 +49,10 @@
 }
 
 @utility input {
-  @apply block w-full mb-5 p-4 px-3 rounded-xl text-[1.05rem] bg-(--accent);
+  @apply block w-full p-4 px-3 rounded-xl text-[1.05rem] bg-(--accent) outline-2 outline-blue-700 accent-blue-700;
 }
 @utility button {
-  @apply px-7 py-2 bg-blue-700 text-white text-base text-center border-0 outline-0 rounded-lg hover:bg-blue-800 font-bold;
+  @apply px-7 py-2 bg-blue-700 text-white text-base text-center border-2 border-black outline-2 rounded-lg hover:bg-blue-800 font-bold outline-blue-700;
 }
 
 .material-symbols-outlined {

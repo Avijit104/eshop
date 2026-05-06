@@ -9,7 +9,8 @@ function PersonalDetails() {
   const userData = useSelector((state) => state.auth.userData);
   const [user, setUser] = useState({
     email: userData?.email,
-    username: userData?.username,
+    firstName: userData?.firstName,
+    lastName: userData?.lastName,
     phno: userData?.phno,
     gender: userData?.gender,
   });
@@ -20,16 +21,16 @@ function PersonalDetails() {
   const dispatcher = useDispatch();
 
   const updateUser = async () => {
-    try {
-      const res = await axios.put("/api/v1/user/update", user);
-      console.log(res.data.data);
-      dispatcher(login(res.data.data));
-      setEditEmail(true);
-      setEditUsername(true);
-      setEditPhno(true);
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   const res = await axios.put("/api/v1/user/update", user);
+    //   console.log(res.data.data);
+    //   dispatcher(login(res.data.data));
+    //   setEditEmail(true);
+    //   setEditUsername(true);
+    //   setEditPhno(true);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
@@ -37,16 +38,60 @@ function PersonalDetails() {
       <div className="flex-center  flex-col">
         <div className="flex border-b border-gray-900 w-[80%] items-center py-2 mb-10 justify-between">
           <h2 className="text-2xl font-bold ">Personal Details</h2>
-          <button
-            className="button"
-            onClick={() => navigate("/change-password")}
-          >
-            Change Password
-          </button>
         </div>
-        <div className=" w-[50%] ">
+
+        {/* name */}
+        <div className=" w-[90%] px-10   mb-5">
+          <div className="flex w-full  gap-5 items-baseline-last  ">
+            <div className="w-[50%]">
+              <h2 className="text-lg font-bold mb-1">First Name :</h2>
+              <input
+                type="text"
+                className="input mb-0 "
+                id="firstName"
+                name="firstName"
+                value={user.firstName}
+                readOnly={editUsername}
+                onChange={(e) =>
+                  setUser({ ...user, firstName: e.target.value })
+                }
+              />
+            </div>
+            <div className="w-[50%]">
+              <h2 className="text-lg font-bold mb-1">Last Name:</h2>
+              <input
+                type="text"
+                className="input mb-0"
+                id="lastName"
+                name="lastName"
+                value={user.lastName}
+                readOnly={editUsername}
+                onChange={(e) => setUser({ ...user, lastName: e.target.value })}
+              />
+            </div>
+            {editUsername ? (
+              <button
+                className="button  "
+                onClick={() => {
+                  setEditUsername(false);
+                  document.getElementById("lastName").focus();
+                  document.getElementById("firstName").focus();
+                }}
+              >
+                Edit
+              </button>
+            ) : (
+              <button className="button" onClick={updateUser}>
+                Save
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Email */}
+        <div className=" w-[90%] px-10  mb-5 ">
           <h2 className="text-lg font-bold mb-1">Email :</h2>
-          <div className="flex-center  mb-5 gap-5">
+          <div className="flex-center w-[60%]  mb-5 gap-5">
             <input
               type="text"
               className="input mb-0 "
@@ -73,38 +118,11 @@ function PersonalDetails() {
             )}
           </div>
         </div>
-        <div className=" w-[50%]">
-          <h2 className="text-lg font-bold mb-1">Username :</h2>
-          <div className="flex-center  mb-5 gap-5">
-            <input
-              type="text"
-              className="input mb-0"
-              id="username"
-              name="username"
-              value={user.username}
-              readOnly={editUsername}
-              onChange={(e) => setUser({ ...user, username: e.target.value })}
-            />
-            {editUsername ? (
-              <button
-                className="button"
-                onClick={() => {
-                  setEditUsername(false);
-                  document.getElementById("username").focus();
-                }}
-              >
-                Edit
-              </button>
-            ) : (
-              <button className="button" onClick={updateUser}>
-                Save
-              </button>
-            )}
-          </div>
-        </div>
-        <div className=" w-[50%]">
+
+        {/* Phone number  */}
+        <div className=" w-[90%] px-10 ">
           <h2 className="text-lg font-bold mb-1 ">Phone Number :</h2>
-          <div className="flex-center  mb-5 gap-5">
+          <div className="flex-center  mb-5 gap-5 w-[60%]">
             <input
               type="text"
               className="input mb-0"
@@ -131,41 +149,51 @@ function PersonalDetails() {
             )}
           </div>
         </div>
-        <div className=" w-[50%]">
+
+        {/* gender */}
+        <div className=" w-[90%] px-10 ">
           <div className="flex-center justify-between mb-2">
             <h2 className="text-lg font-bold ">Gender :</h2>
           </div>
-          <div className="flex justify-around items-center mb-10 input">
-            <div className="flex gap-2">
-              <input
-                type="radio"
-                name="gender"
-                id="gender"
-                checked={user.gender === "male"}
-                readOnly
-              />
-              <p>Male</p>
+          <div className="flex justify-between items-center">
+            <div className="flex justify-around items-center input mb-0 w-[60%]">
+              <div className="flex gap-2">
+                <input
+                  type="radio"
+                  name="gender"
+                  id="gender"
+                  checked={user.gender === "male"}
+                  readOnly
+                />
+                <p>Male</p>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="radio"
+                  name="gender"
+                  id="gender"
+                  checked={user.gender === "female"}
+                  readOnly
+                />
+                <p>Female</p>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="radio"
+                  name="gender"
+                  id="gender"
+                  checked={user.gender === "other"}
+                  readOnly
+                />
+                <p>Other</p>
+              </div>
             </div>
-            <div className="flex gap-2">
-              <input
-                type="radio"
-                name="gender"
-                id="gender"
-                checked={user.gender === "female"}
-                readOnly
-              />
-              <p>Female</p>
-            </div>
-            <div className="flex gap-2">
-              <input
-                type="radio"
-                name="gender"
-                id="gender"
-                checked={user.gender === "other"}
-                readOnly
-              />
-              <p>Other</p>
-            </div>
+            <button
+              className="button"
+              onClick={() => navigate("/change-password")}
+            >
+              Change Password
+            </button>
           </div>
         </div>
       </div>

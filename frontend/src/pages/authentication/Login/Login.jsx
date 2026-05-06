@@ -24,29 +24,33 @@ function Login() {
       <div className="flex-center flex-col w-[40%] text-2xl gap-4 p-10 bg-black rounded-2xl">
         <h1 className="font-bold">Login</h1>
         <div className="w-[75%] my-10">
-          <h2 className="text-base font-bold mb-1">Email :</h2>
-          <input
-            type="email"
-            placeholder="Email"
-            name="email"
-            autoComplete="off"
-            id="email"
-            className="input"
-            value={user.email}
-            onChange={(e) => setUser({ ...user, email: e.target.value })}
-          />
-          <h2 className="text-base font-bold mb-1">Password :</h2>
+          <div className="mb-5">
+            <h2 className="text-base font-bold mb-1">Email :</h2>
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              autoComplete="off"
+              id="email"
+              className="input"
+              value={user.email}
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
+            />
+          </div>
 
-          <input
-            type="password"
-            placeholder="Password"
-            autoComplete="off"
-            name="pass"
-            id="pass"
-            className="input"
-            value={user.password}
-            onChange={(e) => setUser({ ...user, password: e.target.value })}
-          />
+          <div className="mb-5">
+            <h2 className="text-base font-bold mb-1">Password :</h2>
+            <input
+              type="password"
+              placeholder="Password"
+              autoComplete="off"
+              name="pass"
+              id="pass"
+              className="input"
+              value={user.password}
+              onChange={(e) => setUser({ ...user, password: e.target.value })}
+            />
+          </div>
 
           <div className="w-full flex-center">
             <button className="button" onClick={onLogin}>

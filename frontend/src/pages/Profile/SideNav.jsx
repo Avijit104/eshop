@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import SideContainer from "../../components/SideContainer";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import { logout } from "../../store/AtuhSlice";
 
 function SideNav() {
   const user = useSelector((state) => state.auth.userData);
@@ -27,7 +28,7 @@ function SideNav() {
             <div>
               <p className="text-sm text-gray-400 ">Hello, </p>
               <p className="text-lg font-bold text-blue-700">
-                {user?.username}
+                {user?.firstName}
               </p>
             </div>
           </div>

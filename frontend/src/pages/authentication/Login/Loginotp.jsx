@@ -1,6 +1,7 @@
 import React, { use, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import { Link } from "react-router";
 import { login } from "../../../store/AtuhSlice";
 import axios from "axios";
 
@@ -50,20 +51,24 @@ function Loginotp() {
       <div className="flex-center flex-col w-[40%] text-2xl gap-4 p-10 bg-black rounded-2xl">
         <h1 className="font-bold">Login</h1>
         <div className="w-[75%] my-10">
-          <h2 className="text-base font-bold mb-1">Email :</h2>
-          <input
-            type="email"
-            placeholder="Email"
-            name="email"
-            autoComplete="off"
-            id="email"
-            className="input"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <div className="mb-5">
+            <h2 className="text-base font-bold mb-1">Email :</h2>
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              autoComplete="off"
+              id="email"
+              className="input"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
           {otp && (
-            <div>
-              <h2 className="font-bold text-base mb-2">Otp : </h2>
+            <div className="my-10">
+              <h2 className="font-bold text-base mb-5 text-center">
+                Enter your otp
+              </h2>
               <div className=" flex justify-around items-center" ref={otpRef}>
                 <input
                   type="text"
@@ -131,7 +136,7 @@ function Loginotp() {
           <div className="w-full flex-center">
             {otp ? (
               <button className="button" onClick={otpValidate}>
-                Validate
+                Verify otp
               </button>
             ) : (
               <button className="button" onClick={sendOtp}>
@@ -140,6 +145,18 @@ function Loginotp() {
             )}
           </div>
         </div>
+        <p className="text-sm text-gray-600">
+          Don't have any account &nbsp;
+          <Link className="text-blue-700" to="/signup">
+            register here
+          </Link>
+        </p>
+        <p className="text-sm text-gray-600">
+          Login with password &nbsp;
+          <Link className="text-blue-700" to="/login">
+            Click here
+          </Link>
+        </p>
       </div>
     </div>
   );
