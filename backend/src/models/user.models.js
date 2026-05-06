@@ -2,7 +2,6 @@ import mongoose, { Schema } from "mongoose";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import { gender, availableGender } from "../utils/constants.js";
-import { deflate } from "zlib";
 
 const userSchema = new Schema(
   {
@@ -13,7 +12,12 @@ const userSchema = new Schema(
       unique: true,
       index: true,
     },
-    username: {
+    firstName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    lastName: {
       type: String,
       required: true,
       trim: true,

@@ -9,11 +9,17 @@ const signupValidator = () => {
       .withMessage("email is required")
       .isEmail()
       .withMessage("please enter a valid email"),
-    body("username")
+    body("firstName")
       .trim()
       .notEmpty()
-      .withMessage("username is required")
+      .withMessage("first name is required")
       .isLength({ min: 3 })
+      .withMessage("username must be longer than 3 characters"),
+    body("lastName")
+      .trim()
+      .notEmpty()
+      .withMessage("last name is required")
+      .isLength({ min: 2 })
       .withMessage("username must be longer than 3 characters"),
     body("gender")
       .trim()

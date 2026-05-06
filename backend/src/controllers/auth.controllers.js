@@ -31,7 +31,7 @@ const emailOtp = asyncHandler(async (req, res) => {
 
 // user registration
 const signup = asyncHandler(async (req, res) => {
-  const { email, username, gender, phno, password } = req.body;
+  const { email, firstName, lastName, gender, phno, password } = req.body;
   const existingUser = await User.findOne({ email });
 
   if (existingUser) {
@@ -43,7 +43,8 @@ const signup = asyncHandler(async (req, res) => {
 
   const newUser = await User.create({
     email,
-    username,
+    firstName,
+    lastName,
     gender,
     phno,
     password: hasedPassword,
@@ -55,9 +56,7 @@ const signup = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(
-      new ApiResponse(200, { user: newUser }, "user registration successful"),
-    );
+    .json(new ApiResponse(200, "user registration successful", newUser));
 });
 
 //user login otp send

@@ -1,13 +1,41 @@
 import { body } from "express-validator";
 
-const editUsernameValidator = () => {
+const updateUserNameValidator = () => {
   return [
-    body("username")
+    body("firstName")
       .trim()
       .notEmpty()
-      .withMessage("username is required")
+      .withMessage("first name is required")
       .isLength({ min: 3 })
-      .withMessage("username must be 3 characters long"),
+      .withMessage("first name must be 3 characters long"),
+    body("lastName")
+      .trim()
+      .notEmpty()
+      .withMessage("last name is required")
+      .isLength({ min: 3 })
+      .withMessage("last name must be 3 characters long"),
+  ];
+};
+
+const updateEmailValidator = () => {
+  return [
+    body("email")
+      .trim()
+      .notEmpty()
+      .withMessage("email is required")
+      .isEmail()
+      .withMessage("please enter a valid email"),
+  ];
+};
+
+const updatePhnoValidator = () => {
+  return [
+    body("phno")
+      .trim()
+      .notEmpty()
+      .withMessage("phone number field is required")
+      .isLength({ min: 10, max: 10 })
+      .withMessage("phone number must be equal to 10 characters long"),
   ];
 };
 
@@ -28,4 +56,9 @@ const changePasswordValidator = () => {
   ];
 };
 
-export { editUsernameValidator, changePasswordValidator };
+export {
+  updateEmailValidator,
+  changePasswordValidator,
+  updatePhnoValidator,
+  updateUserNameValidator,
+};

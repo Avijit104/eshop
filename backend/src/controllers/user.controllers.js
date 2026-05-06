@@ -20,25 +20,6 @@ const getUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, "user fetched successful", user));
 });
 
-// edit username
-const editUsername = asyncHandler(async (req, res) => {
-  // const { username } = req.body;
-  // const { _id } = req.user;
-  // const user = await User.findByIdAndUpdate(
-  //   _id,
-  //   {
-  //     $set: { username: username },
-  //   },
-  //   { new: true },
-  // );
-  // if (!user) {
-  //   throw new ApiError(404, "user not found");
-  // }
-  // return res
-  //   .status(200)
-  //   .json(new ApiResponse(200, "username updated successfully", user));
-});
-
 // change user password
 const changePassword = asyncHandler(async (req, res) => {
   const { oldPassword, newPassword } = req.body;
@@ -62,49 +43,70 @@ const changePassword = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, "password changed successfully"));
 });
 
-// update user details
-const updateUser = asyncHandler(async (req, res) => {
-  const { email, username, gender, phno, password } = req.body;
+// edit/update user name
+const updateName = asyncHandler(async (req, res) => {
+  const { firstName, lastName } = req.body;
   const { _id } = req.user;
-  if (email && !username && !phno) {
-    const user = await User.findByIdAndUpdate(
-      _id,
-      { $set: { email: email } },
-      { returnDocument: "after" },
-    );
-    if (!user) {
-      throw new ApiError(404, "user not found");
-    }
-    return res
-      .status(200)
-      .json(new ApiResponse(200, "updated user successfully", user));
-  } else if (username && !email && !phno) {
-    const user = await User.findByIdAndUpdate(
-      _id,
-      { $set: { username: username } },
-      { returnDocument: "after" },
-    );
-    if (!user) {
-      throw new ApiError(404, "user not found");
-    }
-    return res
-      .status(200)
-      .json(new ApiResponse(200, "updated user successfully", user));
-  } else if (phno && !email && !username) {
-    const user = await User.findByIdAndUpdate(
-      _id,
-      { $set: { phno: phno } },
-      { returnDocument: "after" },
-    );
-    if (!user) {
-      throw new ApiError(404, "user not found");
-    }
-    return res
-      .status(200)
-      .json(new ApiResponse(200, "updated user successfully", user));
-  } else {
-    throw new ApiError(401, "no user details provided");
+  const updatedUser = await User.findByIdAndUpdate(
+    _id,
+    {
+      $set: {
+        firstName: firstName,
+        lastName: lastName,
+      },
+    },
+    { returnDocument: "after" },
+  );
+  if (!updatedUser) {
+    throw new ApiError(404, "name updation failed");
   }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, "name updated successfully", updatedUser));
 });
 
-export { getUser, editUsername, changePassword, updateUser };
+// update email
+const updateEmail = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  const { _id } = req.user;
+  const updatedUser = await User.findByIdAndUpdate(
+    _id,
+    {
+      $set: {
+        email: email,
+      },
+    },
+    { returnDocument: "after" },
+  );
+
+  if (!updatedUser) {
+    throw new ApiError(404, "email updation failed");
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, "email updation successful", updatedUser));
+});
+
+// update mobile number
+const updatePhno = asyncHandler(async (req, res) => {
+  const { phno } = req.body;
+  const { _id } = req.user;
+  const updatedUser = await User.findByIdAndUpdate(
+    _id,
+    { $set: { phno: phno } },
+    { returnDocument: "after" },
+  );
+  if (!updatedUser) {
+    throw new ApiError(404, "mobile updation failed");
+  }
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(200, "mobile numbe updated successfully", updatedUser),
+    );
+});
+
+export { getUser, changePassword, updateName, updateEmail, updatePhno };
