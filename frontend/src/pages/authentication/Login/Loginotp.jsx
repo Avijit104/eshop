@@ -6,12 +6,16 @@ import { login } from "../../../store/AtuhSlice";
 import axios from "axios";
 
 function Loginotp() {
-  const [email, setEmail] = useState("");
-  const [otp, setOtp] = useState("");
+  // hooks
   const navigate = useNavigate();
   const dispatcher = useDispatch();
   const otpRef = useRef(null);
 
+  // states
+  const [email, setEmail] = useState("");
+  const [otp, setOtp] = useState("");
+
+  // otp input function
   const onKeyPress = (e, index) => {
     const input = Object.values(otpRef.current.children);
     if (e.key === "Backspace" && e.target.value !== "" && index > 0) {
@@ -23,6 +27,7 @@ function Loginotp() {
     }
   };
 
+  // otp verification function
   const otpValidate = async () => {
     const input = Object.values(otpRef.current.children);
     let userOtp = "";
@@ -36,6 +41,7 @@ function Loginotp() {
     }
   };
 
+  // api call to send otp
   const sendOtp = async () => {
     try {
       const res = await axios.post("/api/v1/auth/login-otp-send", { email });
@@ -46,16 +52,17 @@ function Loginotp() {
     }
   };
 
+  // dom return
   return (
     <div className="main flex-center">
       <div className="flex-center flex-col w-[40%] text-2xl gap-4 p-10 bg-black rounded-2xl">
         <h1 className="font-bold">Login</h1>
         <div className="w-[75%] my-10">
           <div className="mb-5">
-            <h2 className="text-base font-bold mb-1">Email :</h2>
+            {/* email input  */}
             <input
               type="email"
-              placeholder="Email"
+              placeholder="Enter your email id"
               name="email"
               autoComplete="off"
               id="email"
@@ -64,12 +71,15 @@ function Loginotp() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
+
+          {/* otp input */}
           {otp && (
             <div className="my-10">
               <h2 className="font-bold text-base mb-5 text-center">
                 Enter your otp
               </h2>
               <div className=" flex justify-around items-center" ref={otpRef}>
+                {/* otp 1 */}
                 <input
                   type="text"
                   className="w-[10%] input p-2 text-center aspect-square"
@@ -80,6 +90,7 @@ function Loginotp() {
                   key={1}
                   onKeyDown={(e) => onKeyPress(e, 0)}
                 />
+                {/* otp 2 */}
                 <input
                   type="text"
                   className="w-[10%] input p-2 text-center aspect-square"
@@ -90,6 +101,7 @@ function Loginotp() {
                   key={2}
                   onKeyDown={(e) => onKeyPress(e, 1)}
                 />
+                {/* otp 3 */}
                 <input
                   type="text"
                   className="w-[10%] input p-2 text-center aspect-square"
@@ -100,6 +112,7 @@ function Loginotp() {
                   key={3}
                   onKeyDown={(e) => onKeyPress(e, 2)}
                 />
+                {/* otp 4 */}
                 <input
                   type="text"
                   className="w-[10%] input p-2 text-center aspect-square"
@@ -110,6 +123,7 @@ function Loginotp() {
                   key={4}
                   onKeyDown={(e) => onKeyPress(e, 3)}
                 />
+                {/* otp 5 */}
                 <input
                   type="text"
                   className="w-[10%] input p-2 text-center aspect-square"
@@ -120,6 +134,7 @@ function Loginotp() {
                   key={5}
                   onKeyDown={(e) => onKeyPress(e, 4)}
                 />
+                {/* otp 6 */}
                 <input
                   type="text"
                   className="w-[10%] input p-2 text-center aspect-square"
@@ -135,16 +150,19 @@ function Loginotp() {
           )}
           <div className="w-full flex-center">
             {otp ? (
+              // verify otp button
               <button className="button" onClick={otpValidate}>
                 Verify otp
               </button>
             ) : (
+              // send otp button
               <button className="button" onClick={sendOtp}>
                 Send Otp
               </button>
             )}
           </div>
         </div>
+        {/* useful links */}
         <p className="text-sm text-gray-600">
           Don't have any account &nbsp;
           <Link className="text-blue-700" to="/signup">

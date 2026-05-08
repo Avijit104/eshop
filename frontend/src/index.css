@@ -6,7 +6,7 @@
   --bg: #252525;
   --bgSecond: #1b1b1b;
   --border: #2e303a;
-  --code-bg: #1f2028;
+  --code-bg: #8c8c8c;
   --accent: #1d1d1d;
   --accent-bg: rgba(40, 40, 40, 0.15);
   --accent-border: #9a9a9a;
@@ -47,10 +47,21 @@
 @utility w-h-half {
   @apply w-[50%] h-[50%];
 }
-
+input::placeholder {
+  color: var(--code-bg);
+}
 @utility input {
   @apply block w-full p-4 px-3 rounded-xl text-[1.05rem] bg-(--accent) outline-2 outline-blue-700 accent-blue-700;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--accent) inset !important;
+  -webkit-text-fill-color: var(--text) !important;
+}
+
 @utility button {
   @apply px-7 py-2 bg-blue-700 text-white text-base text-center border-2 border-black outline-2 rounded-lg hover:bg-blue-800 font-bold outline-blue-700;
 }
