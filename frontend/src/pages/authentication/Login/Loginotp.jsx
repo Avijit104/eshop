@@ -90,6 +90,7 @@ function Loginotp() {
                   key={1}
                   onKeyDown={(e) => onKeyPress(e, 0)}
                 />
+
                 {/* otp 2 */}
                 <input
                   type="text"
@@ -101,6 +102,7 @@ function Loginotp() {
                   key={2}
                   onKeyDown={(e) => onKeyPress(e, 1)}
                 />
+
                 {/* otp 3 */}
                 <input
                   type="text"
@@ -112,6 +114,7 @@ function Loginotp() {
                   key={3}
                   onKeyDown={(e) => onKeyPress(e, 2)}
                 />
+
                 {/* otp 4 */}
                 <input
                   type="text"
@@ -123,6 +126,7 @@ function Loginotp() {
                   key={4}
                   onKeyDown={(e) => onKeyPress(e, 3)}
                 />
+
                 {/* otp 5 */}
                 <input
                   type="text"
@@ -134,6 +138,7 @@ function Loginotp() {
                   key={5}
                   onKeyDown={(e) => onKeyPress(e, 4)}
                 />
+
                 {/* otp 6 */}
                 <input
                   type="text"
@@ -162,6 +167,7 @@ function Loginotp() {
             )}
           </div>
         </div>
+
         {/* useful links */}
         <p className="text-sm text-gray-600">
           Don't have any account &nbsp;

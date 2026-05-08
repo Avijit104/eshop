@@ -36,7 +36,6 @@ function SignUp() {
 
   // otp verification function
   const otpValidate = async () => {
-    setVerified(true);
     const input = Object.values(otpRef.current.children);
     let userOtp = "";
     await input.map((item) => {
@@ -50,9 +49,7 @@ function SignUp() {
   // api call to send otp
   const sendOtp = async () => {
     try {
-      console.log("this is send otp");
       const res = await axios.post("/api/v1/auth/send-otp", { email });
-      console.log("this is response", res);
       setOtp(res.data.data);
       setChange(true);
       console.log(res.data.data);
@@ -111,6 +108,7 @@ function SignUp() {
                     key={1}
                     onKeyDown={(e) => onKeyPress(e, 0)}
                   />
+
                   {/* otp 2 */}
                   <input
                     type="text"
@@ -122,6 +120,7 @@ function SignUp() {
                     key={2}
                     onKeyDown={(e) => onKeyPress(e, 1)}
                   />
+
                   {/* otp 3 */}
                   <input
                     type="text"
@@ -133,6 +132,7 @@ function SignUp() {
                     key={3}
                     onKeyDown={(e) => onKeyPress(e, 2)}
                   />
+
                   {/* otp 4 */}
                   <input
                     type="text"
@@ -144,6 +144,7 @@ function SignUp() {
                     key={4}
                     onKeyDown={(e) => onKeyPress(e, 3)}
                   />
+
                   {/* otp 5 */}
                   <input
                     type="text"
@@ -155,6 +156,7 @@ function SignUp() {
                     key={5}
                     onKeyDown={(e) => onKeyPress(e, 4)}
                   />
+
                   {/* otp 6 */}
                   <input
                     type="text"
@@ -182,12 +184,14 @@ function SignUp() {
               </div>
             ) : (
               <div className="w-full flex-center">
+                {/* send otp button */}
                 <button className="button" onClick={sendOtp}>
                   Send Otp
                 </button>
               </div>
             )}
           </div>
+
           {/* login page link */}
           <p className="text-sm text-gray-600">
             Already have an account &nbsp;

@@ -7,6 +7,7 @@ function RegistrationForm(email) {
   // hooks
   const navigate = useNavigate();
   const refGender = useRef(null);
+
   // states
   const [user, setUser] = useState({
     email: email.email,
@@ -22,7 +23,11 @@ function RegistrationForm(email) {
     document.getElementById("male").style.color = "#8c8c8c";
     document.getElementById("female").style.color = "#8c8c8c";
     document.getElementById("other").style.color = "#8c8c8c";
+    document.getElementById("male").style.fontWeight = "normal";
+    document.getElementById("female").style.fontWeight = "normal";
+    document.getElementById("other").style.fontWeight = "normal";
     document.getElementById(`${value}`).style.color = "blue";
+    document.getElementById(`${value}`).style.fontWeight = "bold";
   };
 
   // api call for registering user/signup
@@ -82,6 +87,7 @@ function RegistrationForm(email) {
             placeholder="Enter your Email Id"
           />
         </div>
+
         {/* password */}
         <div className="w-[49%]">
           <input
@@ -111,11 +117,7 @@ function RegistrationForm(email) {
                 id="gender"
                 onClick={() => setGender("male")}
               />
-              <p
-                className="text-base gender text-(--code-bg)"
-                // ref={refGender}
-                id="male"
-              >
+              <p className="text-base gender text-(--code-bg)" id="male">
                 Male
               </p>
             </div>
@@ -128,11 +130,7 @@ function RegistrationForm(email) {
                 id="gender"
                 onClick={() => setGender("female")}
               />
-              <p
-                className="text-base gender text-(--code-bg) "
-                // ref={refGender}
-                id="female"
-              >
+              <p className="text-base gender text-(--code-bg) " id="female">
                 Female
               </p>
             </div>
@@ -145,11 +143,7 @@ function RegistrationForm(email) {
                 id="gender"
                 onClick={() => setGender("other")}
               />
-              <p
-                className="text-base gender text-(--code-bg) "
-                // ref={refGender}
-                id="other"
-              >
+              <p className="text-base gender text-(--code-bg) " id="other">
                 Other
               </p>
             </div>
@@ -173,6 +167,7 @@ function RegistrationForm(email) {
       </div>
 
       <div className="w-full flex-center gap-10">
+        {/* sign up button */}
         <button className="button" onClick={onSignup}>
           Sign Up
         </button>
