@@ -23,8 +23,8 @@ function SideNav() {
     <SideContainer>
       <div className="w-full h-full p-10 flex flex-col gap-5">
         <div>
-          <div className="flex items-center px-10 gap-4 p-2 py-3 bg-black rounded-xl">
-            <div className="bg-[url(/person.svg)] aspect-square h-10 bg-cover bg-center rounded-2xl "></div>
+          <div className="flex items-center px-10 gap-4 p-2 py-3 border-2 border-blue-500 bg-black rounded-xl">
+            <div className="bg-[url(/person.svg)] aspect-square h-10 bg-cover bg-center p-2 border-2 border-blue-500 rounded-full  "></div>
             <div>
               <p className="text-sm text-gray-400 ">Hello, </p>
               <p className="text-lg font-bold text-blue-700">
@@ -38,12 +38,12 @@ function SideNav() {
             onClick={() => {
               navigate("/");
             }}
-            className="cursor-pointer flex p-3 px-5 justify-between items-center border-b border-gray-900"
+            className="cursor-pointer flex p-3 px-5 justify-between items-center border-b border-gray-700"
           >
             <h2 className="text-lg font-bold">My Orders</h2>
             <div className="bg-[url(/forwardArrow.svg)] aspect-square h-5 bg-cover bg-center px-3"></div>
           </div>
-          <div className="p-3 px-5 border-b border-gray-900">
+          <div className="p-3 px-5 border-b border-gray-700">
             <h2 className="text-lg font-bold py-3 ">My Profile</h2>
             <ul className="pl-[10%] ">
               <li
@@ -64,7 +64,7 @@ function SideNav() {
               </li>
             </ul>
           </div>
-          <div className="p- px-5 border-b  border-gray-900">
+          <div className="p- px-5 border-b  border-gray-700">
             <h2 className="font-bold text-lg py-3">Payment</h2>
             <ul className="pl-[10%]">
               <li className="p-2 cursor-pointer">Gift Card</li>

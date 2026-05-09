@@ -20,23 +20,44 @@ function PersonalDetails() {
   const navigate = useNavigate();
   const dispatcher = useDispatch();
 
-  const updateUser = async () => {
-    // try {
-    //   const res = await axios.put("/api/v1/user/update", user);
-    //   console.log(res.data.data);
-    //   dispatcher(login(res.data.data));
-    //   setEditEmail(true);
-    //   setEditUsername(true);
-    //   setEditPhno(true);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+  const updateUserName = async () => {
+    try {
+      const res = await axios.put("/api/v1/user/update/name", {
+        firstName: user.firstName,
+        lastName: user.lastName,
+      });
+      dispatcher(login(res.data.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateEmail = async () => {
+    try {
+      const res = await axios.put("/api/v1/user/update/email", {
+        email: user.email,
+      });
+      dispatcher(login(res.data.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updatePhno = async () => {
+    try {
+      const res = await axios.put("/api/v1/user/update/phno", {
+        phno: user.phno,
+      });
+      dispatcher(login(res.data.data));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <MainContainer>
       <div className="flex-center  flex-col">
-        <div className="flex border-b border-gray-900 w-[80%] items-center py-2 mb-10 justify-between">
+        <div className="flex border-b-2 border-gray-700 w-[80%] items-center py-2 mb-10 justify-between">
           <h2 className="text-2xl font-bold ">Personal Details</h2>
         </div>
 
@@ -81,7 +102,7 @@ function PersonalDetails() {
                 Edit
               </button>
             ) : (
-              <button className="button" onClick={updateUser}>
+              <button className="button" onClick={updateUserName}>
                 Save
               </button>
             )}
@@ -112,7 +133,7 @@ function PersonalDetails() {
                 Edit
               </button>
             ) : (
-              <button className="button" onClick={updateUser}>
+              <button className="button" onClick={updateEmail}>
                 Save
               </button>
             )}
@@ -143,7 +164,7 @@ function PersonalDetails() {
                 Edit
               </button>
             ) : (
-              <button className="button" onClick={updateUser}>
+              <button className="button" onClick={updatePhno}>
                 Save
               </button>
             )}
