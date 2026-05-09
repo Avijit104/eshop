@@ -9,7 +9,6 @@ import bcrypt from "bcryptjs";
 // fetching user details
 const getUser = asyncHandler(async (req, res) => {
   const { _id } = req.user;
-  console.log("userid", _id);
   const user = await User.findById(_id);
   if (!user) {
     throw new ApiError(404, "user not found");
@@ -26,7 +25,6 @@ const changePassword = asyncHandler(async (req, res) => {
   const { _id } = req.user;
   const user = await User.findById(_id);
   if (!user) {
-    console.log("this is not user found");
     throw new ApiError(404, "user not found");
   }
   const passValidator = bcrypt.compare(oldPassword, user.password);

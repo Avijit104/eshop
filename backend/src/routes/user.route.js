@@ -33,9 +33,11 @@ router
 router
   .route("/update/name")
   .put(jwtValidator, updateUserNameValidator(), validator, updateName);
+
 router
   .route("/update/email")
   .put(jwtValidator, updateEmailValidator(), validator, updateEmail);
+
 router
   .route("/update/phno")
   .put(jwtValidator, updatePhnoValidator(), validator, updatePhno);

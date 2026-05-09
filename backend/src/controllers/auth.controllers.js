@@ -5,7 +5,6 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import { mailSender } from "../utils/mailContent.js";
-import { error } from "console";
 
 //email otp
 const emailOtp = asyncHandler(async (req, res) => {
@@ -66,8 +65,8 @@ const loginOtpSend = asyncHandler(async (req, res) => {
   if (!user) {
     throw new ApiError(404, "user not fuound");
   }
-  console.log(user);
   const otp = crypto.randomInt(100000, 1000000).toString();
+  console.log(otp);
   const option = {
     email: email,
     subject: "User Registration Otp",

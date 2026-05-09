@@ -48,7 +48,6 @@ const getAllAddress = asyncHandler(async (req, res) => {
   if (address.length === 0) {
     throw new ApiError(404, "addresses not found");
   }
-  console.log("addresses", address);
   return res
     .status(200)
     .json(new ApiResponse(200, "fetching all addresses successful", address));
