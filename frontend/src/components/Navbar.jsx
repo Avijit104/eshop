@@ -7,12 +7,17 @@ import { login } from "../store/AtuhSlice";
 function Navbar() {
   const isLogin = useSelector((state) => state.auth.isLogin);
   const dispatcher = useDispatch();
-
   const navigate = useNavigate();
+
   return (
     <div className="w-full h-full box-border flex justify-between items-center px-15 bg-black  ">
       <div>
-        <h1 className="text-2xl font-bold text-blue-600">Ethenicity</h1>
+        <h1
+          className="text-3xl font-bold text-blue-600 "
+          onClick={() => navigate("/")}
+        >
+          Ethenicity
+        </h1>
       </div>
       {isLogin ? (
         <div className="flex gap-10">

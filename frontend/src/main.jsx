@@ -26,6 +26,9 @@ import {
   ProfileOutlet,
   PersonalDetails,
   Address,
+  GiftCard,
+  CardPayment,
+  Upi,
 } from "./pages/Profile/index.js";
 import AuthContainer from "./components/AuthContainer.jsx";
 import PageContainer from "./components/PageContainer.jsx";
@@ -97,6 +100,30 @@ const router = createBrowserRouter([
             element: (
               <AuthContainer authentication>
                 <Address />
+              </AuthContainer>
+            ),
+          },
+          {
+            path: "gift-card",
+            element: (
+              <AuthContainer authentication>
+                <GiftCard />
+              </AuthContainer>
+            ),
+          },
+          {
+            path: "card",
+            element: (
+              <AuthContainer authentication>
+                <CardPayment />
+              </AuthContainer>
+            ),
+          },
+          {
+            path: "upi",
+            element: (
+              <AuthContainer authentication>
+                <Upi />
               </AuthContainer>
             ),
           },

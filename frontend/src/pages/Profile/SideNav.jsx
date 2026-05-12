@@ -74,6 +74,7 @@ function SideNav() {
                 className={`p-2 cursor-pointer ${option === "gift" ? "text-blue-700" : "text-white"}`}
                 onClick={() => {
                   setOption("gift");
+                  navigate("/user/gift-card");
                 }}
               >
                 Gift Card
@@ -82,6 +83,7 @@ function SideNav() {
                 className={`p-2 cursor-pointer ${option === "card" ? "text-blue-700" : "text-white"}`}
                 onClick={() => {
                   setOption("card");
+                  navigate("/user/card");
                 }}
               >
                 Card
@@ -90,6 +92,7 @@ function SideNav() {
                 className={`p-2 cursor-pointer ${option === "upi" ? "text-blue-700" : "text-white"}`}
                 onClick={() => {
                   setOption("upi");
+                  navigate("/user/upi");
                 }}
               >
                 Upi
