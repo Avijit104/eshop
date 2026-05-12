@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SideContainer from "../../components/SideContainer";
 import { useNavigate } from "react-router";
@@ -7,6 +7,7 @@ import { logout } from "../../store/AtuhSlice";
 
 function SideNav() {
   const user = useSelector((state) => state.auth.userData);
+  const [option, setOption] = useState("personal");
   const navigate = useNavigate();
   const dispatcher = useDispatch();
   const onLogout = async () => {
@@ -47,16 +48,18 @@ function SideNav() {
             <h2 className="text-lg font-bold py-3 ">My Profile</h2>
             <ul className="pl-[10%] ">
               <li
-                className="p-2 cursor-pointer"
+                className={`p-2 cursor-pointer ${option === "personal" ? "text-blue-700" : "text-white"} `}
                 onClick={() => {
+                  setOption("personal");
                   navigate("/user");
                 }}
               >
                 Personal Details
               </li>
               <li
-                className="p-2 cursor-pointer"
+                className={`p-2 cursor-pointer ${option === "address" ? "text-blue-700" : "text-white"}`}
                 onClick={() => {
+                  setOption("address");
                   navigate("/user/address");
                 }}
               >
@@ -67,9 +70,30 @@ function SideNav() {
           <div className="p- px-5 border-b  border-gray-700">
             <h2 className="font-bold text-lg py-3">Payment</h2>
             <ul className="pl-[10%]">
-              <li className="p-2 cursor-pointer">Gift Card</li>
-              <li className="p-2 cursor-pointer">Card</li>
-              <li className="p-2 cursor-pointer">Upi</li>
+              <li
+                className={`p-2 cursor-pointer ${option === "gift" ? "text-blue-700" : "text-white"}`}
+                onClick={() => {
+                  setOption("gift");
+                }}
+              >
+                Gift Card
+              </li>
+              <li
+                className={`p-2 cursor-pointer ${option === "card" ? "text-blue-700" : "text-white"}`}
+                onClick={() => {
+                  setOption("card");
+                }}
+              >
+                Card
+              </li>
+              <li
+                className={`p-2 cursor-pointer ${option === "upi" ? "text-blue-700" : "text-white"}`}
+                onClick={() => {
+                  setOption("upi");
+                }}
+              >
+                Upi
+              </li>
             </ul>
           </div>
           <div className="flex justify-center items-center p-4">

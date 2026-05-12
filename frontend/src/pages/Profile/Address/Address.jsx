@@ -15,7 +15,7 @@ function Address() {
   const [editAddressId, setEditAddressId] = useState(null);
   const [allAddress, setAllAddress] = useState([]);
 
-  //setter
+  // setter
   const setDisplayAdd = () => {
     setAddAddress(true);
     setEditAddressId(null);
@@ -24,7 +24,8 @@ function Address() {
     setAddAddress(false);
     setEditAddressId(id);
   };
-  //
+
+  // unsetter
   const unsetDisplayAdd = () => {
     setAddAddress(false);
   };
@@ -95,7 +96,7 @@ function Address() {
       <div className="flex-center flex-col gap-5">
         <div className="w-[90%]">
           <div className="mb-5 border-b-2 border-gray-700 p-2">
-            <h1 className="text-lg font-bold">Manage Address</h1>
+            <h1 className="text-2xl font-bold">Manage Address</h1>
           </div>
           <div className="input bg-black">
             {addAddress ? (

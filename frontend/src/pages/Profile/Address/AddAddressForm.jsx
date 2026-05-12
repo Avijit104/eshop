@@ -36,7 +36,7 @@ function AddAddressForm({ removeDisplayState, data = {}, apiCall, header }) {
     <div className="w-full h-full rounded-2xl p-5  ">
       {/* header of the form */}
       <div className="flex justify-between items-center w-full border-b-2 border-gray-700 p-2 mb-10 ">
-        <h2 className="text-lg font-bold text-blue-500">{header}</h2>
+        <h2 className="text-xl font-bold text-blue-500">{header}</h2>
       </div>
 
       {/* name and phno input box */}

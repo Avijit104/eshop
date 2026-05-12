@@ -57,7 +57,7 @@ function PersonalDetails() {
   return (
     <MainContainer>
       <div className="flex-center  flex-col">
-        <div className="flex border-b-2 border-gray-700 w-[80%] items-center py-2 mb-10 justify-between">
+        <div className="flex border-b-2 border-gray-700 w-[90%] items-center py-2 mb-10 justify-between">
           <h2 className="text-2xl font-bold ">Personal Details</h2>
         </div>
 
@@ -173,7 +173,7 @@ function PersonalDetails() {
 
         {/* gender */}
         <div className=" w-[90%] px-10 ">
-          <div className="flex-center justify-between mb-2">
+          <div className="flex-center justify-between mb-1 ">
             <h2 className="text-lg font-bold ">Gender :</h2>
           </div>
           <div className="flex justify-between items-center">
