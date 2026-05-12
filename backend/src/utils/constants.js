@@ -12,3 +12,11 @@ export const addressType = {
   work: "work",
 };
 export const availableAddress = Object.values(addressType);
+
+export const roles = {
+  user: "user",
+  seller: "seller",
+  admin: "admin",
+};
+
+export const availableRole = Object.values(roles);

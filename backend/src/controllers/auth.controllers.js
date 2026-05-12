@@ -1,4 +1,5 @@
 import { User } from "../models/user.models.js";
+import { Role } from "../models/role.models.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
@@ -53,9 +54,20 @@ const signup = asyncHandler(async (req, res) => {
     throw new ApiError(409, "user registration failed");
   }
 
-  return res
-    .status(200)
-    .json(new ApiResponse(200, "user registration successful", newUser));
+  const userRole = await Role.create({
+    userId: newUser._id,
+  });
+
+  if (!userRole) {
+    throw new ApiError(401, "user role is not defined");
+  }
+  console.log({ ...newUser });
+  return res.status(200).json(
+    new ApiResponse(200, "user registration successful", {
+      user: newUser,
+      role: userRole.role,
+    }),
+  );
 });
 
 //user login otp send
@@ -86,6 +98,11 @@ const loginOtp = asyncHandler(async (req, res) => {
   if (!user) {
     throw new ApiError(404, "user not found");
   }
+  const userRole = await Role.findOne({ userId: user._id });
+  if (!userRole) {
+    throw new ApiError(404, "role not found");
+  }
+
   const refreshToken = user.generateDataToken();
   const accessToken = user.generateDataToken();
 
@@ -101,7 +118,12 @@ const loginOtp = asyncHandler(async (req, res) => {
     .status(200)
     .cookie("accessToken", accessToken, options)
     .cookie("refreshToken", refreshToken, options)
-    .json(new ApiResponse(200, "user login successful", user));
+    .json(
+      new ApiResponse(200, "user login successful", {
+        user: user,
+        role: userRole.role,
+      }),
+    );
 });
 
 //user login
@@ -120,6 +142,10 @@ const login = asyncHandler(async (req, res) => {
       .json(new ApiResponse(409, "invalid login credentials"));
   }
 
+  const userRole = await Role.findOne({ userId: user._id });
+  if (!userRole) {
+    throw new ApiError(404, "role not found");
+  }
   const refreshToken = user.generateDataToken();
   const accessToken = user.generateDataToken();
 
@@ -135,7 +161,12 @@ const login = asyncHandler(async (req, res) => {
     .status(200)
     .cookie("accessToken", accessToken, options)
     .cookie("refreshToken", refreshToken, options)
-    .json(new ApiResponse(200, "user login successful", user));
+    .json(
+      new ApiResponse(200, "user login successful", {
+        user: user,
+        role: userRole.role,
+      }),
+    );
 });
 
 // user logout

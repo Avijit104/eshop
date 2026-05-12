@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SideContainer from "../../components/SideContainer";
 import { useNavigate } from "react-router";
@@ -20,6 +20,9 @@ function SideNav() {
     }
   };
 
+  useEffect(() => {
+    setOption((prev) => prev);
+  }, []);
   return (
     <SideContainer>
       <div className="w-full h-full p-10 flex flex-col gap-5">

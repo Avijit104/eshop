@@ -68,9 +68,10 @@ function Address() {
   const onAddAddress = async (address, id) => {
     try {
       const res = await axios.post("/api/v1/user/address/add-address", address);
-      console.log(res.data.data);
-      setAddAddress((prev) => [...prev, res.data.data]);
-      dispatcher(setuserAddress(allAddress));
+      const allRes = await axios.get("/api/v1/user/address");
+      setAllAddress(allRes.data.data);
+      dispatcher(setuserAddress(allRes.data.data));
+      unsetDisplayAdd();
     } catch (error) {
       console.log(error);
     }
@@ -133,7 +134,7 @@ function Address() {
                       <p className="px-4 py-2 rounded-xl text-sm  w-fit mb-3 bg-gray-700">
                         {address.addressType}
                       </p>
-                      <div className="flex justify-between items-center">
+                      <div className="flex justify-between items-center gap-5">
                         <div>
                           <p className="text-base">
                             {address.name}&nbsp;&nbsp;&nbsp;

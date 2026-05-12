@@ -2,10 +2,15 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useOutletContext } from "react-router";
-import { login } from "../../../store/AtuhSlice";
+import { updateUserData } from "../../../store/AtuhSlice";
 import MainContainer from "../../../components/MainContainer";
 
 function PersonalDetails() {
+  // hooks
+  const navigate = useNavigate();
+  const dispatcher = useDispatch();
+
+  // state
   const userData = useSelector((state) => state.auth.userData);
   const [user, setUser] = useState({
     email: userData?.email,
@@ -17,38 +22,39 @@ function PersonalDetails() {
   const [editUsername, setEditUsername] = useState(true);
   const [editEmail, setEditEmail] = useState(true);
   const [editPhno, setEditPhno] = useState(true);
-  const navigate = useNavigate();
-  const dispatcher = useDispatch();
 
+  // update name api call
   const updateUserName = async () => {
     try {
       const res = await axios.put("/api/v1/user/update/name", {
         firstName: user.firstName,
         lastName: user.lastName,
       });
-      dispatcher(login(res.data.data));
+      dispatcher(updateUserData(res.data.data));
     } catch (error) {
       console.log(error);
     }
   };
 
+  // update email api call
   const updateEmail = async () => {
     try {
       const res = await axios.put("/api/v1/user/update/email", {
         email: user.email,
       });
-      dispatcher(login(res.data.data));
+      dispatcher(updateUserData(res.data.data));
     } catch (error) {
       console.log(error);
     }
   };
 
+  // update phone number api call
   const updatePhno = async () => {
     try {
       const res = await axios.put("/api/v1/user/update/phno", {
         phno: user.phno,
       });
-      dispatcher(login(res.data.data));
+      dispatcher(updateUserData(res.data.data));
     } catch (error) {
       console.log(error);
     }
@@ -151,7 +157,10 @@ function PersonalDetails() {
               name="phno"
               value={user.phno}
               readOnly={editPhno}
-              onChange={(e) => setUser({ ...user, phno: e.target.value })}
+              onChange={(e) => {
+                const phoneValue = e.target.value.replace(/\D/g, "");
+                setUser({ ...user, phno: phoneValue });
+              }}
             />
             {editPhno ? (
               <button
@@ -178,6 +187,7 @@ function PersonalDetails() {
           </div>
           <div className="flex justify-between items-center">
             <div className="flex justify-around items-center input mb-0 w-[60%]">
+              {/* male  */}
               <div className="flex gap-2">
                 <input
                   type="radio"
@@ -188,6 +198,8 @@ function PersonalDetails() {
                 />
                 <p>Male</p>
               </div>
+
+              {/* female */}
               <div className="flex gap-2">
                 <input
                   type="radio"
@@ -198,6 +210,8 @@ function PersonalDetails() {
                 />
                 <p>Female</p>
               </div>
+
+              {/* other */}
               <div className="flex gap-2">
                 <input
                   type="radio"

@@ -5,6 +5,7 @@ import { User } from "../models/user.models.js";
 import mongoose from "mongoose";
 import { mailSender } from "../utils/mailContent.js";
 import bcrypt from "bcryptjs";
+import { Role } from "../models/role.models.js";
 
 // fetching user details
 const getUser = asyncHandler(async (req, res) => {
@@ -13,10 +14,16 @@ const getUser = asyncHandler(async (req, res) => {
   if (!user) {
     throw new ApiError(404, "user not found");
   }
-
-  return res
-    .status(200)
-    .json(new ApiResponse(200, "user fetched successful", user));
+  const userRole = await Role.findOne({ userId: user._id });
+  if (!userRole) {
+    throw new ApiError(404, "user role not found");
+  }
+  return res.status(200).json(
+    new ApiResponse(200, "user fetched successful", {
+      user: user,
+      role: userRole.role,
+    }),
+  );
 });
 
 // change user password

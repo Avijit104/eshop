@@ -21,6 +21,7 @@ import {
   loginValidator,
   emailValidator,
 } from "../validators/auth.validator.js";
+import { roleValidator } from "../validators/role.validator.js";
 
 // router initialization
 const router = Router();
@@ -28,7 +29,9 @@ const router = Router();
 // unsecured routes
 
 router.route("/send-otp").post(emailValidator(), validator, emailOtp);
-router.route("/signup").post(signupValidator(), validator, signup);
+router
+  .route("/signup")
+  .post(signupValidator(), validator, roleValidator(), validator, signup);
 
 router.route("/login").post(loginValidator(), validator, login);
 router.route("/login-otp-send").post(emailValidator(), validator, loginOtpSend);
