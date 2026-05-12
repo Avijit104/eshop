@@ -29,7 +29,7 @@ router
   .route("/edit-address/:id")
   .put(jwtValidator, addressValidator(), validator, editAddress);
 
-router.route("/delete-address/:id").get(jwtValidator, deleteAddress);
+router.route("/delete-address/:id").delete(jwtValidator, deleteAddress);
 
 // export router
 export default router;

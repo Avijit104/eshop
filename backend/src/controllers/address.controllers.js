@@ -63,7 +63,7 @@ const deleteAddress = asyncHandler(async (req, res) => {
   console.log(deletedAddress);
   return res
     .status(200)
-    .json(new ApiResponse(200, "address fetched successfully", currAddress));
+    .json(new ApiResponse(200, "address fetched successfully", deletedAddress));
 });
 
 // edit specific address
@@ -84,7 +84,6 @@ const editAddress = asyncHandler(async (req, res) => {
     id,
     {
       $set: {
-        userId: req.user._id,
         name,
         phno,
         street,
@@ -96,7 +95,7 @@ const editAddress = asyncHandler(async (req, res) => {
         addressType,
       },
     },
-    { returnDocument: after },
+    { returnDocument: "after" },
   );
   if (!editedAddress) {
     throw new ApiError(402, "address updation failed");

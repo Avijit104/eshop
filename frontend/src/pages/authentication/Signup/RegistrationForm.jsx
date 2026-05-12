@@ -158,9 +158,11 @@ function RegistrationForm(email) {
             id="phno"
             className="input"
             placeholder="Enter your Phone number"
+            inputMode="numeric"
             value={user.phno}
             onChange={(e) => {
-              setUser({ ...user, phno: e.target.value });
+              const phoneValue = e.target.value.replace(/\D/g, "");
+              setUser({ ...user, phno: phoneValue });
             }}
           />
         </div>
