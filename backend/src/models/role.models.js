@@ -1,6 +1,10 @@
+// module
 import mongoose, { Schema } from "mongoose";
+
+//utility
 import { roles, availableRole } from "../utils/constants.js";
 
+// schema
 const roleSchema = new Schema(
   {
     userId: {

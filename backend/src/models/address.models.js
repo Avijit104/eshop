@@ -1,6 +1,10 @@
+// module
 import mongoose, { Schema } from "mongoose";
+
+// utility
 import { availableAddress, addressType } from "../utils/constants.js";
 
+//schema
 const addressSchema = new Schema(
   {
     userId: {

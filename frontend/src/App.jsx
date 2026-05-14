@@ -2,9 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
-import { login, logout } from "./store/AtuhSlice";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import { login, logout } from "./store/Customer/AtuhSlice";
 
 function App() {
   const [loading, setLoading] = useState(false);

@@ -1,6 +1,10 @@
+// module
 import { validationResult } from "express-validator";
+
+// utility
 import { ApiError } from "../utils/ApiError.js";
 
+// user data validator
 const validator = (req, res, next) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {

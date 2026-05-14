@@ -5,9 +5,9 @@ import cors from "cors";
 
 // route imports
 import healthcheckRouter from "./routes/healthCheck.route.js";
-import authRouter from "./routes/auth.route.js";
-import userRouter from "./routes/user.route.js";
-import addressRouter from "./routes/address.route.js";
+import authRouter from "./routes/customer/auth.route.js";
+import userRouter from "./routes/customer/user.route.js";
+import addressRouter from "./routes/customer/address.route.js";
 
 // app
 const app = express();

@@ -1,8 +1,14 @@
+// module
 import jwt from "jsonwebtoken";
+
+// utility
 import { ApiError } from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
+
+// model
 import { User } from "../models/user.models.js";
 
+// jwt token validator
 export const jwtValidator = asyncHandler(async (req, res, next) => {
   const token = req.cookies.accessToken;
   if (!token) {

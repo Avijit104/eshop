@@ -1,8 +1,12 @@
+// module
 import mongoose, { Schema } from "mongoose";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
+
+// utility
 import { gender, availableGender } from "../utils/constants.js";
 
+// schema
 const userSchema = new Schema(
   {
     email: {
@@ -42,8 +46,6 @@ const userSchema = new Schema(
 
     resetPasswordToken: String,
     resetPasswordTokenExpiry: Date,
-    emailVerificationToken: String,
-    emailVerificationTokenExpiry: Date,
     refreshToken: String,
   },
   { timestamps: true },

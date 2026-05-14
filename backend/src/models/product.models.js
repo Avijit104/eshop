@@ -1,5 +1,7 @@
+// module
 import mongoose, { Schema } from "mongoose";
 
+//Schema
 const productSchema = new Schema({
   sellerId: {
     type: mongoose.Types.ObjectId,

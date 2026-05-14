@@ -12,27 +12,33 @@ import store from "./store/store.js";
 import "./index.css";
 
 // pages
+// entry point
 import App from "./App.jsx";
-import Home from "./pages/HomePage/Home.jsx";
+
+// health check page
 import Healthcheck from "./pages/healthcheck/Healthcheck.jsx";
+
+// Customer pages
 import {
   SignUp,
-  Login,
-  ChangePassword,
   RegistrationForm,
+  Login,
   Loginotp,
-} from "./pages/authentication/index.js";
-import {
+  ChangePassword,
   ProfileOutlet,
   PersonalDetails,
   Address,
-  GiftCard,
   CardPayment,
+  GiftCard,
   Upi,
-} from "./pages/Profile/index.js";
-import AuthContainer from "./components/AuthContainer.jsx";
-import PageContainer from "./components/PageContainer.jsx";
-import MainContainer from "./components/MainContainer.jsx";
+  Home,
+} from "./pages/Customer/index.js";
+
+// Seller Pages
+import { SignupSeller } from "./pages/Seller/index.js";
+
+// container
+import AuthContainer from "./components/Container/AuthContainer.jsx";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +74,14 @@ const router = createBrowserRouter([
         element: (
           <AuthContainer authentication={false}>
             <SignUp />
+          </AuthContainer>
+        ),
+      },
+      {
+        path: "/seller-signup",
+        element: (
+          <AuthContainer authentication={false}>
+            <SignupSeller />
           </AuthContainer>
         ),
       },
