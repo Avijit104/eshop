@@ -16,6 +16,7 @@ import {
 } from "./Profile";
 
 import Home from "./HomePage/Home";
+import CustomerOutlet from "./CustomerOutlet";
 
 export {
   SignUp,
@@ -30,4 +31,5 @@ export {
   GiftCard,
   Upi,
   Home,
+  CustomerOutlet,
 };

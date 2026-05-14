@@ -51,7 +51,7 @@ function Navbar() {
           <button
             className="button font-bold rounded-3xl "
             onClick={() => {
-              navigate("/signup");
+              navigate("/user/signup");
             }}
           >
             Signup
@@ -61,7 +61,7 @@ function Navbar() {
           <button
             className="button font-bold rounded-3xl "
             onClick={() => {
-              navigate("/user");
+              navigate("/user/profile");
             }}
           >
             Profile
@@ -70,7 +70,7 @@ function Navbar() {
           <button
             className="button font-bold rounded-3xl "
             onClick={() => {
-              navigate("/login");
+              navigate("/user");
             }}
           >
             Login

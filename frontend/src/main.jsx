@@ -32,10 +32,8 @@ import {
   GiftCard,
   Upi,
   Home,
+  CustomerOutlet,
 } from "./pages/Customer/index.js";
-
-// Seller Pages
-import { SignupSeller } from "./pages/Seller/index.js";
 
 // container
 import AuthContainer from "./components/Container/AuthContainer.jsx";
@@ -53,38 +51,7 @@ const router = createBrowserRouter([
         path: "/health-check",
         element: <Healthcheck />,
       },
-      {
-        path: "/login",
-        element: (
-          <AuthContainer authentication={false}>
-            <Login />
-          </AuthContainer>
-        ),
-      },
-      {
-        path: "/loginotp",
-        element: (
-          <AuthContainer authentication={false}>
-            <Loginotp />
-          </AuthContainer>
-        ),
-      },
-      {
-        path: "/signup",
-        element: (
-          <AuthContainer authentication={false}>
-            <SignUp />
-          </AuthContainer>
-        ),
-      },
-      {
-        path: "/seller-signup",
-        element: (
-          <AuthContainer authentication={false}>
-            <SignupSeller />
-          </AuthContainer>
-        ),
-      },
+
       {
         path: "/change-password",
         element: (
@@ -95,51 +62,81 @@ const router = createBrowserRouter([
       },
       {
         path: "/user",
-        element: (
-          <AuthContainer authentication>
-            <ProfileOutlet />
-          </AuthContainer>
-        ),
+        element: <CustomerOutlet />,
         children: [
           {
             path: "",
             element: (
-              <AuthContainer authentication>
-                <PersonalDetails />
+              <AuthContainer authentication={false}>
+                <Login />
               </AuthContainer>
             ),
           },
           {
-            path: "address",
+            path: "loginotp",
             element: (
-              <AuthContainer authentication>
-                <Address />
+              <AuthContainer authentication={false}>
+                <Loginotp />
               </AuthContainer>
             ),
           },
           {
-            path: "gift-card",
+            path: "signup",
             element: (
-              <AuthContainer authentication>
-                <GiftCard />
+              <AuthContainer authentication={false}>
+                <SignUp />
               </AuthContainer>
             ),
           },
           {
-            path: "card",
+            path: "profile",
             element: (
               <AuthContainer authentication>
-                <CardPayment />
+                <ProfileOutlet />
               </AuthContainer>
             ),
-          },
-          {
-            path: "upi",
-            element: (
-              <AuthContainer authentication>
-                <Upi />
-              </AuthContainer>
-            ),
+            children: [
+              {
+                path: "",
+                element: (
+                  <AuthContainer authentication>
+                    <PersonalDetails />
+                  </AuthContainer>
+                ),
+              },
+              {
+                path: "address",
+                element: (
+                  <AuthContainer authentication>
+                    <Address />
+                  </AuthContainer>
+                ),
+              },
+              {
+                path: "gift-card",
+                element: (
+                  <AuthContainer authentication>
+                    <GiftCard />
+                  </AuthContainer>
+                ),
+              },
+              {
+                path: "card",
+                element: (
+                  <AuthContainer authentication>
+                    <CardPayment />
+                  </AuthContainer>
+                ),
+              },
+              {
+                path: "upi",
+                element: (
+                  <AuthContainer authentication>
+                    <Upi />
+                  </AuthContainer>
+                ),
+              },
+            ],
           },
         ],
       },

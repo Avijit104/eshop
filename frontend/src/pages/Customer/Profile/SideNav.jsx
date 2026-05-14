@@ -54,7 +54,7 @@ function SideNav() {
                 className={`p-2 cursor-pointer ${option === "personal" ? "text-blue-700" : "text-white"} `}
                 onClick={() => {
                   setOption("personal");
-                  navigate("/user");
+                  navigate("/user/profile");
                 }}
               >
                 Personal Details
@@ -63,7 +63,7 @@ function SideNav() {
                 className={`p-2 cursor-pointer ${option === "address" ? "text-blue-700" : "text-white"}`}
                 onClick={() => {
                   setOption("address");
-                  navigate("/user/address");
+                  navigate("/user/profile/address");
                 }}
               >
                 Address
@@ -77,7 +77,7 @@ function SideNav() {
                 className={`p-2 cursor-pointer ${option === "gift" ? "text-blue-700" : "text-white"}`}
                 onClick={() => {
                   setOption("gift");
-                  navigate("/user/gift-card");
+                  navigate("/user/profile/gift-card");
                 }}
               >
                 Gift Card
@@ -86,7 +86,7 @@ function SideNav() {
                 className={`p-2 cursor-pointer ${option === "card" ? "text-blue-700" : "text-white"}`}
                 onClick={() => {
                   setOption("card");
-                  navigate("/user/card");
+                  navigate("/user/profile/card");
                 }}
               >
                 Card
@@ -95,7 +95,7 @@ function SideNav() {
                 className={`p-2 cursor-pointer ${option === "upi" ? "text-blue-700" : "text-white"}`}
                 onClick={() => {
                   setOption("upi");
-                  navigate("/user/upi");
+                  navigate("/user/profile/upi");
                 }}
               >
                 Upi
