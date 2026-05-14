@@ -19,10 +19,6 @@ const roleSchema = new Schema(
       trim: true,
       default: roles.user,
     },
-    pan: {
-      type: String,
-      trim: true,
-    },
   },
   { timestamps: true },
 );

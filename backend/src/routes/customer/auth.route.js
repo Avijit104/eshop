@@ -13,7 +13,6 @@ import {
   emailOtp,
   loginOtp,
   loginOtpSend,
-  sellerRegistration,
 } from "../../controllers/customer/auth.controllers.js";
 
 // validators
@@ -30,26 +29,18 @@ const router = Router();
 // unsecured routes
 
 router.route("/send-otp").post(emailValidator(), validator, emailOtp);
+
 router
   .route("/signup")
   .post(signupValidator(), validator, roleValidator(), validator, signup);
 
-router
-  .route("/signup-seller")
-  .post(
-    signupValidator(),
-    validator,
-    roleValidator(),
-    validator,
-    sellerRegistration,
-  );
-
 router.route("/login").post(loginValidator(), validator, login);
+
 router.route("/login-otp-send").post(emailValidator(), validator, loginOtpSend);
+
 router.route("/login-otp").post(emailValidator(), validator, loginOtp);
 
 // secure routes
-
 router.route("/logout").get(jwtValidator, logout);
 
 // export

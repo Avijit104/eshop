@@ -28,10 +28,8 @@ const userSchema = new Schema(
     },
     gender: {
       type: String,
-      required: true,
       trim: true,
       enum: availableGender,
-      default: gender.other,
     },
     phno: {
       type: String,

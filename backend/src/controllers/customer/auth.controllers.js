@@ -58,6 +58,15 @@ const signup = asyncHandler(async (req, res) => {
   if (!newUser) {
     throw new ApiError(409, "user registration failed");
   }
+  const accessToken = newUser.generateDataToken();
+  const refreshToken = newUser.generateDataToken();
+  const option = {
+    httpOnly: true,
+    secure: true,
+  };
+
+  newUser.refreshToken = refreshToken;
+  await newUser.save({ validateBeforeSave: false });
 
   const userRole = await Role.create({
     userId: newUser._id,
@@ -66,13 +75,17 @@ const signup = asyncHandler(async (req, res) => {
   if (!userRole) {
     throw new ApiError(401, "user role is not defined");
   }
-  console.log({ ...newUser });
-  return res.status(200).json(
-    new ApiResponse(200, "user registration successful", {
-      user: newUser,
-      role: userRole.role,
-    }),
-  );
+
+  return res
+    .status(200)
+    .cookie("accessToken", accessToken, option)
+    .cookie("refreshToken", refreshToken, option)
+    .json(
+      new ApiResponse(200, "user registration successful", {
+        user: newUser,
+        role: userRole.role,
+      }),
+    );
 });
 
 // seller registration
@@ -147,7 +160,7 @@ const loginOtp = asyncHandler(async (req, res) => {
   if (!user) {
     throw new ApiError(404, "user not found");
   }
-  const userRole = await Role.findOne({ userId: user._id });
+  const userRole = await Role.findOne({ userId: user._id, role: "user" });
   if (!userRole) {
     throw new ApiError(404, "role not found");
   }
@@ -191,10 +204,11 @@ const login = asyncHandler(async (req, res) => {
       .json(new ApiResponse(409, "invalid login credentials"));
   }
 
-  const userRole = await Role.findOne({ userId: user._id });
+  const userRole = await Role.findOne({ userId: user._id, role: "user" });
   if (!userRole) {
-    throw new ApiError(404, "role not found");
+    throw new ApiError(403, "invalid login credentials");
   }
+
   const refreshToken = user.generateDataToken();
   const accessToken = user.generateDataToken();
 
@@ -243,41 +257,4 @@ const logout = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, "user logged out successfully"));
 });
 
-const becomeSeller = asyncHandler(async (req, res) => {
-  const { _id } = req.user;
-  const { role, pan } = req.body;
-  const existingRole = await Role.findOne({ userId: _id });
-  if (!existingRole || existingRole.role === "seller") {
-    throw new ApiError(402, "role updation failed");
-  }
-
-  const newRole = await Role.findByIdAndUpdate(
-    existingRole._id,
-    {
-      $set: {
-        role: role,
-        pan: pan,
-      },
-    },
-    { returnDocument: "after" },
-  );
-  if (!newRole) {
-    throw new ApiError(401, "role updation failed");
-  }
-
-  return res
-    .status(200)
-    .json(
-      new ApiResponse(200, "role updation successful", { role: newRole.role }),
-    );
-});
-
-export {
-  signup,
-  login,
-  logout,
-  emailOtp,
-  loginOtp,
-  loginOtpSend,
-  sellerRegistration,
-};
+export { signup, login, logout, emailOtp, loginOtp, loginOtpSend };

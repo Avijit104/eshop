@@ -26,8 +26,7 @@ const signupValidator = () => {
       .withMessage("username must be longer than 3 characters"),
     body("gender")
       .trim()
-      .notEmpty()
-      .withMessage("gender field is required")
+      .optional()
       .isIn(availableGender)
       .withMessage("invalid gender"),
     body("phno")

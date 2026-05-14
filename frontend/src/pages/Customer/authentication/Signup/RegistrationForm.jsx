@@ -1,10 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router";
+import { login } from "../../../../store/Customer/AtuhSlice";
 
 function RegistrationForm(email) {
   // hooks
+  const dispatcher = useDispatch();
   const navigate = useNavigate();
   const refGender = useRef(null);
 
@@ -34,7 +37,8 @@ function RegistrationForm(email) {
   const onSignup = async () => {
     try {
       const res = await axios.post("/api/v1/auth/signup", user);
-      navigate("/login");
+      dispatcher(login(res.data.data));
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
