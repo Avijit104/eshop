@@ -10,6 +10,7 @@ export const availableGender = Object.values(gender);
 export const addressType = {
   home: "home",
   work: "work",
+  business: "business",
 };
 export const availableAddress = Object.values(addressType);
 

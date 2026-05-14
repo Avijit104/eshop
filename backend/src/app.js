@@ -4,10 +4,16 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 
 // route imports
+
 import healthcheckRouter from "./routes/healthCheck.route.js";
-import authRouter from "./routes/customer/auth.route.js";
-import userRouter from "./routes/customer/user.route.js";
-import addressRouter from "./routes/customer/address.route.js";
+
+// customer routes
+import customerAuthRouter from "./routes/customer/auth.route.js";
+import customerUserRouter from "./routes/customer/user.route.js";
+import customerAddressRouter from "./routes/customer/address.route.js";
+
+// seller routes
+import sellerAuthRouter from "./routes/seller/auth.route.js";
 
 // app
 const app = express();
@@ -35,11 +41,14 @@ app.use(
 app.use("/api/v1/health-check", healthcheckRouter);
 
 // user authenticaton routes
-app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/auth", customerAuthRouter);
 
 // user profile routes
-app.use("/api/v1/user", userRouter);
-app.use("/api/v1/user/address", addressRouter);
+app.use("/api/v1/user", customerUserRouter);
+app.use("/api/v1/user/address", customerAddressRouter);
+
+// seller authentication routes
+app.use("/api/v1/seller", sellerAuthRouter);
 
 // database check request
 app.get("/api", (req, res) => {
