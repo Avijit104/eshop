@@ -1,3 +1,21 @@
-import { SignupSeller } from "./Authentication";
+// authentication
+import {
+  SellerLogin,
+  SellerRegistration,
+  BusinessRegistration,
+} from "./Authentication";
 
-export { SignupSeller };
+// dashboard
+import DashboardSeller from "./Dashboard/DashboardSeller";
+
+// outlet
+import SellerOutlet from "./SellerOutlet";
+
+//export
+export {
+  SellerLogin,
+  SellerRegistration,
+  BusinessRegistration,
+  DashboardSeller,
+  SellerOutlet,
+};

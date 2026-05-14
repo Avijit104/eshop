@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router";
-import { login } from "../../store/Customer/AtuhSlice";
+import { login } from "../../store/AtuhSlice";
 
 function Navbar() {
   const isLogin = useSelector((state) => state.auth.isLogin);

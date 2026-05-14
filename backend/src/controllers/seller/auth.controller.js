@@ -10,6 +10,7 @@ import { ApiResponse } from "../../utils/ApiResponse.js";
 import { User } from "../../models/user.models.js";
 import { Role } from "../../models/role.models.js";
 import { Business } from "../../models/business.models.js";
+import { Address } from "../../models/address.models.js";
 
 // registering Seller
 const registerSeller = asyncHandler(async (req, res) => {
@@ -73,6 +74,7 @@ const registerSeller = asyncHandler(async (req, res) => {
 
   const userRole = await Role.create({
     userId: newUser._id,
+    role: "seller",
   });
 
   if (!userRole) {
@@ -120,7 +122,7 @@ const addBusinessAddress = asyncHandler(async (req, res) => {
 // registering a business
 const registerBusiness = asyncHandler(async (req, res) => {
   const { gst, address, businessName } = req.body;
-  const { _id } = req.User;
+  const { _id } = req.user;
 
   const newBusiness = await Business.create({
     sellerId: _id,

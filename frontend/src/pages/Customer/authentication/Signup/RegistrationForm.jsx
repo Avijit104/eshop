@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router";
-import { login } from "../../../../store/Customer/AtuhSlice";
+import { login } from "../../../../store/AtuhSlice";
 
 function RegistrationForm(email) {
   // hooks

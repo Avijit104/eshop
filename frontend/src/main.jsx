@@ -35,6 +35,15 @@ import {
   CustomerOutlet,
 } from "./pages/Customer/index.js";
 
+//seller
+import {
+  SellerLogin,
+  SellerRegistration,
+  SellerOutlet,
+  BusinessRegistration,
+  DashboardSeller,
+} from "./pages/Seller/index.js";
+
 // container
 import AuthContainer from "./components/Container/AuthContainer.jsx";
 
@@ -137,6 +146,48 @@ const router = createBrowserRouter([
                 ),
               },
             ],
+          },
+        ],
+      },
+      {
+        path: "/seller",
+        element: (
+          <AuthContainer authentication>
+            <SellerOutlet />
+          </AuthContainer>
+        ),
+        children: [
+          {
+            path: "",
+            element: (
+              <AuthContainer authentication>
+                <DashboardSeller />
+              </AuthContainer>
+            ),
+          },
+          {
+            path: "login",
+            element: (
+              <AuthContainer authentication={false}>
+                <SellerLogin />
+              </AuthContainer>
+            ),
+          },
+          {
+            path: "signup",
+            element: (
+              <AuthContainer authentication={false}>
+                <SellerRegistration />
+              </AuthContainer>
+            ),
+          },
+          {
+            path: "business-signup",
+            element: (
+              <AuthContainer authentication>
+                <BusinessRegistration />
+              </AuthContainer>
+            ),
           },
         ],
       },

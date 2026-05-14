@@ -20,8 +20,8 @@ const AuthSlice = createSlice({
     },
     logout: (state, action) => {
       state.isLogin = false;
-      console.log("this is logout ");
       state.userData = null;
+      state.role = "";
     },
   },
 });

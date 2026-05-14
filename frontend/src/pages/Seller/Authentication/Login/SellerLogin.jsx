@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../../store/AtuhSlice";
 import axios from "axios";
 
-function Login() {
+function SellerLogin() {
   // hooks
   const navigate = useNavigate();
   const dispatcher = useDispatch();
@@ -12,25 +12,26 @@ function Login() {
   // states
   const [user, setUser] = useState({ email: "", password: "" });
 
-  // api call for password login
-  const onLogin = async () => {
+  // seller login api call
+  const onSellerLogin = async () => {
     try {
-      const res = await axios.post("/api/v1/auth/login", user);
-      if (res.data.data.role === "usre") {
+      const res = await axios.post("/api/v1/seller/login", user);
+      if (res.data.data.role === "seller") {
+        console.log(res.data.data);
         dispatcher(login(res.data.data));
-        navigate("/");
+        navigate("/seller");
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  // dom return
+  // dom
   return (
     <div className="main flex-center">
       <div className="flex-center flex-col w-[40%] text-2xl gap-2 p-10 bg-black rounded-2xl">
-        <div className="pb-4  w-[75%] border-b-2 border-gray-700">
-          <h1 className="font-bold text-center">Login</h1>
+        <div className="pb-2  w-[75%] border-b-2 border-gray-700">
+          <h1 className="font-bold text-center">Seller Login</h1>
         </div>
         <div className="w-[75%] my-5">
           {/* email input */}
@@ -63,7 +64,7 @@ function Login() {
 
           <div className="w-full flex-center">
             {/* login button  */}
-            <button className="button" onClick={onLogin}>
+            <button className="button" onClick={onSellerLogin}>
               Login
             </button>
           </div>
@@ -72,14 +73,8 @@ function Login() {
         {/* useful links */}
         <p className="text-sm text-gray-600">
           Don't have any account &nbsp;
-          <Link className="text-blue-700" to="/signup">
+          <Link className="text-blue-700" to="/seller/signup">
             register here
-          </Link>
-        </p>
-        <p className="text-sm text-gray-600">
-          Login with otp &nbsp;
-          <Link className="text-blue-700" to="/loginotp">
-            Click here
           </Link>
         </p>
       </div>
@@ -87,4 +82,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default SellerLogin;

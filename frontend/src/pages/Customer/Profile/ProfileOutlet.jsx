@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../../store/Customer/AtuhSlice";
+import { logout } from "../../../store/AtuhSlice";
 import MainContainer from "../../../components/Container/PageContainer";
 import PageContainer from "../../../components/Container/PageContainer";
 import SideNav from "./SideNav";

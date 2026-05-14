@@ -1,3 +1,5 @@
-import SignupSeller from "./Signup/SignupSeller";
+import SellerLogin from "./Login/SellerLogin";
+import SellerRegistration from "./Signup/SellerRegistration";
+import BusinessRegistration from "./Signup/BusinessRegistration";
 
-export { SignupSeller };
+export { SellerLogin, SellerRegistration, BusinessRegistration };

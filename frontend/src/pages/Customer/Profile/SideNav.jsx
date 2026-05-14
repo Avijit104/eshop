@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import SideContainer from "../../../components/Container/SideContainer";
 import { useNavigate } from "react-router";
 import axios from "axios";
-import { logout } from "../../../store/Customer/AtuhSlice";
+import { logout } from "../../../store/AtuhSlice";
 
 function SideNav() {
   const user = useSelector((state) => state.auth.userData);

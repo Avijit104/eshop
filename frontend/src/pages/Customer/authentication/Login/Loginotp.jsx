@@ -2,7 +2,7 @@ import React, { use, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { Link } from "react-router";
-import { login } from "../../../../store/Customer/AtuhSlice";
+import { login } from "../../../../store/AtuhSlice";
 
 import axios from "axios";
 

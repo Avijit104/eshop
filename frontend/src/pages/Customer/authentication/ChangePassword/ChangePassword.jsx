@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { logout } from "../../../../store/Customer/AtuhSlice";
+import { logout } from "../../../../store/AtuhSlice";
 
 function ChangePassword() {
   // hooks

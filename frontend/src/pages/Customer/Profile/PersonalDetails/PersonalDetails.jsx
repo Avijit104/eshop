@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useOutletContext } from "react-router";
-import { updateUserData } from "../../../../store/Customer/AtuhSlice";
+import { updateUserData } from "../../../../store/AtuhSlice";
 import MainContainer from "../../../../components/Container/MainContainer";
 
 function PersonalDetails() {
