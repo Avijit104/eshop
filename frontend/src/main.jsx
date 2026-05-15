@@ -42,6 +42,9 @@ import {
   SellerOutlet,
   BusinessRegistration,
   DashboardSeller,
+  Inventory,
+  Orders,
+  AddProduct,
 } from "./pages/Seller/index.js";
 
 // container
@@ -160,16 +163,16 @@ const router = createBrowserRouter([
           {
             path: "",
             element: (
-              <AuthContainer authentication>
-                <DashboardSeller />
+              <AuthContainer authentication={false}>
+                <SellerLogin />
               </AuthContainer>
             ),
           },
           {
-            path: "login",
+            path: "dashboard",
             element: (
-              <AuthContainer authentication={false}>
-                <SellerLogin />
+              <AuthContainer authentication>
+                <DashboardSeller />
               </AuthContainer>
             ),
           },
@@ -186,6 +189,30 @@ const router = createBrowserRouter([
             element: (
               <AuthContainer authentication>
                 <BusinessRegistration />
+              </AuthContainer>
+            ),
+          },
+          {
+            path: "inventory",
+            element: (
+              <AuthContainer authentication>
+                <Inventory />
+              </AuthContainer>
+            ),
+          },
+          {
+            path: "orders",
+            element: (
+              <AuthContainer authentication>
+                <Orders />
+              </AuthContainer>
+            ),
+          },
+          {
+            path: "add-product",
+            element: (
+              <AuthContainer authentication>
+                <AddProduct />
               </AuthContainer>
             ),
           },

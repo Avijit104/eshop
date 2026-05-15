@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import MainContainer from "../../../../components/Container/MainContainer";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 import axios from "axios";
 import { login } from "../../../../store/AtuhSlice";
 
@@ -36,9 +36,9 @@ function SellerRegistration() {
   //seller signup api call
   const onSignup = async () => {
     try {
-      const res = await axios.post("/api/v1/seller/signup", user);
-      console.log(res.data.data);
-      dispathcer(login(res.data.data));
+      // const res = await axios.post("/api/v1/seller/signup", user);
+      // console.log(res.data.data);
+      // dispathcer(login(res.data.data));
       navigate("/seller/business-signup");
     } catch (error) {
       console.log(error);
@@ -185,6 +185,14 @@ function SellerRegistration() {
               Sign Up
             </button>
           </div>
+        </div>
+        <div>
+          <p className="text-sm text-gray-600">
+            Already registerd &nbsp;
+            <Link className="text-blue-500" to="/seller/login">
+              Click here
+            </Link>
+          </p>
         </div>
       </div>
     </div>

@@ -1,12 +1,12 @@
 import React from "react";
 import PageContainer from "../../../components/Container/PageContainer";
 
-function DashboardSeller() {
+function Orders() {
   return (
     <PageContainer>
-      <div>DashboardSeller</div>
+      <div>Orders</div>
     </PageContainer>
   );
 }
 
-export default DashboardSeller;
+export default Orders;

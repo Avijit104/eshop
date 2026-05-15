@@ -1,0 +1,84 @@
+import axios from "axios";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router";
+import { login } from "../../store/AtuhSlice";
+
+function NavbarUser() {
+  const isLogin = useSelector((state) => state.auth.isLogin);
+  const dispatcher = useDispatch();
+  const navigate = useNavigate();
+
+  return (
+    <div className="w-full h-full box-border flex justify-between items-center px-15 bg-black  ">
+      <div>
+        <h1
+          className="text-3xl font-bold text-blue-600 "
+          onClick={() => navigate("/")}
+        >
+          Ethenicity
+        </h1>
+      </div>
+
+      <div className="flex gap-10">
+        <button
+          className="button font-bold rounded-3xl  "
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          Home
+        </button>
+        <button
+          className="button font-bold rounded-3xl  "
+          onClick={() => {
+            navigate("/seller/signup");
+          }}
+        >
+          Become Seller
+        </button>
+
+        {isLogin ? (
+          <button
+            className="button font-bold rounded-3xl "
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Cart
+          </button>
+        ) : (
+          <button
+            className="button font-bold rounded-3xl "
+            onClick={() => {
+              navigate("/user/signup");
+            }}
+          >
+            Signup
+          </button>
+        )}
+        {isLogin ? (
+          <button
+            className="button font-bold rounded-3xl "
+            onClick={() => {
+              navigate("/user/profile");
+            }}
+          >
+            Profile
+          </button>
+        ) : (
+          <button
+            className="button font-bold rounded-3xl "
+            onClick={() => {
+              navigate("/user");
+            }}
+          >
+            Login
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default NavbarUser;

@@ -7,6 +7,9 @@ import {
 
 // dashboard
 import DashboardSeller from "./Dashboard/DashboardSeller";
+import Inventory from "./Inventory.jsx/Inventory";
+import Orders from "./Orders/Orders";
+import AddProduct from "./Products/AddProduct";
 
 // outlet
 import SellerOutlet from "./SellerOutlet";
@@ -18,4 +21,7 @@ export {
   BusinessRegistration,
   DashboardSeller,
   SellerOutlet,
+  Inventory,
+  Orders,
+  AddProduct,
 };

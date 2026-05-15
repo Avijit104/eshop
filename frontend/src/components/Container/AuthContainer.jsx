@@ -12,7 +12,7 @@ function AuthContainer({ children, authentication = true }) {
       if (userRole === "user") {
         navigate("/");
       } else if (userRole === "seller") {
-        navigate("/seller");
+        navigate("/seller/dashboard");
       }
     }
   }, [authentication, isLogin, navigate]);
