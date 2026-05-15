@@ -36,7 +36,7 @@ function RegistrationForm(email) {
   // api call for registering user/signup
   const onSignup = async () => {
     try {
-      const res = await axios.post("/api/v1/auth/signup", user);
+      const res = await axios.post("/api/v1/user/auth/signup", user);
       dispatcher(login(res.data.data));
       navigate("/");
     } catch (error) {

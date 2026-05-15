@@ -12,6 +12,8 @@ function PersonalDetails() {
 
   // state
   const userData = useSelector((state) => state.auth.userData);
+  const userRole = useSelector((state) => state.auth.role);
+  console.log(userRole);
   const [user, setUser] = useState({
     email: userData?.email,
     firstName: userData?.firstName,

@@ -20,7 +20,7 @@ function Navbar() {
         </button>
         <button
           className="button rounded-3xl"
-          onClick={() => navigate("/user")}
+          onClick={() => navigate("/user/login")}
         >
           Login
         </button>

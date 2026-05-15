@@ -12,7 +12,7 @@ function SideNav() {
   const dispatcher = useDispatch();
   const onLogout = async () => {
     try {
-      const res = await axios.get("/api/v1/auth/logout");
+      const res = await axios.get("/api/v1/user/logout");
       dispatcher(logout());
       navigate("/");
     } catch (error) {

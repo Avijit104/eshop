@@ -20,7 +20,7 @@ function ChangePassword() {
     try {
       console.log("this is change password");
       const res = await axios.put("/api/v1/user/change-password", password);
-      const logoutRes = await axios.get("/api/v1/auth/logout");
+      const logoutRes = await axios.get("/api/v1/user/logout");
       dispatcher(logout());
       navigate("/login");
     } catch (error) {

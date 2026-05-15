@@ -9,7 +9,7 @@ import healthcheckRouter from "./routes/healthCheck.route.js";
 
 // customer routes
 import customerAuthRouter from "./routes/customer/auth.route.js";
-import customerUserRouter from "./routes/customer/user.route.js";
+import userRouter from "./routes/user/user.route.js";
 import customerAddressRouter from "./routes/customer/address.route.js";
 
 // seller routes
@@ -40,15 +40,15 @@ app.use(
 // server health check routes
 app.use("/api/v1/health-check", healthcheckRouter);
 
-// user authenticaton routes
-app.use("/api/v1/auth", customerAuthRouter);
-
-// user profile routes
-app.use("/api/v1/user", customerUserRouter);
+// customer routers
+app.use("/api/v1/user/auth", customerAuthRouter);
 app.use("/api/v1/user/address", customerAddressRouter);
 
-// seller authentication routes
-app.use("/api/v1/seller", sellerAuthRouter);
+// user routers
+app.use("/api/v1/user", userRouter);
+
+// business routers
+app.use("/api/v1/seller/auth", sellerAuthRouter);
 
 // database check request
 app.get("/api", (req, res) => {

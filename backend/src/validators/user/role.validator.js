@@ -1,7 +1,7 @@
 import { body } from "express-validator";
 
 // utility
-import { availableRole } from "../utils/constants.js";
+import { availableRole } from "../../utils/constants.js";
 
 //validator
 const roleValidator = () => {

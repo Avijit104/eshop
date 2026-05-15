@@ -37,7 +37,7 @@ function Loginotp() {
       userOtp = userOtp + item.value;
     });
     if (otp === userOtp) {
-      const res = await axios.post("/api/v1/auth/login-otp", { email });
+      const res = await axios.post("/api/v1/user/auth/login-otp", { email });
       dispatcher(login(res.data.data));
       navigate("/");
     }
@@ -46,7 +46,9 @@ function Loginotp() {
   // api call to send otp
   const sendOtp = async () => {
     try {
-      const res = await axios.post("/api/v1/auth/login-otp-send", { email });
+      const res = await axios.post("/api/v1/user/auth/login-otp-send", {
+        email,
+      });
       setOtp(res.data.data);
       console.log(res.data.data);
     } catch (error) {

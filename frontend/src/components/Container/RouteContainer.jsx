@@ -6,6 +6,7 @@ function RouteContainer({ children, auth = true, role }) {
   const navigate = useNavigate();
   const isLogin = useSelector((state) => state.auth.isLogin);
   const userRole = useSelector((state) => state.auth.role);
+  console.log(userRole);
 
   useEffect(() => {
     if (auth) {

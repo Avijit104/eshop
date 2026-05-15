@@ -17,7 +17,7 @@ function SellerLogin() {
   // seller login api call
   const onSellerLogin = async () => {
     try {
-      const res = await axios.post("/api/v1/seller/login", user);
+      const res = await axios.post("/api/v1/user/login", user);
       if (res.data.data.role === "seller") {
         console.log(res.data.data);
         dispatcher(login(res.data.data));

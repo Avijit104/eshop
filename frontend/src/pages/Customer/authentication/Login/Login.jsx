@@ -16,11 +16,10 @@ function Login() {
   // api call for password login
   const onLogin = async () => {
     try {
-      const res = await axios.post("/api/v1/auth/login", user);
-      if (res.data.data.role === "user") {
-        dispatcher(login(res.data.data));
-        navigate("/");
-      }
+      const res = await axios.post("/api/v1/user/login", user);
+      console.log(res.data.data);
+      dispatcher(login(res.data.data));
+      navigate("/");
     } catch (error) {
       console.log(error);
     }

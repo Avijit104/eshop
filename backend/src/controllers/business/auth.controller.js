@@ -142,44 +142,4 @@ const registerBusiness = asyncHandler(async (req, res) => {
     );
 });
 
-// seller Login
-const loginSeller = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({ email });
-  if (!user) {
-    throw new ApiError(404, "seller not found");
-  }
-
-  const passValidator = bcrypt.compare(password, user.password);
-  if (!passValidator) {
-    throw new ApiError(403, "invalid login credentials");
-  }
-
-  const accessToken = user.generateDataToken();
-  const refreshToken = user.generateDataToken();
-  user.refreshToken = refreshToken;
-  await user.save({ validateBeforeSave: false });
-
-  const userRole = await Role.findOne({ userId: user._id, role: "seller" });
-  if (!userRole) {
-    throw new ApiError(403, "invalid login credentials");
-  }
-
-  const option = {
-    httpOnly: true,
-    secure: false,
-  };
-
-  return res
-    .status(200)
-    .cookie("accessToken", accessToken, option)
-    .cookie("refreshToken", refreshToken, option)
-    .json(
-      new ApiResponse(200, "seller login successful", {
-        user: user,
-        role: userRole.role,
-      }),
-    );
-});
-
-export { registerSeller, addBusinessAddress, registerBusiness, loginSeller };
+export { registerSeller, addBusinessAddress, registerBusiness };

@@ -7,11 +7,13 @@ import { validator } from "../../middleware/validator.middle.js";
 // controllers
 import {
   getUser,
+  login,
+  logout,
   changePassword,
   updateEmail,
   updateName,
   updatePhno,
-} from "../../controllers/customer/user.controllers.js";
+} from "../../controllers/user/user.controllers.js";
 
 // validators
 import {
@@ -19,9 +21,12 @@ import {
   updatePhnoValidator,
   updateUserNameValidator,
   changePasswordValidator,
-} from "../../validators/customer/user.validator.js";
+  loginValidator,
+} from "../../validators/user/user.validator.js";
 
 const router = Router();
+
+router.route("/login").post(loginValidator(), validator, login);
 
 // secure routes
 router.route("/").get(jwtValidator, getUser);
@@ -41,6 +46,8 @@ router
 router
   .route("/update/phno")
   .put(jwtValidator, updatePhnoValidator(), validator, updatePhno);
+
+router.route("/logout").get(jwtValidator, logout);
 
 // export router
 export default router;

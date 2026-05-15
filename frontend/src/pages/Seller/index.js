@@ -6,7 +6,7 @@ import {
 } from "./Authentication";
 
 // dashboard
-import DashboardSeller from "./Dashboard/DashboardSeller";
+import { Dashboard, SellerProfile, DashboardOutlet } from "./Dashboard";
 import Inventory from "./Inventory.jsx/Inventory";
 import Orders from "./Orders/Orders";
 import AddProduct from "./Products/AddProduct";
@@ -19,7 +19,9 @@ export {
   SellerLogin,
   SellerRegistration,
   BusinessRegistration,
-  DashboardSeller,
+  Dashboard,
+  SellerProfile,
+  DashboardOutlet,
   SellerOutlet,
   Inventory,
   Orders,

@@ -18,6 +18,23 @@ const updateUserNameValidator = () => {
   ];
 };
 
+const loginValidator = () => {
+  return [
+    body("email")
+      .trim()
+      .isEmail()
+      .withMessage("enter a valid email id")
+      .notEmpty()
+      .withMessage("email is required"),
+    body("password")
+      .trim()
+      .notEmpty()
+      .withMessage("password is required")
+      .isLength({ min: 8 })
+      .withMessage("password must be 8 characters long"),
+  ];
+};
+
 const updateEmailValidator = () => {
   return [
     body("email")
@@ -58,6 +75,7 @@ const changePasswordValidator = () => {
 };
 
 export {
+  loginValidator,
   updateEmailValidator,
   changePasswordValidator,
   updatePhnoValidator,

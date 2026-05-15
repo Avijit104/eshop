@@ -19,14 +19,19 @@ const getUser = asyncHandler(async (req, res) => {
   if (!user) {
     throw new ApiError(404, "user not found");
   }
-  const userRole = await Role.findOne({ userId: user._id });
+  const userRole = await Role.find({ userId: user._id });
+  console.log(userRole);
   if (!userRole) {
     throw new ApiError(404, "user role not found");
   }
+  let roles = [];
+  userRole.map((item) => {
+    roles.push(item.role);
+  });
   return res.status(200).json(
     new ApiResponse(200, "user fetched successful", {
       user: user,
-      role: userRole.role,
+      role: roles,
     }),
   );
 });
@@ -119,4 +124,83 @@ const updatePhno = asyncHandler(async (req, res) => {
     );
 });
 
-export { getUser, changePassword, updateName, updateEmail, updatePhno };
+// user Login
+const login = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new ApiError(404, "seller not found");
+  }
+
+  const passValidator = bcrypt.compare(password, user.password);
+  if (!passValidator) {
+    throw new ApiError(403, "invalid login credentials");
+  }
+
+  const accessToken = user.generateDataToken();
+  const refreshToken = user.generateDataToken();
+  user.refreshToken = refreshToken;
+  await user.save({ validateBeforeSave: false });
+
+  const userRole = await Role.find({ userId: user._id }).select(
+    "-_id -userId -createdAt -updatedAt -__v",
+  );
+  if (!userRole) {
+    throw new ApiError(403, "invalid login credentials");
+  }
+  let roles = [];
+  userRole.map((item) => {
+    roles.push(item.role);
+  });
+  console.log(roles);
+  console.log(userRole);
+  const option = {
+    httpOnly: true,
+    secure: false,
+  };
+
+  return res
+    .status(200)
+    .cookie("accessToken", accessToken, option)
+    .cookie("refreshToken", refreshToken, option)
+    .json(
+      new ApiResponse(200, "seller login successful", {
+        user: user,
+        role: roles,
+      }),
+    );
+});
+// user logout
+const logout = asyncHandler(async (req, res) => {
+  const { _id } = req.user;
+  const user = await User.findByIdAndUpdate(
+    _id,
+    { $set: { refreshToken: "" } },
+    { returnDocument: "after" },
+  );
+
+  if (!user) {
+    throw new ApiError(404, "user not found");
+  }
+
+  const option = {
+    httpOnly: true,
+    secure: true,
+  };
+
+  return res
+    .status(200)
+    .clearCookie("accessToken", option)
+    .clearCookie("refreshToken", option)
+    .json(new ApiResponse(200, "user logged out successfully"));
+});
+
+export {
+  login,
+  logout,
+  getUser,
+  changePassword,
+  updateName,
+  updateEmail,
+  updatePhno,
+};

@@ -39,16 +39,16 @@ function BusinessRegistration() {
   // Business register api call
   const onBusinessRegister = async () => {
     try {
-      // const addressRes = await axios.post(
-      //   "/api/v1/seller/add-address",
-      //   address,
-      // );
-      // const businessRes = await axios.post("/api/v1/seller/add-business", {
-      //   ...business,
-      //   address: addressRes.data.data._id,
-      // });
-      // console.log(addressRes.data.data);
-      // console.log(businessRes.data.data);
+      const addressRes = await axios.post(
+        "/api/v1/seller/auth/add-address",
+        address,
+      );
+      const businessRes = await axios.post("/api/v1/seller/auth/add-business", {
+        ...business,
+        address: addressRes.data.data._id,
+      });
+      console.log(addressRes.data.data);
+      console.log(businessRes.data.data);
       navigate("/seller");
     } catch (error) {
       console.log(error);

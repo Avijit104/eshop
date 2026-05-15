@@ -37,9 +37,9 @@ function SellerRegistration() {
   //seller signup api call
   const onSignup = async () => {
     try {
-      // const res = await axios.post("/api/v1/seller/signup", user);
-      // console.log(res.data.data);
-      // dispathcer(login(res.data.data));
+      const res = await axios.post("/api/v1/seller/auth/signup", user);
+      console.log(res.data.data);
+      dispathcer(login(res.data.data));
       navigate("/seller/business-signup");
     } catch (error) {
       console.log(error);

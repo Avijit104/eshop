@@ -9,22 +9,29 @@ import {
   registerBusiness,
   registerSeller,
   addBusinessAddress,
-  loginSeller,
-} from "../../controllers/seller/auth.controller.js";
+} from "../../controllers/business/auth.controller.js";
 
 // validator
 import {
   signupValidator,
   loginValidator,
 } from "../../validators/customer/auth.validator.js";
+import { roleValidator } from "../../validators/user/role.validator.js";
 import { addressValidator } from "../../validators/customer/address.validator.js";
 import { businessRegisterValidator } from "../../validators/seller/business.validator.js";
 
 const router = Router();
 
 // unsecure routes
-router.route("/signup").post(signupValidator(), validator, registerSeller);
-router.route("/login").post(loginValidator(), validator, loginSeller);
+router
+  .route("/signup")
+  .post(
+    signupValidator(),
+    validator,
+    roleValidator(),
+    validator,
+    registerSeller,
+  );
 
 // secure routes
 router

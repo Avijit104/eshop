@@ -50,7 +50,7 @@ function SignUp() {
   // api call to send otp
   const sendOtp = async () => {
     try {
-      const res = await axios.post("/api/v1/auth/send-otp", { email });
+      const res = await axios.post("/api/v1/user/auth/send-otp", { email });
       setOtp(res.data.data);
       setChange(true);
       console.log(res.data.data);

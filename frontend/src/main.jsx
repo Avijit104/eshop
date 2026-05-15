@@ -41,7 +41,9 @@ import {
   SellerRegistration,
   SellerOutlet,
   BusinessRegistration,
-  DashboardSeller,
+  Dashboard,
+  SellerProfile,
+  DashboardOutlet,
   Inventory,
   Orders,
   AddProduct,
@@ -161,22 +163,6 @@ const router = createBrowserRouter([
         element: <SellerOutlet />,
         children: [
           {
-            path: "login",
-            element: (
-              <RouteContainer auth={false} role={["seller"]}>
-                <SellerLogin />
-              </RouteContainer>
-            ),
-          },
-          {
-            path: "dashboard",
-            element: (
-              <RouteContainer auth role={["seller"]}>
-                <DashboardSeller />
-              </RouteContainer>
-            ),
-          },
-          {
             path: "",
             element: (
               <RouteContainer auth={false} role={["seller"]}>
@@ -192,6 +178,41 @@ const router = createBrowserRouter([
               </RouteContainer>
             ),
           },
+          {
+            path: "login",
+            element: (
+              <RouteContainer auth={false} role={["seller"]}>
+                <SellerLogin />
+              </RouteContainer>
+            ),
+          },
+          {
+            path: "dashboard",
+            element: (
+              <RouteContainer auth role={["seller"]}>
+                <DashboardOutlet />
+              </RouteContainer>
+            ),
+            children: [
+              {
+                path: "",
+                element: (
+                  <RouteContainer auth role={["seller"]}>
+                    <Dashboard />
+                  </RouteContainer>
+                ),
+              },
+              {
+                path: "profile",
+                element: (
+                  <RouteContainer auth role={["seller"]}>
+                    <SellerProfile />
+                  </RouteContainer>
+                ),
+              },
+            ],
+          },
+
           {
             path: "inventory",
             element: (
