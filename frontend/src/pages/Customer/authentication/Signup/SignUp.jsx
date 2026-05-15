@@ -200,7 +200,7 @@ function SignUp() {
             {/* login page link */}
             <p className="text-sm text-gray-600">
               Already have an account &nbsp;
-              <Link className="text-blue-700" to="/user">
+              <Link className="text-blue-700" to="/user/login">
                 login here
               </Link>
             </p>

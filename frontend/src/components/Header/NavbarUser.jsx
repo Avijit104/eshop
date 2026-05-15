@@ -32,7 +32,7 @@ function NavbarUser() {
         <button
           className="button font-bold rounded-3xl  "
           onClick={() => {
-            navigate("/seller/signup");
+            navigate("/seller/business-signup");
           }}
         >
           Become Seller

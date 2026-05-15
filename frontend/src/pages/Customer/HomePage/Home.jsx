@@ -5,7 +5,7 @@ function Home() {
   return (
     <PageContainer>
       <div>
-        <p>this is home page</p>
+        <p>this is Customer home page</p>
       </div>
     </PageContainer>
   );

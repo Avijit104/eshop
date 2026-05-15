@@ -4,7 +4,7 @@
   --text: #ffffff;
   --text-h: #303030;
   --bg: #252525;
-  --bgSecond: #121111;
+  --bgSecond: #2c2a2a;
   --border: #2e303a;
   --code-bg: #8c8c8c;
   --accent: #1d1d1d;
@@ -36,7 +36,7 @@
   display: none;
 }
 @utility main {
-  @apply min-h-screen h-screen w-full box-border bg-(--bg);
+  @apply min-h-screen h-screen w-full box-border bg-neutral-700;
 }
 @utility flex-center {
   @apply flex justify-center items-center;

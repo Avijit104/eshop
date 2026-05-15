@@ -174,13 +174,13 @@ function Loginotp() {
           {/* useful links */}
           <p className="text-sm text-gray-600">
             Don't have any account &nbsp;
-            <Link className="text-blue-700" to="/user/signup">
+            <Link className="text-blue-700" to="/user">
               register here
             </Link>
           </p>
           <p className="text-sm text-gray-600">
             Login with password &nbsp;
-            <Link className="text-blue-700" to="/user">
+            <Link className="text-blue-700" to="/user/login">
               Click here
             </Link>
           </p>

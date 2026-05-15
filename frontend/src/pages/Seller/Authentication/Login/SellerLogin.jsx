@@ -76,7 +76,7 @@ function SellerLogin() {
           {/* useful links */}
           <p className="text-sm text-gray-600">
             Don't have any account &nbsp;
-            <Link className="text-blue-700" to="/seller/signup">
+            <Link className="text-blue-700" to="/seller">
               register here
             </Link>
           </p>

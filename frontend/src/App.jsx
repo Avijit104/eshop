@@ -17,7 +17,6 @@ function App() {
           dispatcher(login(res.data.data));
         }
       } catch (error) {
-        console.log("this is app jsx");
         dispatcher(logout());
         console.log(error);
       } finally {

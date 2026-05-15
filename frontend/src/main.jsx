@@ -48,7 +48,7 @@ import {
 } from "./pages/Seller/index.js";
 
 // container
-import AuthContainer from "./components/Container/AuthContainer.jsx";
+import RouteContainer from "./components/Container/RouteContainer.jsx";
 
 const router = createBrowserRouter([
   {
@@ -57,7 +57,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Home />,
+        element: (
+          <RouteContainer auth={false} role={["user"]}>
+            <Home />
+          </RouteContainer>
+        ),
       },
       {
         path: "/health-check",
@@ -67,9 +71,9 @@ const router = createBrowserRouter([
       {
         path: "/change-password",
         element: (
-          <AuthContainer authentication>
+          <RouteContainer auth>
             <ChangePassword />
-          </AuthContainer>
+          </RouteContainer>
         ),
       },
       {
@@ -77,75 +81,75 @@ const router = createBrowserRouter([
         element: <CustomerOutlet />,
         children: [
           {
-            path: "",
+            path: "login",
             element: (
-              <AuthContainer authentication={false}>
+              <RouteContainer auth={false} role={["user"]}>
                 <Login />
-              </AuthContainer>
+              </RouteContainer>
             ),
           },
           {
             path: "loginotp",
             element: (
-              <AuthContainer authentication={false}>
+              <RouteContainer auth={false} role={["user"]}>
                 <Loginotp />
-              </AuthContainer>
+              </RouteContainer>
             ),
           },
           {
-            path: "signup",
+            path: "",
             element: (
-              <AuthContainer authentication={false}>
+              <RouteContainer auth={false} role={["user"]}>
                 <SignUp />
-              </AuthContainer>
+              </RouteContainer>
             ),
           },
           {
             path: "profile",
             element: (
-              <AuthContainer authentication>
+              <RouteContainer auth role={["user"]}>
                 <ProfileOutlet />
-              </AuthContainer>
+              </RouteContainer>
             ),
             children: [
               {
                 path: "",
                 element: (
-                  <AuthContainer authentication>
+                  <RouteContainer auth role={["user"]}>
                     <PersonalDetails />
-                  </AuthContainer>
+                  </RouteContainer>
                 ),
               },
               {
                 path: "address",
                 element: (
-                  <AuthContainer authentication>
+                  <RouteContainer auth role={["user"]}>
                     <Address />
-                  </AuthContainer>
+                  </RouteContainer>
                 ),
               },
               {
                 path: "gift-card",
                 element: (
-                  <AuthContainer authentication>
+                  <RouteContainer auth role={["user"]}>
                     <GiftCard />
-                  </AuthContainer>
+                  </RouteContainer>
                 ),
               },
               {
                 path: "card",
                 element: (
-                  <AuthContainer authentication>
+                  <RouteContainer auth role={["user"]}>
                     <CardPayment />
-                  </AuthContainer>
+                  </RouteContainer>
                 ),
               },
               {
                 path: "upi",
                 element: (
-                  <AuthContainer authentication>
+                  <RouteContainer auth role={["user"]}>
                     <Upi />
-                  </AuthContainer>
+                  </RouteContainer>
                 ),
               },
             ],
@@ -154,66 +158,62 @@ const router = createBrowserRouter([
       },
       {
         path: "/seller",
-        element: (
-          <AuthContainer authentication>
-            <SellerOutlet />
-          </AuthContainer>
-        ),
+        element: <SellerOutlet />,
         children: [
           {
-            path: "",
+            path: "login",
             element: (
-              <AuthContainer authentication={false}>
+              <RouteContainer auth={false} role={["seller"]}>
                 <SellerLogin />
-              </AuthContainer>
+              </RouteContainer>
             ),
           },
           {
             path: "dashboard",
             element: (
-              <AuthContainer authentication>
+              <RouteContainer auth role={["seller"]}>
                 <DashboardSeller />
-              </AuthContainer>
+              </RouteContainer>
             ),
           },
           {
-            path: "signup",
+            path: "",
             element: (
-              <AuthContainer authentication={false}>
+              <RouteContainer auth={false} role={["seller"]}>
                 <SellerRegistration />
-              </AuthContainer>
+              </RouteContainer>
             ),
           },
           {
             path: "business-signup",
             element: (
-              <AuthContainer authentication>
+              <RouteContainer auth role={["user", "seller"]}>
                 <BusinessRegistration />
-              </AuthContainer>
+              </RouteContainer>
             ),
           },
           {
             path: "inventory",
             element: (
-              <AuthContainer authentication>
+              <RouteContainer auth role={["seller"]}>
                 <Inventory />
-              </AuthContainer>
+              </RouteContainer>
             ),
           },
           {
             path: "orders",
             element: (
-              <AuthContainer authentication>
+              <RouteContainer auth role={["seller"]}>
                 <Orders />
-              </AuthContainer>
+              </RouteContainer>
             ),
           },
           {
             path: "add-product",
             element: (
-              <AuthContainer authentication>
+              <RouteContainer auth role={["seller"]}>
                 <AddProduct />
-              </AuthContainer>
+              </RouteContainer>
             ),
           },
         ],

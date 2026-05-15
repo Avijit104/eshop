@@ -8,7 +8,7 @@ function NavbarSeller() {
       <div>
         <h1 className="text-blue-500 font-bold text-3xl">Ethenicity</h1>
       </div>
-      <div className="flex gap-10">
+      <div className="flex gap-10 items-center">
         <button
           className="button rounded-3xl"
           onClick={() => {
@@ -24,7 +24,7 @@ function NavbarSeller() {
           Inventory
         </button>
         <button
-          className="button rounded-3xl"
+          className="button rounded-3xl text-nowrap"
           onClick={() => navigate("/seller/add-product")}
         >
           Add Product
