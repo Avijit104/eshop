@@ -3,8 +3,9 @@ import mongoose, { Schema } from "mongoose";
 
 //Schema
 const productSchema = new Schema({
-  sellerId: {
+  businessId: {
     type: mongoose.Types.ObjectId,
+    ref: "businesses",
     trim: true,
     required: true,
   },
@@ -26,6 +27,7 @@ const productSchema = new Schema({
   discount: {
     type: Number,
     trim: true,
+    default: 0,
   },
   category: {
     type: String, // this will changed replaced by catagory constant
