@@ -38,8 +38,10 @@ function Loginotp() {
     });
     if (otp === userOtp) {
       const res = await axios.post("/api/v1/user/auth/login-otp", { email });
-      dispatcher(login(res.data.data));
-      navigate("/");
+      if (res.data.data.role === "user") {
+        dispatcher(login(res.data.data));
+        navigate("/");
+      }
     }
   };
 
@@ -61,7 +63,9 @@ function Loginotp() {
     <PageContainer>
       <div className="w-full h-full flex-center">
         <div className="flex-center flex-col w-[40%] text-2xl gap-4 p-10 bg-black rounded-2xl">
-          <h1 className="font-bold">Login</h1>
+          <div className="pb-4  w-[90%] border-b-2 border-gray-700">
+            <h1 className="font-bold text-center">Login</h1>
+          </div>
           <div className="w-[75%] my-10">
             <div className="mb-5">
               {/* email input  */}

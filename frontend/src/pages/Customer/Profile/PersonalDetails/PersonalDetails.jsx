@@ -13,7 +13,8 @@ function PersonalDetails() {
   // state
   const userData = useSelector((state) => state.auth.userData);
   const userRole = useSelector((state) => state.auth.role);
-  console.log(userRole);
+
+  console.log("this is personal details", userRole);
   const [user, setUser] = useState({
     email: userData?.email,
     firstName: userData?.firstName,
@@ -33,6 +34,7 @@ function PersonalDetails() {
         lastName: user.lastName,
       });
       dispatcher(updateUserData(res.data.data));
+      setEditUsername(true);
     } catch (error) {
       console.log(error);
     }
@@ -45,6 +47,7 @@ function PersonalDetails() {
         email: user.email,
       });
       dispatcher(updateUserData(res.data.data));
+      setEditEmail(true);
     } catch (error) {
       console.log(error);
     }
@@ -57,6 +60,7 @@ function PersonalDetails() {
         phno: user.phno,
       });
       dispatcher(updateUserData(res.data.data));
+      setEditPhno(true);
     } catch (error) {
       console.log(error);
     }

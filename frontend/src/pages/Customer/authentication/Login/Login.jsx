@@ -11,15 +11,17 @@ function Login() {
   const dispatcher = useDispatch();
 
   // states
-  const [user, setUser] = useState({ email: "", password: "" });
+  const [user, setUser] = useState({ email: "", password: "", role: "user" });
 
   // api call for password login
   const onLogin = async () => {
     try {
       const res = await axios.post("/api/v1/user/login", user);
-      console.log(res.data.data);
-      dispatcher(login(res.data.data));
-      navigate("/");
+      if (res.data.data.role === "user") {
+        console.log("this is user");
+        dispatcher(login(res.data.data));
+        navigate("/");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -30,7 +32,7 @@ function Login() {
     <PageContainer>
       <div className="w-full h-full flex-center">
         <div className="flex-center flex-col w-[40%] text-2xl gap-2 p-10 bg-black rounded-2xl">
-          <div className="pb-4  w-[75%] border-b-2 border-gray-700">
+          <div className="pb-4  w-[90%] border-b-2 border-gray-700">
             <h1 className="font-bold text-center">Login</h1>
           </div>
           <div className="w-[75%] my-5">

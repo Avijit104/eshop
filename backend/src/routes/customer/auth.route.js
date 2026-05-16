@@ -16,7 +16,6 @@ import {
 // validators
 import {
   signupValidator,
-  loginValidator,
   emailValidator,
 } from "../../validators/customer/auth.validator.js";
 import { roleValidator } from "../../validators/user/role.validator.js";

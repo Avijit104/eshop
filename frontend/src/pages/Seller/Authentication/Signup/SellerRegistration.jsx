@@ -38,9 +38,10 @@ function SellerRegistration() {
   const onSignup = async () => {
     try {
       const res = await axios.post("/api/v1/seller/auth/signup", user);
-      console.log(res.data.data);
-      dispathcer(login(res.data.data));
-      navigate("/seller/business-signup");
+      if (res.data.data.role === "seller") {
+        dispathcer(login(res.data.data));
+        navigate("/seller/business-signup");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -50,7 +51,7 @@ function SellerRegistration() {
     <PageContainer>
       <div className="w-full h-full flex-center">
         <div className="flex-center flex-col w-[60%] text-2xl gap-7  bg-black rounded-2xl p-10">
-          <div className="pb-4  w-[75%] border-b-2 border-gray-700">
+          <div className="pb-4  w-[90%] border-b-2 border-gray-700">
             <h1 className="font-bold text-center">Seller Signup</h1>
           </div>
           {/* registration form input */}

@@ -12,10 +12,7 @@ import {
 } from "../../controllers/business/auth.controller.js";
 
 // validator
-import {
-  signupValidator,
-  loginValidator,
-} from "../../validators/customer/auth.validator.js";
+import { signupValidator } from "../../validators/customer/auth.validator.js";
 import { roleValidator } from "../../validators/user/role.validator.js";
 import { addressValidator } from "../../validators/customer/address.validator.js";
 import { businessRegisterValidator } from "../../validators/seller/business.validator.js";

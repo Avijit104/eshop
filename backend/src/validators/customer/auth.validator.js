@@ -55,4 +55,4 @@ const emailValidator = () => {
   ];
 };
 
-export { signupValidator, loginValidator, emailValidator };
+export { signupValidator, emailValidator };

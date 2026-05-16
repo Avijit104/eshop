@@ -37,8 +37,10 @@ function RegistrationForm(email) {
   const onSignup = async () => {
     try {
       const res = await axios.post("/api/v1/user/auth/signup", user);
-      dispatcher(login(res.data.data));
-      navigate("/");
+      if (res.data.data.role === "user") {
+        dispathcer(login(res.data.data));
+        navigate("/");
+      }
     } catch (error) {
       console.log(error);
     }

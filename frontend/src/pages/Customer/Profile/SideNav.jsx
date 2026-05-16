@@ -14,7 +14,7 @@ function SideNav() {
     try {
       const res = await axios.get("/api/v1/user/logout");
       dispatcher(logout());
-      navigate("/");
+      navigate("/user/login");
     } catch (error) {
       console.log(error);
     }

@@ -49,10 +49,12 @@ const userSchema = new Schema(
   { timestamps: true },
 );
 
-userSchema.methods.generateDataToken = function () {
+userSchema.methods.generateDataToken = function (role) {
+  console.log("this is jwt role", role);
   return jwt.sign(
     {
       _id: this._id,
+      role: role,
     },
     process.env.TOKEN_SECRET,
     {

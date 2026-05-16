@@ -12,16 +12,15 @@ function SellerLogin() {
   const dispatcher = useDispatch();
 
   // states
-  const [user, setUser] = useState({ email: "", password: "" });
+  const [user, setUser] = useState({ email: "", password: "", role: "seller" });
 
   // seller login api call
   const onSellerLogin = async () => {
     try {
       const res = await axios.post("/api/v1/user/login", user);
       if (res.data.data.role === "seller") {
-        console.log(res.data.data);
         dispatcher(login(res.data.data));
-        navigate("/seller");
+        navigate("/seller/dashboard");
       }
     } catch (error) {
       console.log(error);
@@ -33,7 +32,7 @@ function SellerLogin() {
     <PageContainer>
       <div className="w-full h-full flex-center flex-col">
         <div className="flex-center flex-col w-[40%] text-2xl gap-2 p-10 bg-black rounded-2xl">
-          <div className="pb-2  w-[75%] border-b-2 border-gray-700">
+          <div className="pb-2  w-[90%] border-b-2 border-gray-700">
             <h1 className="font-bold text-center">Seller Login</h1>
           </div>
           <div className="w-[75%] my-5">

@@ -15,23 +15,23 @@ import { Role } from "../../models/role.models.js";
 // fetching user details
 const getUser = asyncHandler(async (req, res) => {
   const { _id } = req.user;
+  const role = req.role;
+  console.log("this is role", role);
   const user = await User.findById(_id);
   if (!user) {
     throw new ApiError(404, "user not found");
   }
-  const userRole = await Role.find({ userId: user._id });
+  console.log(user);
+  const userRole = await Role.findOne({ userId: user._id, role: role });
   console.log(userRole);
   if (!userRole) {
     throw new ApiError(404, "user role not found");
   }
-  let roles = [];
-  userRole.map((item) => {
-    roles.push(item.role);
-  });
+
   return res.status(200).json(
     new ApiResponse(200, "user fetched successful", {
       user: user,
-      role: roles,
+      role: userRole.role,
     }),
   );
 });
@@ -126,7 +126,7 @@ const updatePhno = asyncHandler(async (req, res) => {
 
 // user Login
 const login = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, role } = req.body;
   const user = await User.findOne({ email });
   if (!user) {
     throw new ApiError(404, "seller not found");
@@ -137,23 +137,15 @@ const login = asyncHandler(async (req, res) => {
     throw new ApiError(403, "invalid login credentials");
   }
 
-  const accessToken = user.generateDataToken();
-  const refreshToken = user.generateDataToken();
-  user.refreshToken = refreshToken;
-  await user.save({ validateBeforeSave: false });
-
-  const userRole = await Role.find({ userId: user._id }).select(
-    "-_id -userId -createdAt -updatedAt -__v",
-  );
+  const userRole = await Role.findOne({ userId: user._id, role: role });
   if (!userRole) {
     throw new ApiError(403, "invalid login credentials");
   }
-  let roles = [];
-  userRole.map((item) => {
-    roles.push(item.role);
-  });
-  console.log(roles);
-  console.log(userRole);
+
+  const accessToken = user.generateDataToken(userRole.role);
+  const refreshToken = user.generateDataToken(userRole.role);
+  user.refreshToken = refreshToken;
+  await user.save({ validateBeforeSave: false });
   const option = {
     httpOnly: true,
     secure: false,
@@ -166,10 +158,11 @@ const login = asyncHandler(async (req, res) => {
     .json(
       new ApiResponse(200, "seller login successful", {
         user: user,
-        role: roles,
+        role: userRole.role,
       }),
     );
 });
+
 // user logout
 const logout = asyncHandler(async (req, res) => {
   const { _id } = req.user;

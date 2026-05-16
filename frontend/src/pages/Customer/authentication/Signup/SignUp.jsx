@@ -65,7 +65,7 @@ function SignUp() {
       <div className="w-full h-full flex-center flex-col ">
         {isVerified ? (
           <div className="flex-center flex-col w-[60%] text-2xl gap-7  bg-black rounded-2xl p-10">
-            <div className="pb-4  w-[75%] border-b-2 border-gray-700">
+            <div className="pb-4  w-[90%] border-b-2 border-gray-700">
               <h1 className="font-bold text-center">Signup</h1>
             </div>
             {/* registration form input */}

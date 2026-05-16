@@ -23,10 +23,13 @@ import {
   changePasswordValidator,
   loginValidator,
 } from "../../validators/user/user.validator.js";
+import { roleValidator } from "../../validators/user/role.validator.js";
 
 const router = Router();
 
-router.route("/login").post(loginValidator(), validator, login);
+router
+  .route("/login")
+  .post(loginValidator(), validator, roleValidator(), validator, login);
 
 // secure routes
 router.route("/").get(jwtValidator, getUser);

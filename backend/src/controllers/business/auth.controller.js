@@ -25,8 +25,8 @@ const registerSeller = asyncHandler(async (req, res) => {
     if (!existingUserRole) {
       throw new ApiError(401, "role updation failed");
     }
-    const refresh = existingUser.generateDataToken();
-    const access = existingUser.generateDataToken();
+    const refresh = existingUser.generateDataToken(existingUserRole.role);
+    const access = existingUser.generateDataToken(existingUserRole.role);
     existingUser.refreshToken = refresh;
     await existingUser.save({ validateBeforeSave: false });
 
@@ -62,8 +62,8 @@ const registerSeller = asyncHandler(async (req, res) => {
   if (!newUser) {
     throw new ApiError(409, "user registration failed");
   }
-  const accessToken = newUser.generateDataToken();
-  const refreshToken = newUser.generateDataToken();
+  const accessToken = newUser.generateDataToken("seller");
+  const refreshToken = newUser.generateDataToken("seller");
   const option = {
     httpOnly: true,
     secure: true,

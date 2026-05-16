@@ -58,8 +58,8 @@ const signup = asyncHandler(async (req, res) => {
   if (!newUser) {
     throw new ApiError(409, "user registration failed");
   }
-  const accessToken = newUser.generateDataToken();
-  const refreshToken = newUser.generateDataToken();
+  const accessToken = newUser.generateDataToken("user");
+  const refreshToken = newUser.generateDataToken("user");
   const option = {
     httpOnly: true,
     secure: true,
@@ -86,50 +86,6 @@ const signup = asyncHandler(async (req, res) => {
         role: userRole.role,
       }),
     );
-});
-
-// seller registration
-const sellerRegistration = asyncHandler(async (req, res) => {
-  const { email, firstName, lastName, gender, phno, password, role, pan } =
-    req.body;
-
-  const existingUser = await User.findOne({ email });
-  if (!existingUser) {
-    throw new ApiError(401, "user already exist");
-  }
-
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
-
-  const newUser = await User.create({
-    email,
-    firstName,
-    lastName,
-    gender,
-    phno,
-    password: hashedPassword,
-  });
-
-  if (!newUser) {
-    throw new ApiError(402, "seller registration failed");
-  }
-
-  const userRole = await Role.create({
-    userId: newUser._id,
-    role,
-    pan,
-  });
-
-  if (!userRole) {
-    throw new ApiError(402, "role assignment failed");
-  }
-
-  return res.status(200).json(
-    new ApiResponse(200, "seller registration successful", {
-      user: newUser,
-      role: userRole.role,
-    }),
-  );
 });
 
 //user login otp send
@@ -165,8 +121,8 @@ const loginOtp = asyncHandler(async (req, res) => {
     throw new ApiError(404, "role not found");
   }
 
-  const refreshToken = user.generateDataToken();
-  const accessToken = user.generateDataToken();
+  const refreshToken = user.generateDataToken(userRole.role);
+  const accessToken = user.generateDataToken(userRole.role);
 
   user.refreshToken = refreshToken;
   await user.save({ validateBeforeSave: false });

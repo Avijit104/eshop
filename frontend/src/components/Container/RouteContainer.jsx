@@ -3,15 +3,18 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
 function RouteContainer({ children, auth = true, role }) {
+  //hookes
   const navigate = useNavigate();
+
+  // states
   const isLogin = useSelector((state) => state.auth.isLogin);
   const userRole = useSelector((state) => state.auth.role);
-  console.log(userRole);
 
+  // route security
   useEffect(() => {
     if (auth) {
       if (!isLogin) {
-        navigate(`${role === "user" ? "/user" : "/seller"}`);
+        navigate(`${role.includes("user") ? "/user/login" : "/seller"}`);
       } else {
         if (!role.includes(userRole)) {
           navigate(`${userRole === "user" ? "/" : "/seller/dashboard"}`);
@@ -24,6 +27,7 @@ function RouteContainer({ children, auth = true, role }) {
     }
   }, [isLogin, auth, role, userRole, navigate]);
 
+  // dom
   return <>{children}</>;
 }
 
