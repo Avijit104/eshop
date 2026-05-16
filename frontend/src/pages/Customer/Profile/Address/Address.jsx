@@ -6,10 +6,12 @@ import AddAddressForm from "./AddAddressForm";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { setuserAddress } from "../../../../store/Customer/AddressSlice";
+import { useOutletContext } from "react-router";
 
 function Address() {
   // hooks
   const dispatcher = useDispatch();
+  const { setCurrent } = useOutletContext();
 
   // states
   const [addAddress, setAddAddress] = useState(false);
@@ -93,6 +95,12 @@ function Address() {
     setAddAddress(false);
   }, []);
 
+  // change current option for sidenav
+  useEffect(() => {
+    setCurrent("address");
+  }, []);
+
+  // dom
   return (
     <MainContainer>
       <div className="flex-center flex-col gap-5">
@@ -102,8 +110,8 @@ function Address() {
           </div>
           <div className="input bg-black">
             {addAddress ? (
+              //  add address form
               <div className=" flex flex-col gap-0 justify-baseline items-center ">
-                {/* add address form */}
                 <div className="flex-center w-full">
                   <AddAddressForm
                     removeDisplayState={unsetDisplayAdd}
@@ -113,6 +121,7 @@ function Address() {
                 </div>
               </div>
             ) : (
+              // add address button
               <button
                 className="button ml-10"
                 onClick={() => {
@@ -125,11 +134,12 @@ function Address() {
           </div>
         </div>
         <div className="flex flex-col justify-center items-center w-full gap-5">
+          {/* list all addresses of user */}
           {allAddress.map((address) => {
             return (
               <div className="input px-5 w-[90%]" key={address._id}>
                 <div>
-                  {/* address display/listing */}
+                  {/* display individual address */}
                   {editAddressId !== address._id && (
                     <div>
                       <p className="px-4 py-2 rounded-xl text-sm  w-fit mb-3 bg-gray-700">
@@ -149,6 +159,7 @@ function Address() {
                         </div>
 
                         <div className="flex gap-5">
+                          {/* edit button  */}
                           <button
                             className="button"
                             onClick={() => {
@@ -157,6 +168,8 @@ function Address() {
                           >
                             Edit
                           </button>
+
+                          {/* delete button */}
                           <button
                             className="button"
                             onClick={() => {

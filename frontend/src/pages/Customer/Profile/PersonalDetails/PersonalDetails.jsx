@@ -9,12 +9,12 @@ function PersonalDetails() {
   // hooks
   const navigate = useNavigate();
   const dispatcher = useDispatch();
+  const { setCurrent } = useOutletContext();
 
   // state
   const userData = useSelector((state) => state.auth.userData);
   const userRole = useSelector((state) => state.auth.role);
 
-  console.log("this is personal details", userRole);
   const [user, setUser] = useState({
     email: userData?.email,
     firstName: userData?.firstName,
@@ -66,6 +66,12 @@ function PersonalDetails() {
     }
   };
 
+  // change current option for sidenav
+  useEffect(() => {
+    setCurrent("personal");
+  }, []);
+
+  //dom
   return (
     <MainContainer>
       <div className="flex-center  flex-col">
@@ -76,6 +82,7 @@ function PersonalDetails() {
         {/* name */}
         <div className=" w-[90%] px-10   mb-5">
           <div className="flex w-full  gap-5 items-baseline-last  ">
+            {/* first name  */}
             <div className="w-[50%]">
               <h2 className="text-lg font-bold mb-1">First Name :</h2>
               <input
@@ -90,6 +97,7 @@ function PersonalDetails() {
                 }
               />
             </div>
+            {/* last name  */}
             <div className="w-[50%]">
               <h2 className="text-lg font-bold mb-1">Last Name:</h2>
               <input
@@ -103,6 +111,7 @@ function PersonalDetails() {
               />
             </div>
             {editUsername ? (
+              // edit user name button
               <button
                 className="button  "
                 onClick={() => {
@@ -114,6 +123,7 @@ function PersonalDetails() {
                 Edit
               </button>
             ) : (
+              // save user name button
               <button className="button" onClick={updateUserName}>
                 Save
               </button>
@@ -135,6 +145,7 @@ function PersonalDetails() {
               onChange={(e) => setUser({ ...user, email: e.target.value })}
             />
             {editEmail ? (
+              // edit email button
               <button
                 className="button"
                 onClick={() => {
@@ -145,6 +156,7 @@ function PersonalDetails() {
                 Edit
               </button>
             ) : (
+              // save email button
               <button className="button" onClick={updateEmail}>
                 Save
               </button>
@@ -169,6 +181,7 @@ function PersonalDetails() {
               }}
             />
             {editPhno ? (
+              // edit phone number button
               <button
                 className="button"
                 onClick={() => {
@@ -179,6 +192,7 @@ function PersonalDetails() {
                 Edit
               </button>
             ) : (
+              // save phone number button
               <button className="button" onClick={updatePhno}>
                 Save
               </button>
@@ -229,6 +243,8 @@ function PersonalDetails() {
                 <p>Other</p>
               </div>
             </div>
+
+            {/* change password button */}
             <button
               className="button"
               onClick={() => navigate("/change-password")}

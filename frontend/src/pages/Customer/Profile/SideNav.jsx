@@ -5,11 +5,16 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import { logout } from "../../../store/AtuhSlice";
 
-function SideNav() {
-  const user = useSelector((state) => state.auth.userData);
-  const [option, setOption] = useState("personal");
+function SideNav({ currOption }) {
+  // hooks
   const navigate = useNavigate();
   const dispatcher = useDispatch();
+
+  // states
+  const user = useSelector((state) => state.auth.userData);
+  const [option, setOption] = useState("");
+
+  // user logout api call
   const onLogout = async () => {
     try {
       const res = await axios.get("/api/v1/user/logout");
@@ -20,9 +25,12 @@ function SideNav() {
     }
   };
 
+  // dom change based on content displaying
   useEffect(() => {
-    setOption((prev) => prev);
-  }, []);
+    setOption(currOption);
+  }, [currOption]);
+
+  // dom
   return (
     <SideContainer>
       <div className="w-full h-full p-10 flex flex-col gap-5">

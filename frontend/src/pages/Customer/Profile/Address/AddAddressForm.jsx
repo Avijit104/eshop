@@ -218,7 +218,7 @@ function AddAddressForm({ removeDisplayState, data = {}, apiCall, header }) {
         </div>
       </div>
       <div className="flex items-center justify-start gap-5 py-3">
-        {/* save button */}
+        {/* save button also calls api in address file */}
         <button
           className="button"
           onClick={() => {
