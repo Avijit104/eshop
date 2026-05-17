@@ -58,6 +58,11 @@ const addressSchema = new Schema(
       enum: availableAddress,
       default: addressType.home,
     },
+    visibility: {
+      type: Boolean,
+      default: true,
+      required: true,
+    },
   },
   { timestamps: true },
 );

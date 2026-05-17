@@ -34,6 +34,11 @@ const productSchema = new Schema({
     trim: true,
     required: true,
   },
+  visibility: {
+    type: Boolean,
+    default: true,
+    required: true,
+  },
 });
 
 export const Product = mongoose.model("products", productSchema);

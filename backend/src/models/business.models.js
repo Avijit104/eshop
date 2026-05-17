@@ -25,6 +25,11 @@ const businessSchema = new Schema(
       required: true,
       trim: true,
     },
+    visibility: {
+      type: Boolean,
+      default: true,
+      required: true,
+    },
   },
   { timestamps: true },
 );

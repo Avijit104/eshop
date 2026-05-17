@@ -45,6 +45,7 @@ const getAllAddress = asyncHandler(async (req, res) => {
   const { _id } = req.user;
   const address = await Address.find({
     userId: _id,
+    visibility: true,
   }).select("-userId -createdAt -updatedAt -__v");
   if (address.length === 0) {
     throw new ApiError(404, "addresses not found");
@@ -57,7 +58,9 @@ const getAllAddress = asyncHandler(async (req, res) => {
 // delete user address by id
 const deleteAddress = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const deletedAddress = await Address.findByIdAndDelete(id);
+  const deletedAddress = await Address.findByIdAndUpdate(id, {
+    $set: { visibility: false },
+  });
   if (!deletedAddress) {
     throw new ApiError(404, "address not found");
   }

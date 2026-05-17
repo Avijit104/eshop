@@ -3,15 +3,7 @@ import mongoose from "mongoose";
 
 const productValidator = () => {
   return [
-    body("businessId")
-      .trim()
-      .custom((value) => {
-        if (!mongoose.Types.ObjectId.isValid(value)) {
-          throw new Error("invalid businessid");
-        }
-      })
-      .notEmpty()
-      .withMessage("business id is required"),
+    body("businessId").trim().notEmpty().withMessage("business id is required"),
     body("name")
       .trim()
       .notEmpty()

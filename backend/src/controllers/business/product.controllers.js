@@ -65,6 +65,7 @@ const getAllUserProducts = asyncHandler(async (req, res) => {
               $expr: {
                 $in: ["$businessId", "$$businessIds"],
               },
+              visibility: true,
             },
           },
         ],
@@ -99,7 +100,10 @@ const getBusinessProducts = asyncHandler(async (req, res) => {
     throw new ApiError(409, "unautherized access");
   }
 
-  const products = await Product.find({ businessId: businessId });
+  const products = await Product.find({
+    businessId: businessId,
+    visibility: true,
+  });
 
   if (!products) {
     throw new ApiError(404, "products not found");
@@ -148,7 +152,15 @@ const deleteProduct = asyncHandler(async (req, res) => {
     throw new ApiError(409, "unautherized access");
   }
 
-  const deletedProduct = await Product.findByIdAndDelete(productId);
+  const deletedProduct = await Product.findByIdAndUpdate(
+    productId,
+    {
+      $set: {
+        visibility: false,
+      },
+    },
+    { returnDocument: "after" },
+  );
   if (!deletedProduct) {
     throw new ApiError(401, "product deletion failed");
   }

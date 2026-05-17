@@ -9,15 +9,7 @@ const businessRegisterValidator = () => {
       .withMessage("gst field is required")
       .isLength({ min: 15, max: 15 })
       .withMessage("invalid gst number"),
-    body("address")
-      .trim()
-      .notEmpty()
-      .withMessage("address is required")
-      .custom((value) => {
-        if (!mongoose.Types.ObjectId.isValid(value)) {
-          throw new Error("invalid address");
-        }
-      }),
+    body("address").trim().notEmpty().withMessage("address is required"),
     body("businessName")
       .trim()
       .notEmpty()
