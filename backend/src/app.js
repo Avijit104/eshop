@@ -15,6 +15,7 @@ import customerAddressRouter from "./routes/customer/address.route.js";
 // seller routes
 import sellerAuthRouter from "./routes/seller/auth.route.js";
 import productRouter from "./routes/seller/product.route.js";
+import businessRouter from "./routes/seller/business.route.js";
 
 // app
 const app = express();
@@ -49,6 +50,7 @@ app.use("/api/v1/user/address", customerAddressRouter);
 app.use("/api/v1/user", userRouter);
 
 // business routers
+app.use("/api/v1/seller", businessRouter);
 app.use("/api/v1/seller/auth", sellerAuthRouter);
 app.use("/api/v1/seller/product", productRouter);
 
