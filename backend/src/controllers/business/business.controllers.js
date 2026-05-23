@@ -17,32 +17,10 @@ const getAllUserBusiness = asyncHandler(async (req, res) => {
     throw new ApiError(409, "unautherized access");
   }
 
-  const business = await Business.aggregate([
-    {
-      $match: {
-        sellerId: userId,
-        visibility: true,
-      },
-    },
-    {
-      $lookup: {
-        from: "addresses",
-        localField: "address",
-        foreignField: "_id",
-        pipeline: [
-          {
-            $match: {
-              visibility: true,
-            },
-          },
-        ],
-        as: "address",
-      },
-    },
-    {
-      $unwind: "$address",
-    },
-  ]);
+  const business = await Business.find({
+    sellerId: userId,
+    visibility: true,
+  });
 
   return res
     .status(200)
@@ -58,37 +36,20 @@ const getBusiness = asyncHandler(async (req, res) => {
     throw new ApiError(409, "unautherized access");
   }
 
-  const objectId = new mongoose.Types.ObjectId(businessId);
-
-  const business = await Business.aggregate([
-    {
-      $match: {
-        _id: objectId,
-        visibility: true,
-      },
+  const business = await Business.findOne({
+    _id: businessId,
+    visibility: true,
+  }).populate({
+    path: "address",
+    match: {
+      visibility: true,
     },
-    {
-      $lookup: {
-        from: "addresses",
-        localField: "address",
-        foreignField: "_id",
-        pipeline: [
-          {
-            $match: {
-              visibility: true,
-            },
-          },
-        ],
-        as: "address",
-      },
-    },
-    {
-      $unwind: "$address",
-    },
-  ]);
+  });
   if (!business) {
     throw new ApiError(401, "fetching business details failed");
   }
+  console.log(business);
+
   return res
     .status(200)
     .json(
@@ -98,9 +59,10 @@ const getBusiness = asyncHandler(async (req, res) => {
 
 // edit business details
 const editBusiness = asyncHandler(async (req, res) => {
-  const { gst, businessName } = req.body;
+  const { businessName, gst } = req.body;
   const { businessId } = req.params;
   const role = req.role;
+  const userId = req.user._id;
 
   if (role !== "seller") {
     throw new ApiError(409, "unautherized access");
@@ -119,35 +81,43 @@ const editBusiness = asyncHandler(async (req, res) => {
   if (!updatedBusiness) {
     throw new ApiError(401, "business details updated failed");
   }
+
+  const business = await Business.findOne({
+    _id: businessId,
+    visibility: true,
+  }).populate({
+    path: "address",
+    match: {
+      visibility: true,
+    },
+  });
+
+  if (!business) {
+    throw new ApiError(404, "business not found");
+  }
+
   return res
     .status(200)
-    .json(
-      new ApiResponse(200, "business updation successful", updatedBusiness),
-    );
+    .json(new ApiResponse(200, "business updation successful", business));
 });
 
 // edit business address
 const editBusinessAddress = asyncHandler(async (req, res) => {
-  const { building, street, landmark, city, state, pin } = req.body;
-  const { addressId } = req.params;
+  const { _id, userId, building, street, landmark, city, state, pin } =
+    req.body;
+
+  const id = new mongoose.Types.ObjectId(userId);
   const role = req.role;
-  const userId = req.user._id;
+  const sellerId = req.user._id;
+  console.log(sellerId);
+  console.log(id);
 
   if (role !== "seller") {
     throw new ApiError(409, "unauthorized access");
   }
 
-  const addressPermission = await Address.findOne({
-    _id: addressId,
-    userId: userId,
-  });
-
-  if (!addressPermission) {
-    throw new ApiError(403, "user does not permission to do this");
-  }
-
   const address = await Address.findByIdAndUpdate(
-    addressId,
+    _id,
     {
       $set: {
         building: building,
@@ -176,6 +146,7 @@ const editBusinessAddress = asyncHandler(async (req, res) => {
 const removeBusiness = asyncHandler(async (req, res) => {
   const { businessId } = req.params;
   const role = req.role;
+  const userId = req.user._id;
 
   if (role !== "seller") {
     throw new ApiError(409, "unauthorized access");
@@ -202,9 +173,13 @@ const removeBusiness = asyncHandler(async (req, res) => {
     throw new ApiError(401, "business address deletion failed");
   }
 
+  const allBusiness = await Business.find({
+    sellerId: userId,
+    visibility: true,
+  });
   return res
     .status(200)
-    .json(new ApiResponse(200, "business deletion successful"));
+    .json(new ApiResponse(200, "business deletion successful", allBusiness));
 });
 
 export {

@@ -9,7 +9,7 @@ const roleSchema = new Schema(
   {
     userId: {
       type: mongoose.Types.ObjectId,
-      ref: "users",
+      ref: "user",
       required: true,
       trim: true,
     },
@@ -23,4 +23,4 @@ const roleSchema = new Schema(
   { timestamps: true },
 );
 
-export const Role = mongoose.model("roles", roleSchema);
+export const Role = mongoose.model("role", roleSchema);

@@ -12,6 +12,7 @@ const validator = (req, res, next) => {
   }
   const extractErrors = [];
   errors.array().map((err) => extractErrors.push(err));
+  console.log(extractErrors);
   throw new ApiError(
     422,
     `validation error :: ${extractErrors[0].msg}`,

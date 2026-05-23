@@ -5,7 +5,7 @@ import mongoose, { Schema } from "mongoose";
 const productSchema = new Schema({
   businessId: {
     type: mongoose.Types.ObjectId,
-    ref: "businesses",
+    ref: "business",
     trim: true,
     required: true,
   },
@@ -41,4 +41,4 @@ const productSchema = new Schema({
   },
 });
 
-export const Product = mongoose.model("products", productSchema);
+export const Product = mongoose.model("product", productSchema);

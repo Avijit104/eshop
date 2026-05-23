@@ -44,6 +44,7 @@ import {
   Dashboard,
   SellerProfile,
   DashboardOutlet,
+  Business,
   Inventory,
   Orders,
   AddProduct,
@@ -207,6 +208,14 @@ const router = createBrowserRouter([
                 element: (
                   <RouteContainer auth role={["seller"]}>
                     <SellerProfile />
+                  </RouteContainer>
+                ),
+              },
+              {
+                path: "business/:businessId",
+                element: (
+                  <RouteContainer auth role={["seller"]}>
+                    <Business />
                   </RouteContainer>
                 ),
               },

@@ -36,7 +36,7 @@ function BusinessRegistration() {
     document.getElementById(`${value}`).style.fontWeight = "bold";
   };
 
-  // Business register api call
+  //  Business register api call
   const onBusinessRegister = async () => {
     try {
       const addressRes = await axios.post(
@@ -63,9 +63,9 @@ function BusinessRegistration() {
             <h1 className="font-bold text-center">Register Business</h1>
           </div>
           <div className="w-[75%]  ">
-            {/* name and phno input box */}
+            {/*   name and phno input box */}
             <div className="flex justify-baseline items-center gap-5 mb-5">
-              {/* name input */}
+              {/* business name input */}
               <div className="w-[50%]">
                 <input
                   type="text"
@@ -81,7 +81,7 @@ function BusinessRegistration() {
                 />
               </div>
 
-              {/* phone number input */}
+              {/* gst identification number input */}
               <div className="w-[50%]">
                 <input
                   type="text"

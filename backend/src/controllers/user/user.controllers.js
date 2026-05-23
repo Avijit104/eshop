@@ -16,14 +16,12 @@ import { Role } from "../../models/role.models.js";
 const getUser = asyncHandler(async (req, res) => {
   const { _id } = req.user;
   const role = req.role;
-  console.log("this is role", role);
   const user = await User.findById(_id);
   if (!user) {
     throw new ApiError(404, "user not found");
   }
-  console.log(user);
+
   const userRole = await Role.findOne({ userId: user._id, role: role });
-  console.log(userRole);
   if (!userRole) {
     throw new ApiError(404, "user role not found");
   }

@@ -9,7 +9,7 @@ const addressSchema = new Schema(
   {
     userId: {
       type: mongoose.Types.ObjectId,
-      ref: "users",
+      ref: "user",
       required: true,
     },
     name: {

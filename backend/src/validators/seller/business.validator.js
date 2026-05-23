@@ -22,11 +22,11 @@ const editBusinessValidator = () => {
     body("businessName")
       .trim()
       .notEmpty()
-      .withMessage("business name is required"),
+      .withMessage("business name and is required"),
   ];
 };
 
-const ediBusinesstAddressValidator = () => {
+const ediBusinessAddressValidator = () => {
   return [
     body("street")
       .trim()
@@ -68,6 +68,6 @@ const ediBusinesstAddressValidator = () => {
 
 export {
   businessRegisterValidator,
-  ediBusinesstAddressValidator,
   editBusinessValidator,
+  ediBusinessAddressValidator,
 };

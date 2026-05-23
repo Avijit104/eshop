@@ -72,4 +72,4 @@ userSchema.methods.generateToken = function () {
   return { unHashedToken, hashedToken, expiry };
 };
 
-export const User = mongoose.model("users", userSchema);
+export const User = mongoose.model("user", userSchema);

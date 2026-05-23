@@ -6,7 +6,12 @@ import {
 } from "./Authentication";
 
 // dashboard
-import { Dashboard, SellerProfile, DashboardOutlet } from "./Dashboard";
+import {
+  Dashboard,
+  SellerProfile,
+  DashboardOutlet,
+  Business,
+} from "./Dashboard";
 import Inventory from "./Inventory.jsx/Inventory";
 import Orders from "./Orders/Orders";
 import AddProduct from "./Products/AddProduct";
@@ -22,6 +27,7 @@ export {
   Dashboard,
   SellerProfile,
   DashboardOutlet,
+  Business,
   SellerOutlet,
   Inventory,
   Orders,

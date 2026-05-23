@@ -16,7 +16,7 @@ const businessSchema = new Schema(
     },
     address: {
       type: mongoose.Types.ObjectId,
-      ref: "addresses",
+      ref: "address",
       required: true,
       trim: true,
     },

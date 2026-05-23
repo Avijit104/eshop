@@ -1,5 +1,10 @@
 import { Router } from "express";
 
+// middlewares
+import { validator } from "../../middleware/validator.middle.js";
+import { jwtValidator } from "../../middleware/jwtValidator.middle.js";
+
+// controllers
 import {
   getAllUserBusiness,
   getBusiness,
@@ -8,17 +13,17 @@ import {
   removeBusiness,
 } from "../../controllers/business/business.controllers.js";
 
+// validators
 import {
-  ediBusinesstAddressValidator,
+  ediBusinessAddressValidator,
   editBusinessValidator,
 } from "../../validators/seller/business.validator.js";
 
-import { validator } from "../../middleware/validator.middle.js";
-import { jwtValidator } from "../../middleware/jwtValidator.middle.js";
-
 const router = Router();
 
+// secure routes
 router.route("/").get(jwtValidator, getAllUserBusiness);
+
 router
   .route("/:businessId")
   .put(jwtValidator, editBusinessValidator(), validator, editBusiness)
@@ -26,11 +31,13 @@ router
   .delete(jwtValidator, removeBusiness);
 
 router
-  .route("/edit-address/:addressId")
+  .route("/edit/address")
   .put(
     jwtValidator,
-    ediBusinesstAddressValidator(),
+    ediBusinessAddressValidator(),
     validator,
     editBusinessAddress,
   );
+
+// export
 export default router;
