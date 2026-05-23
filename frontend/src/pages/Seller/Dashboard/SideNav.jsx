@@ -36,7 +36,7 @@ function SideNav({ currOption }) {
   // dom
   return (
     <SideContainer>
-      <div className="w-full h-full flex justify-center items-start   p-10">
+      <div className="w-full h-full flex justify-center items-start   py-10 px-5">
         <div className="flex-center flex-col items-center gap-5 w-full ">
           {/* dashboard box */}
           <div className="w-full bg-black p-5 rounded-2xl">
