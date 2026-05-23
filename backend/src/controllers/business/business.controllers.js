@@ -73,6 +73,7 @@ const editBusiness = asyncHandler(async (req, res) => {
     {
       $set: {
         businessName: businessName,
+        gst: gst,
       },
     },
     { returnDocument: "after" },
