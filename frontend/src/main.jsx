@@ -7,11 +7,52 @@ import { Provider } from "react-redux";
 import { createBrowserRouter } from "react-router-dom";
 import store from "./store/store.js";
 
+import {
+  CustomerOutlet,
+  HomePage,
+  Login,
+  LoginOtp,
+  Signup,
+} from "./pages/Customer/index.js";
+import HealthCheck from "./pages/HealthCheck/HealthCheck.jsx";
+import ChangePassword from "./pages/ChangePassword/ChangePassword.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    children: [],
+    children: [
+      {
+        path: "",
+        element: <HomePage />,
+      },
+      {
+        path: "health-check",
+        element: <HealthCheck />,
+      },
+      {
+        path: "user",
+        element: <CustomerOutlet />,
+        children: [
+          {
+            path: "",
+            element: <Login />,
+          },
+          {
+            path: "signup",
+            element: <Signup />,
+          },
+          {
+            path: "login-otp",
+            element: <LoginOtp />,
+          },
+          {
+            path: "change-password",
+            element: <ChangePassword />,
+          },
+        ],
+      },
+    ],
   },
 ]);
 
