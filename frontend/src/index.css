@@ -6,15 +6,16 @@
   --code-bg: #f4f3ec;
   --accent-bg: rgba(170, 59, 255, 0.1);
 
-  --accent-secondary: #b3b3b3;
-  --accent: #2fa084;
+  --accent-shade: #b3b3b3;
+  --text-secondary: #8c8c8c;
   --text: #000000;
   --primary: #ffffff;
-  --background: #e5fced;
+  --background: #fff9f4;
   --footer: #091413;
-  --secondary: #917254;
+  --accent: #c45a3f;
+  --accent-second: #2fa084;
 
-  --shadow: 3px 3px 20px rgb(192, 192, 192);
+  --shadow: 3px 3px 20px #00000055;
 
   --sans: system-ui, "Segoe UI", Roboto, sans-serif;
   --heading: system-ui, "Segoe UI", Roboto, sans-serif;
@@ -26,6 +27,7 @@
   color: var(--text);
   background: var(--background);
   font-synthesis: none;
+  /* box-sizing: border-box; */
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -48,11 +50,11 @@ input:-webkit-autofill:active {
 }
 
 @utility button {
-  @apply bg-(--primary) text-(--text) py-1 px-3 text-base rounded-sm outline-0 border-2 border-(--primary) hover:text-(--accent) hover:border-(--accent) hover:border-2 focus:text-white focus:bg-(--accent) focus:border-(--accent);
+  @apply bg-(--primary) text-(--text) font-semibold py-1 px-3 text-base rounded-sm outline-0 border-2 border-(--primary) hover:text-(--accent) hover:border-(--accent) hover:border-2 focus:text-white focus:bg-(--accent) focus:border-(--accent);
 }
 
 @utility input {
-  @apply py-2 px-2 border-2  border-(--secondary) rounded-sm text-base w-full placeholder:text-base placeholder:text-(--accent-secondary) focus:outline-0;
+  @apply p-2 border-2  border-(--accent-shade) rounded-sm text-base w-full placeholder:text-base placeholder:text-(--text-secondary) focus:outline-0;
 }
 
 .material-symbols-outlined {

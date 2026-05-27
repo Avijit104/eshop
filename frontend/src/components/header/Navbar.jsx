@@ -29,7 +29,7 @@ function Navbar() {
   return (
     <div className="w-full h-full flex items-center justify-between px-10 gap-3">
       {/* logo */}
-      <Logo />
+      <Logo css={"gap-2"} />
 
       {/* primary options not viewed for seller */}
       {role !== "seller" && (

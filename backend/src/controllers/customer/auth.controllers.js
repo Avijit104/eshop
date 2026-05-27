@@ -52,6 +52,7 @@ const signup = asyncHandler(async (req, res) => {
     lastName,
     gender,
     phno,
+
     password: hasedPassword,
   });
 
