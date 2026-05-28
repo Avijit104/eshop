@@ -13,9 +13,12 @@ import {
   Login,
   LoginOtp,
   Signup,
+  PersonalDetails,
+  ProfileOutlet,
 } from "./pages/Customer/index.js";
 import HealthCheck from "./pages/HealthCheck/HealthCheck.jsx";
 import ChangePassword from "./pages/ChangePassword/ChangePassword.jsx";
+import RouteContainer from "./components/container/RouteContainer.jsx";
 
 const router = createBrowserRouter([
   {
@@ -36,19 +39,49 @@ const router = createBrowserRouter([
         children: [
           {
             path: "",
-            element: <Login />,
+            element: (
+              <RouteContainer auth={false} role={["user"]}>
+                <Login />,
+              </RouteContainer>
+            ),
           },
           {
             path: "signup",
-            element: <Signup />,
+            element: (
+              <RouteContainer auth={false} role={["user"]}>
+                <Signup />
+              </RouteContainer>
+            ),
           },
           {
             path: "login-otp",
-            element: <LoginOtp />,
+            element: (
+              <RouteContainer auth={false} role={["user"]}>
+                <LoginOtp />
+              </RouteContainer>
+            ),
           },
           {
             path: "change-password",
-            element: <ChangePassword />,
+            element: (
+              <RouteContainer auth role={["user"]}>
+                <ChangePassword />
+              </RouteContainer>
+            ),
+          },
+          {
+            path: "profile",
+            element: <ProfileOutlet />,
+            children: [
+              {
+                path: "",
+                element: (
+                  <RouteContainer auth role={["user"]}>
+                    <PersonalDetails />
+                  </RouteContainer>
+                ),
+              },
+            ],
           },
         ],
       },

@@ -14,7 +14,7 @@ function RouteContainer({ children, auth = true, role }) {
   useEffect(() => {
     if (auth) {
       if (!isLogin) {
-        navigate(`${role.includes("user") ? "/user/login" : "/seller"}`);
+        navigate(`${role.includes("user") ? "/user/" : "/seller"}`);
       } else {
         if (!role.includes(userRole)) {
           navigate(`${userRole === "user" ? "/" : "/seller/dashboard"}`);

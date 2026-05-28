@@ -134,7 +134,7 @@ function Signup() {
               <div className="flex gap-2">
                 {/* first name */}
                 <div className="w-[50%]">
-                  <h2 className="text-sm text-(--text) font-semibold">
+                  <h2 className="text-sm text-(--text) mb-1 font-semibold">
                     First name
                   </h2>
                   <input
@@ -152,7 +152,7 @@ function Signup() {
 
                 {/* last name */}
                 <div className="w-[50%]">
-                  <h2 className="text-sm text-(--text) font-semibold">
+                  <h2 className="text-sm text-(--text) mb-1 font-semibold">
                     Last name
                   </h2>
                   <input
@@ -171,7 +171,7 @@ function Signup() {
 
               {/* email */}
               <div>
-                <h2 className="text-sm text-(--text) font-semibold">
+                <h2 className="text-sm text-(--text) mb-1 font-semibold">
                   Email Address
                 </h2>
                 <input
@@ -186,7 +186,7 @@ function Signup() {
 
               {/* password */}
               <div>
-                <h2 className="text-sm text-(--text) font-semibold">
+                <h2 className="text-sm text-(--text) mb-1 font-semibold">
                   Password
                 </h2>
                 <div className="flex input p-0  ">
@@ -228,7 +228,7 @@ function Signup() {
 
               {/* phone number */}
               <div>
-                <h2 className="text-sm text-(--text) font-semibold">
+                <h2 className="text-sm text-(--text) mb-1 font-semibold">
                   Phone Number
                 </h2>
                 <input
@@ -249,7 +249,9 @@ function Signup() {
 
               {/* gender  */}
               <div>
-                <h2 className="text-sm text-(--text) font-semibold">Gender </h2>
+                <h2 className="text-sm text-(--text) mb-1 font-semibold">
+                  Gender{" "}
+                </h2>
                 <div className="flex input justify-around ">
                   {/* male */}
                   <div className="flex items-center gap-2">
@@ -258,7 +260,7 @@ function Signup() {
                       name="gender"
                       id="male"
                       required
-                      className="appearance-none w-[1.5vh] aspect-square rounded-2xl  scale-125 bg-(--primary)  border-2 checked:bg-(--accent) checked:border-0"
+                      className="appearance-none w-[1.5vh] aspect-square rounded-2xl  scale-125 bg-(--primary)  border-2 checked:bg-(--accent) checked:border"
                       onClick={() => setUser({ ...user, gender: "male" })}
                     />
                     <p className="text-sm text(--text) font-semibold">Male</p>
@@ -272,7 +274,7 @@ function Signup() {
                       id="female"
                       required
                       onClick={() => setUser({ ...user, gender: "female" })}
-                      className="appearance-none w-[1.5vh] aspect-square rounded-2xl  scale-125 bg-(--primary)  border-2 checked:bg-(--accent) checked:border-0"
+                      className="appearance-none w-[1.5vh] aspect-square rounded-2xl  scale-125 bg-(--primary)  border-2 checked:bg-(--accent) checked:border"
                     />
                     <p className="text-sm text(--text) font-semibold">Female</p>
                   </div>
@@ -284,7 +286,7 @@ function Signup() {
                       name="gender"
                       required
                       id="other"
-                      className="appearance-none w-[1.5vh] aspect-square rounded-2xl  scale-125 bg-(--primary)  border-2 checked:bg-(--accent) checked:border-0"
+                      className="appearance-none w-[1.5vh] aspect-square rounded-2xl  scale-125 bg-(--primary)  border-2 checked:bg-(--accent) checked:border"
                       onClick={() => setUser({ ...user, gender: "other" })}
                     />
                     <p className="text-(--text) text-sm font-semibold">Other</p>
@@ -520,7 +522,7 @@ function Signup() {
 
             {/* email input */}
             <div>
-              <h3 className="text-sm text-(--text) font-semibold">
+              <h3 className="text-sm text-(--text) mb-1 font-semibold">
                 Email Address
               </h3>
               <input

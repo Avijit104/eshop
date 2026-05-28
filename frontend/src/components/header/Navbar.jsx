@@ -77,7 +77,10 @@ function Navbar() {
               </span>
             </button>
             {/* porfile button  */}
-            <button className="flex justify-center px-1 py-1  items-center text-(--text) button rounded-sm focus:bg-(--primary) focus:text-(--accent) ">
+            <button
+              className="flex justify-center px-1 py-1  items-center text-(--text) button rounded-sm focus:bg-(--primary) focus:text-(--accent) "
+              onClick={() => navigate(`/${role}/profile`)}
+            >
               <span
                 style={{ "font-size": "30px" }}
                 class="material-symbols-outlined "

@@ -18,7 +18,7 @@ function App() {
       try {
         const res = await axios.get("/api/v1/user");
         if (res) {
-          dispatcher(res.data.data);
+          dispatcher(login(res.data.data));
         }
       } catch (error) {
         dispatcher(logout());
