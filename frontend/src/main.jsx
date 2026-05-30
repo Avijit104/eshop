@@ -15,6 +15,7 @@ import {
   Signup,
   PersonalDetails,
   ProfileOutlet,
+  Address,
 } from "./pages/Customer/index.js";
 import HealthCheck from "./pages/HealthCheck/HealthCheck.jsx";
 import ChangePassword from "./pages/ChangePassword/ChangePassword.jsx";
@@ -78,6 +79,14 @@ const router = createBrowserRouter([
                 element: (
                   <RouteContainer auth role={["user"]}>
                     <PersonalDetails />
+                  </RouteContainer>
+                ),
+              },
+              {
+                path: "address",
+                element: (
+                  <RouteContainer auth role={["user"]}>
+                    <Address />
                   </RouteContainer>
                 ),
               },

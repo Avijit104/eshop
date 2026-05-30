@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MainContainer from "../../../../components/container/MainContainer";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNavigate, useOutletContext } from "react-router";
 
 function PersonalDetails() {
   // hooks
   const dispatcher = useDispatch();
   const navigate = useNavigate();
+  const setOption = useOutletContext();
 
   // states
   const userData = useSelector((state) => state.auth.userData);
@@ -21,10 +22,14 @@ function PersonalDetails() {
   const [email, setEmail] = useState(true);
   const [phno, setPhno] = useState(true);
 
+  useEffect(() => {
+    setOption("personal");
+  }, []);
+
   // dom
   return (
     <MainContainer>
-      <div className="py-5 px-10 flex flex-col items-center ">
+      <div className="py-5 px-10 flex flex-col bg-(--primary) rounded-md items-center ">
         <div className="py-1 px-2 border-b-2 border-(--accent) w-full">
           <h2 className="text-2xl text-(--accent) font-bold">
             Personal Details
@@ -193,7 +198,7 @@ function PersonalDetails() {
                     readOnly={true}
                     className="appearance-none w-[1.5vh] aspect-square rounded-2xl  scale-125 bg-(--primary)  border-2 checked:bg-(--accent) checked:border"
                   />
-                  <p className="text-sm text(--text) font-semibold">Male</p>
+                  <p className="text-base text(--text) font-semibold">Male</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <input
@@ -204,7 +209,7 @@ function PersonalDetails() {
                     checked={user.gender === "female"}
                     className="appearance-none w-[1.5vh] aspect-square rounded-2xl  scale-125 bg-(--primary)  border-2 checked:bg-(--accent) checked:border"
                   />
-                  <p className="text-sm text(--text) font-semibold">Female</p>
+                  <p className="text-base text(--text) font-semibold">Female</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <input
@@ -215,7 +220,7 @@ function PersonalDetails() {
                     checked={user.gender === "other"}
                     className="appearance-none w-[1.5vh] aspect-square rounded-2xl  scale-125 bg-(--primary)  border-2 checked:bg-(--accent) checked:border"
                   />
-                  <p className="text-sm text(--text) font-semibold">Other</p>
+                  <p className="text-base text(--text) font-semibold">Other</p>
                 </div>
               </div>
             </div>
