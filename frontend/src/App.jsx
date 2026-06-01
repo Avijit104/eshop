@@ -9,7 +9,7 @@ import axios from "axios";
 import { login, logout } from "./store/AuthSlice";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [loading, setloading] = useState(false);
   const dispatcher = useDispatch();
   const navigate = useNavigate();
 
@@ -18,20 +18,26 @@ function App() {
       try {
         const res = await axios.get("/api/v1/user");
         if (res) {
+          console.log(res.data.data.role);
           dispatcher(login(res.data.data));
         }
       } catch (error) {
         dispatcher(logout());
+
         console.log(error);
+      } finally {
+        setloading(true);
       }
     };
     fetchUser();
-  }, []);
+  }, [loading, setloading]);
 
-  return (
+  return loading ? (
     <div>
       <Outlet />
     </div>
+  ) : (
+    <></>
   );
 }
 

@@ -20,6 +20,14 @@ import {
 import HealthCheck from "./pages/HealthCheck/HealthCheck.jsx";
 import ChangePassword from "./pages/ChangePassword/ChangePassword.jsx";
 import RouteContainer from "./components/container/RouteContainer.jsx";
+import SellerOutlet from "./pages/Seller/SellerOutlet.jsx";
+
+import {
+  LoginSeller,
+  SignupSeller,
+  BusinessSignup,
+  SellerHome,
+} from "./pages/Seller/index.js";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +36,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <HomePage />,
+        element: (
+          <RouteContainer auth={false} role={["user"]}>
+            <HomePage />
+          </RouteContainer>
+        ),
       },
       {
         path: "health-check",
@@ -72,7 +84,11 @@ const router = createBrowserRouter([
           },
           {
             path: "profile",
-            element: <ProfileOutlet />,
+            element: (
+              <RouteContainer auth role={["user"]}>
+                <ProfileOutlet />
+              </RouteContainer>
+            ),
             children: [
               {
                 path: "",
@@ -91,6 +107,44 @@ const router = createBrowserRouter([
                 ),
               },
             ],
+          },
+        ],
+      },
+      {
+        path: "seller",
+        element: <SellerOutlet />,
+        children: [
+          {
+            path: "",
+            element: (
+              // <RouteContainer auth={false} role={["seller"]}>
+              <SellerHome />
+              // </RouteContainer>
+            ),
+          },
+          {
+            path: "login",
+            element: (
+              <RouteContainer auth={false} role={["seller"]}>
+                <LoginSeller />
+              </RouteContainer>
+            ),
+          },
+          {
+            path: "signup",
+            element: (
+              <RouteContainer auth={false} role={["seller"]}>
+                <SignupSeller />
+              </RouteContainer>
+            ),
+          },
+          {
+            path: "business",
+            element: (
+              <RouteContainer auth role={["user"]}>
+                <BusinessSignup />
+              </RouteContainer>
+            ),
           },
         ],
       },

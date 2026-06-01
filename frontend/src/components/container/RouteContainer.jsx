@@ -8,20 +8,25 @@ function RouteContainer({ children, auth = true, role }) {
 
   // states
   const isLogin = useSelector((state) => state.auth.isLogin);
+  console.log(isLogin);
   const userRole = useSelector((state) => state.auth.role);
 
   // route security
   useEffect(() => {
     if (auth) {
       if (!isLogin) {
-        navigate(`${role.includes("user") ? "/user/" : "/seller"}`);
+        console.log(isLogin);
+        console.log("this is not login but auth");
+        navigate(`${role.includes("user") ? "/user" : "/seller"}`);
       } else {
         if (!role.includes(userRole)) {
+          console.log("this is not user role");
           navigate(`${userRole === "user" ? "/" : "/seller/dashboard"}`);
         }
       }
     } else if (!auth) {
       if (isLogin) {
+        console.log("this is not auth but login");
         navigate(`${userRole === "user" ? "/" : "/seller/dashboard"}`);
       }
     }

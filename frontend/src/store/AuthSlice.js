@@ -14,6 +14,7 @@ const AuthSlice = createSlice({
       state.isLogin = true;
       state.userData = action.payload.user;
       state.role = action.payload.role;
+      console.log(state.role);
     },
     updateUserData: (state, action) => {
       state.userData = action.payload;
@@ -22,6 +23,7 @@ const AuthSlice = createSlice({
     logout: (state, action) => {
       state.isLogin = false;
       state.userData = null;
+      console.log("this is logout");
       state.role = "";
     },
   },
