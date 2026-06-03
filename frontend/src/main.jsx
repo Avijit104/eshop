@@ -53,15 +53,15 @@ const router = createBrowserRouter([
           {
             path: "",
             element: (
-              <RouteContainer auth={false} role={["user"]}>
-                <Login />,
+              <RouteContainer auth={false} role={[]}>
+                <Login />
               </RouteContainer>
             ),
           },
           {
             path: "signup",
             element: (
-              <RouteContainer auth={false} role={["user"]}>
+              <RouteContainer auth={false} role={[]}>
                 <Signup />
               </RouteContainer>
             ),

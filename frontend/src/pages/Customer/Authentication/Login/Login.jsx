@@ -27,7 +27,7 @@ function Login() {
     }
   };
   return (
-    <div className="w-full min-h-screen h-screen flex justify-center items-center ">
+    <div className="w-full min-h-screen h-screen flex justify-center items-center border-2 border-green-500">
       <div className="w-[30%] bg-(--primary) shadow-(--shadow) p-7  rounded-lg flex flex-col items-center gap-7">
         <Logo css={"flex-col gap-0"} />
 
