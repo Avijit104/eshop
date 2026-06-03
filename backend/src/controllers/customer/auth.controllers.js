@@ -9,8 +9,10 @@ import { ApiResponse } from "../../utils/ApiResponse.js";
 import { mailSender } from "../../utils/mailContent.js";
 
 // model
+import { Customer } from "../../models/customer.model.js";
 import { User } from "../../models/user.models.js";
 import { Role } from "../../models/role.models.js";
+import mongoose from "mongoose";
 
 //email otp
 const emailOtp = asyncHandler(async (req, res) => {
@@ -42,23 +44,27 @@ const signup = asyncHandler(async (req, res) => {
   if (existingUser) {
     return res.status(401).json(new ApiResponse(401, "user already exists"));
   }
-
   const salt = await bcrypt.genSalt(10);
   const hasedPassword = await bcrypt.hash(password, salt);
-
   const newUser = await User.create({
     email,
+    password: hasedPassword,
+  });
+  if (!newUser) {
+    throw new ApiError(409, "user registration failed");
+  }
+
+  const newCustomer = await Customer.create({
+    userId: newUser._id,
     firstName,
     lastName,
     gender,
     phno,
-
-    password: hasedPassword,
   });
-
-  if (!newUser) {
-    throw new ApiError(409, "user registration failed");
+  if (!newCustomer) {
+    throw new ApiError(401, "user registration failed");
   }
+
   const accessToken = newUser.generateDataToken("user");
   const refreshToken = newUser.generateDataToken("user");
   const option = {
@@ -83,6 +89,7 @@ const signup = asyncHandler(async (req, res) => {
     .cookie("refreshToken", refreshToken, option)
     .json(
       new ApiResponse(200, "user registration successful", {
+        userData: newCustomer,
         user: newUser,
         role: userRole.role,
       }),
@@ -133,12 +140,15 @@ const loginOtp = asyncHandler(async (req, res) => {
     secure: true,
   };
 
+  const userData = await Customer.findOne({ userId: user._id });
+
   return res
     .status(200)
     .cookie("accessToken", accessToken, options)
     .cookie("refreshToken", refreshToken, options)
     .json(
       new ApiResponse(200, "user login successful", {
+        userData: userData,
         user: user,
         role: userRole.role,
       }),

@@ -4,9 +4,9 @@ import mongoose, { Schema } from "mongoose";
 // schema
 const businessSchema = new Schema(
   {
-    sellerId: {
+    userId: {
       type: mongoose.Types.ObjectId,
-      ref: "users",
+      ref: "user",
       required: true,
     },
     gst: {

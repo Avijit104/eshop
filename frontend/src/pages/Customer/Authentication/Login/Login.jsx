@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { login } from "../../../../store/AuthSlice";
+import { setUserData } from "../../../../store/Customer/CustomerSlice";
 
 function Login() {
   // hooks
@@ -21,6 +22,7 @@ function Login() {
       const res = await axios.post("/api/v1/user/login", user);
       console.log(res.data.data);
       dispatcher(login(res.data.data));
+      dispatcher(setUserData(res.data.data));
       navigate("/");
     } catch (error) {
       console.log(error);

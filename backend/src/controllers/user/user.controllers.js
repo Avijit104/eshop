@@ -11,12 +11,15 @@ import { mailSender } from "../../utils/mailContent.js";
 // model
 import { User } from "../../models/user.models.js";
 import { Role } from "../../models/role.models.js";
+import { Customer } from "../../models/customer.model.js";
 
 // fetching user details
 const getUser = asyncHandler(async (req, res) => {
   const { _id } = req.user;
   const role = req.role;
-  const user = await User.findById(_id);
+  const user = await Customer.findOne({ userId: _id }).populate({
+    path: "userId",
+  });
   if (!user) {
     throw new ApiError(404, "user not found");
   }

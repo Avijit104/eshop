@@ -3,8 +3,6 @@ import mongoose, { Schema } from "mongoose";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 
-// utility
-import { gender, availableGender } from "../utils/constants.js";
 
 // schema
 const userSchema = new Schema(
@@ -15,26 +13,6 @@ const userSchema = new Schema(
       trim: true,
       unique: true,
       index: true,
-    },
-    firstName: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    lastName: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    gender: {
-      type: String,
-      trim: true,
-      enum: availableGender,
-    },
-    phno: {
-      type: String,
-      required: true,
-      trim: true,
     },
     password: {
       type: String,
@@ -50,7 +28,6 @@ const userSchema = new Schema(
 );
 
 userSchema.methods.generateDataToken = function (role) {
-  console.log("this is jwt role", role);
   return jwt.sign(
     {
       _id: this._id,

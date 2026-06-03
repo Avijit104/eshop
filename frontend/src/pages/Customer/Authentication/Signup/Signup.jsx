@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router";
 import axios from "axios";
 import { login } from "../../../../store/AuthSlice";
+import { setUserData } from "../../../../store/Customer/CustomerSlice";
 
 function Signup() {
   // hooks
@@ -77,14 +78,15 @@ function Signup() {
 
   // signup api call
   const onSignUp = async () => {
-    // try {
-    //   const res = await axios.post("/api/v1/user/auth/signup", user);
-    //   console.log(res.data.data);
-    //   dispatcher(login(res.data.data));
-    //   navigate("/");
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      const res = await axios.post("/api/v1/user/auth/signup", user);
+      console.log(res.data.data);
+      dispatcher(login(res.data.data));
+      dispatcher(setUserData(res.data.data));
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
     console.log(user);
   };
 

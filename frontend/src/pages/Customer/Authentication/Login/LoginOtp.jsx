@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { login } from "../../../../store/AuthSlice";
+import { setUserData } from "../../../../store/Customer/CustomerSlice";
 
 function LoginOtp() {
   // hooks
@@ -46,6 +47,7 @@ function LoginOtp() {
       const res = await axios.post("/api/v1/user/auth/login-otp", { email });
       if (res.data.data.role === "user") {
         dispatcher(login(res.data.data));
+        dispatcher(setUserData(res.data.data));
         navigate("/");
       }
     }
