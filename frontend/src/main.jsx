@@ -53,7 +53,7 @@ const router = createBrowserRouter([
           {
             path: "",
             element: (
-              <RouteContainer auth={false} role={[]}>
+              <RouteContainer auth={false} role={["user"]}>
                 <Login />
               </RouteContainer>
             ),
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
           {
             path: "signup",
             element: (
-              <RouteContainer auth={false} role={[]}>
+              <RouteContainer auth={false} role={["user"]}>
                 <Signup />
               </RouteContainer>
             ),
@@ -117,9 +117,9 @@ const router = createBrowserRouter([
           {
             path: "",
             element: (
-              // <RouteContainer auth={false} role={["seller"]}>
-              <SellerHome />
-              // </RouteContainer>
+              <RouteContainer auth={false} role={["user", "seller"]}>
+                <SellerHome />
+              </RouteContainer>
             ),
           },
           {
@@ -141,7 +141,7 @@ const router = createBrowserRouter([
           {
             path: "business",
             element: (
-              <RouteContainer auth role={["user"]}>
+              <RouteContainer auth role={["user", "seller"]}>
                 <BusinessSignup />
               </RouteContainer>
             ),

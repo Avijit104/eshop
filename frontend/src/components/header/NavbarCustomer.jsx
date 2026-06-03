@@ -36,14 +36,25 @@ function NavbarCustomer() {
       <div className="flex gap-2">
         <button className="button">Categories</button>
         <button className="button">New&nbsp;arraivals</button>
-        <button
-          className="button"
-          onClick={() => {
-            navigate("/seller");
-          }}
-        >
-          Become&nbsp;seller
-        </button>
+        {isLogin ? (
+          <button
+            className="button"
+            onClick={() => {
+              navigate("/seller");
+            }}
+          >
+            Become&nbsp;seller
+          </button>
+        ) : (
+          <button
+            className="button"
+            onClick={() => {
+              navigate("/seller");
+            }}
+          >
+            Become&nbsp;seller
+          </button>
+        )}
         <button className="button">about</button>
       </div>
 
